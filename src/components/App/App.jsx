@@ -1,8 +1,10 @@
-import './App.module.css'
+import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal";
+import "./App.module.css";
 
 export default function App() {
-    return (
-        <>
-        </>
-    )
+  return (
+    <>
+      <DeleteWaterModal />
+    </>
+  );
 }
