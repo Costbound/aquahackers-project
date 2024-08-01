@@ -1,8 +1,19 @@
-import './App.module.css'
+import UserPanel from '../UserPanel/UserPanel';
+import UserBar from '../UserBar/UserBar';
+import DailyInfo from '../DailyInfo/DailyInfo';
+import styles from './App.module.css';
 
-export default function App() {
+const App = () => {
     return (
-        <>
-        </>
-    )
-}
+        <div className={styles.container}>
+        <div className={styles.app}>
+             
+            <UserPanel />
+            <UserBar />
+            <DailyInfo />
+        </div>
+        </div>
+    );
+};
+
+export default App;

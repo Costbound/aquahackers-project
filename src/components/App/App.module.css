@@ -1,0 +1,17 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* Оставляем App позиционированным относительно */
+}
+
+.container {
+    width: 343px;
+    height: 770px;
+    top: 447px;
+    left: 16px;
+    background-color: #F0EFF4;
+    border-radius: 30px;
+    z-index: -1; /* Помещаем фон под контент */
+}
