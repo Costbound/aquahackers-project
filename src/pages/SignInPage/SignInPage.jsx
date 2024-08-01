@@ -1,8 +1,8 @@
-import css from './SighninPage.module.css'
+import css from './SignInPage.module.css'
 
 function SignInPage(props) {
     return (
-        <div></div>
+        <div>SignIn</div>
     );
 }
 
