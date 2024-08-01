@@ -1,19 +1,28 @@
-import  { useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUsername } from '../../redux/auth/selectors-auth'; // Убедитесь, что путь правильный
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
-import styles from './UserBar.module.css';
+import css from './UserBar.module.css';
 
-const UserBar = () => {
-    const [showPopover, setShowPopover] = useState(false);
+function UserBar() {
+    const [isPopoverOpen, setPopoverOpen] = useState(false);
+    const userName = useSelector(selectUsername); // Получаем имя пользователя из Redux
 
-    const togglePopover = () => setShowPopover(!showPopover);
+    const togglePopover = () => setPopoverOpen(!isPopoverOpen);
 
     return (
-        <div className={styles.userBar} onClick={togglePopover}>
-            <span className={styles.username}>Nadia</span>
-            <img src="path/to/avatar.png" alt="User Avatar" className={styles.avatar} />
-            {showPopover && <UserBarPopover />}
+        <div className={css.userBar}>
+            <div className={css.userInfo}>
+                <img src="user-avatar.jpg" alt="User Avatar" className={css.avatar} />
+                <span className={css.userName}>{userName || 'Guest'}</span>
+                <button className={css.menuButton} onClick={togglePopover}>
+                    {/* Используем иконку или текст для кнопки */}
+                    ☰
+                </button>
+            </div>
+            {isPopoverOpen && <UserBarPopover onClose={togglePopover} />}
         </div>
     );
-};
+}
 
 export default UserBar;

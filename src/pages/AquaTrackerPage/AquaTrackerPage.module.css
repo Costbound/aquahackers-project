@@ -1,1 +1,9 @@
-
+.aquaTrackerPage{
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        width: 343px;
+        background-color: #F0EFF4;
+        border-radius: 30px;
+    
+}

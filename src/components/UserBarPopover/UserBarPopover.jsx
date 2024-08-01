@@ -1,12 +1,16 @@
-import styles from './UserBarPopover.module.css';
+import css from './UserBarPopover.module.css';
 
-const UserBarPopover = () => {
+function UserBarPopover({ onClose }) {
     return (
-        <div className={styles.popover}>
-            <button className={styles.button}>Settings</button>
-            <button className={styles.button}>Logout</button>
+        <div className={css.popover}>
+            <button className={css.popoverButton} onClick={onClose}>
+                Settings
+            </button>
+            <button className={css.popoverButton} onClick={onClose}>
+                Log out
+            </button>
         </div>
     );
-};
+}
 
 export default UserBarPopover;

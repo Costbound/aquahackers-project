@@ -1,15 +1,15 @@
-import styles from './AddWaterBtn.module.css';
+import css from './AddWaterBtn.module.css';
 
-const AddWaterBtn = () => {
+function AddWaterBtn() {
     const handleClick = () => {
-        // Open modal or do something
+        // Открыть модальное окно WaterModal
     };
 
     return (
-        <button className={styles.addButton} onClick={handleClick}>
-            Add Water
+        <button onClick={handleClick} className={css.addWaterBtn}>
+            Add water
         </button>
     );
-};
+}
 
 export default AddWaterBtn;
