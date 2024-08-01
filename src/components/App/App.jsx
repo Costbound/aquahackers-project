@@ -1,12 +1,12 @@
 import UserPanel from '../UserPanel/UserPanel';
 import UserBar from '../UserBar/UserBar';
 import DailyInfo from '../DailyInfo/DailyInfo';
-import styles from './App.module.css';
+import css from './App.module.css';
 
 const App = () => {
     return (
-        <div className={styles.container}>
-        <div className={styles.app}>
+        <div className={css.container}>
+        <div className={css.app}>
              
             <UserPanel />
             <UserBar />
