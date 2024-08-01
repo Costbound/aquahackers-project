@@ -9,8 +9,8 @@ const waterSlice = createSlice({
             weight: 0,
             sportTime: 0
         },
-        currentMonthWater: [],
-        prevMonthWater: [],
+        selectedMonthWater: [],
+        month: new Date().getMonth()
     },
     extraReducers: (build) => {}
 })
