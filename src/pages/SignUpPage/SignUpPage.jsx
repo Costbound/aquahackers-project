@@ -2,7 +2,7 @@ import css from './SignUpPage.module.css'
 
 function SignUpPage(props) {
     return (
-        <div></div>
+        <div>SignUp</div>
     );
 }
 
