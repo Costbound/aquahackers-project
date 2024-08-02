@@ -1,12 +1,26 @@
-.addButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+/* src/components/AddWaterBtn/AddWaterBtn.module.css */
+
+.addContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.addButton:hover {
-    background-color: #0056b3;
+.addButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    color: #323F47;
+    background-color: #9BE1A0;
+    border: #9BE1A0;
+
+}
+
+.addText {
+    display: flex;
+    font-weight: 700;
+    line-height: 24px;
+    color: #323F47;
+    font-size: 16px;
+    align-items: center;
 }

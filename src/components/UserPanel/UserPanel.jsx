@@ -10,7 +10,7 @@ const UserPanel = () => {
     return (
         <div className={css.panel}>
             <h1 className={css.greeting}>
-                Hello <span className={css.username}>,{username}!</span>
+                Hello<span className={css.username}>, {username}!</span>
             </h1>
             <UserBar />
         </div>

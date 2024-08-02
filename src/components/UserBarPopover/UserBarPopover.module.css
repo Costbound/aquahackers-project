@@ -1,19 +1,27 @@
+/* src/components/UserBarPopover/UserBarPopover.module.css */
+
 .popover {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 137px;
+    height: 72px;
+    border-radius: 15px;
+    color: white;
+    background-color: #323F47;
+    gap: 8px;
+    position: absolute;
+    transform: translateY(4px);
 }
 
-.button {
+.popoverButton {
+    width: 76px;
+    height: 18px;
     background: none;
     border: none;
-    padding: 10px;
+    color: white;
     cursor: pointer;
-}
-
-.button:hover {
-    background-color: #f0f0f0;
+    font-size: 14px;
+    text-align: center;
 }

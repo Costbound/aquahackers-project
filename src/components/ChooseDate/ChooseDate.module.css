@@ -1,4 +1,6 @@
-.datePicker {
-    width: 100%;
-    padding: 10px;
+.dateDisplay {
+    width: 99px;
+    height: 24px;
+    font-weight: 700;
+    font-size: 20px;
 }

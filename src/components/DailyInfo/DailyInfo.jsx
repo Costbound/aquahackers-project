@@ -3,11 +3,17 @@ import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
 import WaterList from '../WaterList/WaterList';
 import css from './DailyInfo.module.css';
 
-function DailyInfo() {
+const DailyInfo = () => {
+    const handleAddWater = () => {
+        // Логика добавления воды
+    };
+
     return (
         <div className={css.dailyInfo}>
-            <ChooseDate />
-            <AddWaterBtn />
+            <div className={css.dailyInfoContainer}>
+           <ChooseDate />
+            <AddWaterBtn onAddWater={handleAddWater} />     
+            </div>
             <WaterList />
         </div>
     );

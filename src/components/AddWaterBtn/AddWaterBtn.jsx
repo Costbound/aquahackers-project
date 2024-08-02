@@ -1,14 +1,14 @@
+// src/components/AddWaterBtn/AddWaterBtn.jsx
 import css from './AddWaterBtn.module.css';
 
-function AddWaterBtn() {
-    const handleClick = () => {
-        // Открыть модальное окно WaterModal
-    };
-
+const AddWaterBtn = ({ onAddWater }) => {
     return (
-        <button onClick={handleClick} className={css.addWaterBtn}>
-            Add water
-        </button>
+        <div className={css.addContainer}>
+            <button onClick={onAddWater} className={css.addButton}>
+                +
+            </button>
+            <span className={css.addText}>Add water</span>
+        </div>
     );
 }
 

@@ -1,6 +1,52 @@
-.waterItem {
+/* src/components/WaterItem/WaterItem.module.css */
+
+.waterItemContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 8px;
+}
+
+.waterInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрирует текст по вертикали */
+    align-items: center; /* Центрирует текст по горизонтали */
+    text-align: center; /* Центрирует текст внутри контейнера */
+}
+
+.amount {
+    font-size: 16px;
+    font-weight: 700;
+    color: #323F47;
+}
+
+.time {
+    font-size: 14px;
+    color: #6C757D;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.editButton, .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #007BFF;
+}
+
+.deleteButton {
+    color: #dc3545;
+}
+
+.editButton:hover, .deleteButton:hover {
+    opacity: 0.8;
 }

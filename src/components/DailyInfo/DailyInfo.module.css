@@ -1,3 +1,10 @@
 .dailyInfo {
-    padding-top: 20px;
+margin-top: 40px;
+}
+
+.dailyInfoContainer {
+    display: flex;
+    align-items: center;
+    gap:80px;
+    margin-bottom: 40px;
 }

@@ -1,4 +1,5 @@
 .waterList {
-    list-style-type: none;
-    padding: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
 }

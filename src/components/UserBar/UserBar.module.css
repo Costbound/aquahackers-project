@@ -1,27 +1,51 @@
+/* UserBar.module.css */
+
+.userBarContainer {
+    position: relative;
+    display: inline-block; /* Изменить при необходимости */
+}
+
 .userBar {
     display: flex;
     align-items: center;
-}
-
-.userInfo {
-    display: flex;
-    align-items: center;
+    justify-content: center;
+    width: 137px;
+    height: 50px;
+    margin-top: 20px;
+    border: 2px solid;
+    border-radius: 30px;
+    gap: 8px;
+    background-color: #323F47;
 }
 
 .avatar {
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 8px;
+    color:#F0EFF4;
+    background-color: #fff;
 }
 
-.userName {
-    margin-right: 8px;
+.username {
+    width: 43px;
+    height:18px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -1%;
+    align-items: center;
+    color: #fff
 }
 
-.menuButton {
-    background: none;
+.dropdownArrow {
+    font-size: 16px;
+    color: #fff;
+}
+
+.userButton {
+    width: 16px;
+    height: 16px;
     border: none;
-    font-size: 18px;
+    background-color: transparent;
     cursor: pointer;
 }
