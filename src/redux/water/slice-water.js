@@ -11,8 +11,7 @@ const waterSlice = createSlice({
         },
         selectedMonthWater: [],
         month: new Date().getMonth()
-    },
-    extraReducers: (build) => {}
+    }
 })
 
 const waterReducer = waterSlice.reducer
