@@ -9,6 +9,9 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .modal {
   display: flex;
@@ -16,7 +19,7 @@
   justify-content: center;
   flex-direction: column;
   padding: 40px 20px 40px 20px;
-
+  width: auto;
   border-radius: 15px;
 
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
@@ -36,21 +39,11 @@
   border: none;
   background: none;
 }
-@media screen and (min-width: 320px) {
-  .modal {
-    width: 100%;
-  }
-}
-@media screen and (min-width: 375px) {
-  .modal {
-    width: 343px;
-  }
-}
+
 @media screen and (min-width: 768px) {
   /* ++++++++++++  TABLET STYLES +++++++++++++++++++ */
 
   .modal {
-    width: 518px;
     padding: 40px;
   }
 
@@ -62,15 +55,4 @@
     right: 20px;
     top: 20px;
   }
-  /* ============== END TABLET STYLES ============== */
-}
-
-@media screen and (min-width: 1440px) {
-  /* ++++++++++++  DESKTOP STYLES +++++++++++++++++++ */
-
-  .modal {
-    width: auto;
-  }
-
-  /* ============== END DESKTOP STYLES ============== */
 }
