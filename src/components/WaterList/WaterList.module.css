@@ -1,28 +1,26 @@
-/* WaterList.module.css */
 .waterListContainer {
     position: relative;
-    width: 303px; /* Ширина контейнера, чтобы ползунок был фиксированной ширины */
-    overflow: hidden; /* Скрыть элементы, выходящие за пределы контейнера */
+    width: 303px;
+    overflow: hidden;
 }
 
 .waterList {
     display: flex;
     gap: 8px;
     flex-wrap: nowrap;
-    white-space: nowrap; /* Чтобы контейнеры не переносились на новую строку */
-    overflow-x: auto; /* Для скроллинга по горизонтали */
-    
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .slider-container {
     position: absolute;
-    bottom: 10px; /* Позиционируем ползунок над контейнером с элементами */
+    bottom: 10px;
     width: 100%;
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 303px; /* Чтобы ползунок занимал всю ширину контейнера */
+    width: 303px;
     height: 8px;
     border-radius: 5px;
     background: #d3d3d3;

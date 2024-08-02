@@ -1,5 +1,5 @@
 import './App.module.css'
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {selectIsRefreshing} from "../../redux/auth/selectors-auth.js";
 import {Route, Routes} from "react-router";
 // import HomePage from '../../pages/HomePage/HomePage'
@@ -11,6 +11,7 @@ import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
 
 
 export default function App() {
+    const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);
 
     return isRefreshing ? (

@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
 
 const initialData = [
     { id: 1, amount: 250, time: '7:00 AM' },
-    { id: 2, amount: 250, time: '11:00 AM' },
-    { id: 3, amount: 300, time: '17:00 PM' },
-    { id: 4, amount: 300, time: '17:00 PM' },
-    { id: 5, amount: 300, time: '17:00 PM' },
-    { id: 6, amount: 300, time: '17:00 PM' },
-    // Добавьте другие элементы, если необходимо
+    { id: 2, amount: 300, time: '11:00 AM' },
+    { id: 3, amount: 350, time: '13:00 PM' },
+    { id: 4, amount: 400, time: '15:00 PM' },
+    { id: 5, amount: 450, time: '17:00 PM' },
+    { id: 6, amount: 500, time: '19:00 PM' },
 ];
 
 const WaterList = () => {
@@ -25,12 +24,19 @@ const WaterList = () => {
         }
     };
 
-    useEffect(() => {
-        // Установите максимальное значение ползунка при монтировании компонента
+    const updateMaxScroll = () => {
         if (containerRef.current) {
             setMaxScroll(containerRef.current.scrollWidth - containerRef.current.clientWidth);
         }
-    }, [containerRef.current]);
+    };
+
+    useLayoutEffect(() => {
+        updateMaxScroll();
+        window.addEventListener('resize', updateMaxScroll);
+        return () => {
+            window.removeEventListener('resize', updateMaxScroll);
+        };
+    }, []);
 
     return (
         <div className={css.waterListContainer}>
