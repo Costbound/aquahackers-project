@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-// import "./Button.css"; // Подключите стили для кнопки
 
 const Button = ({
   children,
