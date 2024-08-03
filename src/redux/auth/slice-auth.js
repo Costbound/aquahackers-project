@@ -5,7 +5,7 @@ const authSlice = createSlice({
     initialState: {
         email: null,
         accessToken: null,
-        isLoggedIn: false,
+        isLoggedIn: true,
         isRefreshing: false,
         error: null
     }
