@@ -1,8 +1,6 @@
-/* UserBar.module.css */
-
 .userBarContainer {
     position: relative;
-    display: inline-block; /* Изменить при необходимости */
+    display: inline-block;
 }
 
 .userBar {
@@ -39,7 +37,8 @@
 .svgIconChevron {
     width: 16px;
     height: 16px;
-    fill: #fff;
+    stroke: #fff;
+    fill: none;
 }
 
 .userButton {

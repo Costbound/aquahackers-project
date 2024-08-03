@@ -10,6 +10,7 @@
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow-x: auto;
+    overflow: hidden;
 }
 
 .slider-container {
@@ -22,8 +23,8 @@
     -webkit-appearance: none;
     width: 303px;
     height: 8px;
-    border-radius: 5px;
-    background: #d3d3d3;
+    border-radius: 9px;
+    background: #FFFFFF;
     outline: none;
     opacity: 0.7;
     transition: opacity .2s;
@@ -36,9 +37,9 @@
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
+    width: 150px;
+    height: 8px;
+    border-radius: 9px;
+    background: #323F47;
     cursor: pointer;
 }

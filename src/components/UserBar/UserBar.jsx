@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUsername } from '../../redux/auth/selectors-auth'; 
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
@@ -8,11 +8,40 @@ import icon from "../../img/icons.svg";
 
 const UserBar = () => {
     const [isPopoverOpen, setPopoverOpen] = useState(false);
+    const popoverRef = useRef(null);
     const userName = useSelector(selectUsername); 
     const username = userName || 'Guest';
 
     const togglePopover = () => {
         setPopoverOpen(prevState => !prevState);
+    };
+
+    const handleClickOutside = (event) => {
+        if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+            setPopoverOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isPopoverOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isPopoverOpen]);
+
+    const handleSettingClick = (event) => {
+        event.stopPropagation();
+        console.log("Settings clicked");
+    };
+
+    const handleLogoutClick = (event) => {
+        event.stopPropagation();
+        console.log("Log out clicked");
     };
 
     return (
@@ -28,7 +57,15 @@ const UserBar = () => {
                     </span>
                 </button>
             </div>
-            {isPopoverOpen && <UserBarPopover onClose={togglePopover} />}
+            {isPopoverOpen && (
+                <div ref={popoverRef}>
+                    <UserBarPopover
+                        onClose={togglePopover}
+                        onSettingClick={handleSettingClick}
+                        onLogoutClick={handleLogoutClick}
+                    />
+                </div>
+            )}
         </div>
     );
 }

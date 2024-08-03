@@ -46,8 +46,8 @@ const WaterList = () => {
                         key={item.id} 
                         amount={item.amount} 
                         time={item.time}
-                        onEdit={() => console.log(`Edit item with id: ${item.id}`)}
-                        onDelete={() => console.log(`Delete item with id: ${item.id}`)}
+                        onEdit={() => console.log('Edit item')}
+                        onDelete={() => console.log('Delete item')}
                     />
                 ))}
             </div>
