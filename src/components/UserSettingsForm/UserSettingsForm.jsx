@@ -1,4 +1,5 @@
-import * as yup from "yup";
+import * as yup from 'yup';
+
 
 const schema = yup.object().shape({
             avatar: yup.mixed(),
@@ -61,3 +62,5 @@ const schema = yup.object().shape({
     }),
 });
 
+
+ 
