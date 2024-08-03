@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import css from './WaterItem.module.css';
+import icon from "../../img/icons.svg";
 
 const WaterItem = ({ amount, time, onEdit, onDelete }) => {
     const handleEdit = () => {
@@ -12,9 +13,9 @@ const WaterItem = ({ amount, time, onEdit, onDelete }) => {
 
     return (
         <div className={css.waterItemContainer}>
-            <svg className={css.waterIcon}>
-                <use xlinkHref="#icon-glass-of-water"></use>
-            </svg>
+            <svg className={css.svgIcon}>
+            <use href={`${icon}#icon-glass-of-water`} />
+          </svg>
             <div className={css.waterInfo}>
                 <span className={css.amount}>{amount} ml</span>
                 <span className={css.time}>{time}</span> 

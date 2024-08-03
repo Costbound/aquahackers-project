@@ -9,18 +9,29 @@
     height: 72px;
     border-radius: 15px;
     color: white;
-    background-color: #323F47;
+    background-color: white;
     gap: 8px;
     position: absolute;
     transform: translateY(4px);
 }
 
-.popoverButton {
+.popoverButtonSettings {
     width: 76px;
     height: 18px;
     background: none;
     border: none;
-    color: white;
+    color: #323F47;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.popoverButtonLogout {
+    width: 76px;
+    height: 18px;
+    background: none;
+    border: none;
+    color: rgba(50, 63, 71, 0.4);
     cursor: pointer;
     font-size: 14px;
     text-align: center;

@@ -8,7 +8,7 @@ const initialData = [
     { id: 3, amount: 350, time: '13:00 PM' },
     { id: 4, amount: 400, time: '15:00 PM' },
     { id: 5, amount: 450, time: '17:00 PM' },
-    { id: 6, amount: 500, time: '19:00 PM' },
+    { id: 6, amount: 1000, time: '19:00 PM' },
 ];
 
 const WaterList = () => {
