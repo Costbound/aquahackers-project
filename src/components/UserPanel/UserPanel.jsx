@@ -5,7 +5,7 @@ import css from './UserPanel.module.css';
 
 const UserPanel = () => {
     const userName = useSelector(selectUsername);
-    const username = userName || 'Guest';
+    const username = userName || 'Nadia';
 
     return (
         <div className={css.panel}>

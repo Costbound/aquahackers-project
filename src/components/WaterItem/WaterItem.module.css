@@ -2,13 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    border-radius: 8px;
+    border-radius: 15px;
     background-color: #f9f9f9;
-    margin-bottom: 24px;
-    gap: 9px;
+    gap: 10px;
     width: 149px;
     height: 74px;
+    padding: 18px 14px 18px 14px;
 }
 
 .waterInfo {
@@ -21,13 +20,13 @@
 }
 
 .amount {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     color: #323F47;
 }
 
 .time {
-    font-size: 14px;
+    font-size: 12px;
     color: #6C757D;
 }
 

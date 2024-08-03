@@ -9,12 +9,11 @@
     gap: 8px;
     flex-wrap: nowrap;
     white-space: nowrap;
-    overflow-x: auto;
     overflow: hidden;
+    margin-bottom: 24px;
 }
 
-.slider-container {
-    position: absolute;
+.sliderContainer {
     bottom: 10px;
     width: 100%;
 }

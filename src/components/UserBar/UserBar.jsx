@@ -4,11 +4,12 @@ import { selectUsername } from '../../redux/auth/selectors-auth';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import css from './UserBar.module.css';
 import userAvatar from '../../img/tracker-page/user.jpg';
-import icon from "../../img/icons.svg";
+import icon from '../../img/icons.svg';
 
 const UserBar = () => {
     const [isPopoverOpen, setPopoverOpen] = useState(false);
     const popoverRef = useRef(null);
+    const buttonRef = useRef(null);
     const userName = useSelector(selectUsername); 
     const username = userName || 'Guest';
 
@@ -17,8 +18,13 @@ const UserBar = () => {
     };
 
     const handleClickOutside = (event) => {
-        if (popoverRef.current && !popoverRef.current.contains(event.target)) {
-            setPopoverOpen(false);
+        if (
+            popoverRef.current && !popoverRef.current.contains(event.target) &&
+            buttonRef.current && !buttonRef.current.contains(event.target)
+        ) {
+            setTimeout(() => {
+                setPopoverOpen(false);
+            }, 0);
         }
     };
 
@@ -49,10 +55,10 @@ const UserBar = () => {
             <div className={css.userBar}>
                 <span className={css.username}>{username}</span>
                 <img src={userAvatar} className={css.avatar} alt="User Avatar"/>
-                <button onClick={togglePopover} className={css.userButton}>
+                <button onClick={togglePopover} className={css.userButton} ref={buttonRef}>
                     <span>
                         <svg className={css.svgIconChevron}>
-                            <use href={`${icon}#icon-${isPopoverOpen ? 'chevron-down' : 'chevron-up'}`} />
+                            <use href={`${icon}#icon-${isPopoverOpen ? 'chevron-up' : 'chevron-down'}`} />
                         </svg>
                     </span>
                 </button>

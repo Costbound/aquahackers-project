@@ -1,7 +1,7 @@
 import css from './UserBarPopover.module.css';
 import icon from '../../img/icons.svg';
 
-function UserBarPopover({ onClose, onSettingClick, onLogoutClick }) {
+function UserBarPopover({ onSettingClick, onLogoutClick }) {
     return (
         <div className={css.popover}>
             <button className={css.popoverButtonSetting} onClick={onSettingClick}>
