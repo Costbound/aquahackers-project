@@ -1,0 +1,62 @@
+.overlay {
+            position: fixed;
+            padding: 20px;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            overflow-y: auto;
+            z-index: 999;
+            background-color: rgba(47, 47, 47, 0.6);
+            animation: fadeIn 0.2s ease-in-out forwards;
+          }
+          .ReactModal__Overlay--after-open {
+            opacity: 1;
+          }
+          .ReactModal__Overlay--before-close {
+            opacity: 0;
+          }
+          
+          .modalContent {
+            padding: 40px 20px;
+            margin: 80px auto auto;
+            position: relative;
+            border-radius: 15px;
+            background-color: white;
+            width: 100%;
+            max-width: 344px;
+          }
+          
+          @media screen and (min-width: 768px) {
+            .modalContent {
+              padding: 40px;
+              width: unset;
+              max-width: 518px;
+            }
+          }
+          
+          .buttonClose {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            transition: color 100ms ease-in;
+          }
+          
+          @media screen and (min-width: 768px) {
+            .modalContent {
+              padding: 40px;
+              max-width: 920px;
+            }
+          }
+          
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
