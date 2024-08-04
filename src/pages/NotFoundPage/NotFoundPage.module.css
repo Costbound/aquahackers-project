@@ -1,0 +1,10 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.status {
+  font-size: 44px;
+  text-shadow: 2px;
+  color: aqua;
+}
