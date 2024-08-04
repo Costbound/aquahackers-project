@@ -16,10 +16,10 @@
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M24 8l-16 16"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M8 8l16 16"></path>
 </symbol>
-<symbol id="icon-chevron-right" viewBox="0 0 32 32">
+<symbol fill="none" id="icon-chevron-right" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M12 24l8-8-8-8"></path>
 </symbol>
-<symbol id="icon-chevron-left" viewBox="0 0 32 32">
+<symbol fill="none" id="icon-chevron-left" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.5556" d="M20 24l-8-8 8-8"></path>
 </symbol>
 <symbol id="icon-pie-for-statistics-active" viewBox="0 0 32 32">
@@ -50,8 +50,7 @@
 <symbol id="icon-pencil" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.6" d="M22.666 4c0.35-0.35 0.766-0.628 1.223-0.817s0.948-0.287 1.443-0.287c0.495 0 0.986 0.098 1.443 0.287s0.873 0.467 1.224 0.817 0.628 0.766 0.817 1.223c0.19 0.458 0.287 0.948 0.287 1.443s-0.098 0.986-0.287 1.443c-0.189 0.458-0.467 0.873-0.817 1.223l-18 18-7.333 2 2-7.333 18-18z"></path>
 </symbol>
-<symbol id="icon-bin" viewBox="0 0 32 32">
-<path d="M0 0h32v32h-32v-32z"></path>
+<symbol fill="none" id="icon-bin" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3" d="M12 4h8"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.6" d="M4 8h24M25.333 8l-0.935 14.026c-0.14 2.104-0.21 3.156-0.665 3.954-0.4 0.702-1.004 1.267-1.731 1.62-0.826 0.4-1.881 0.4-3.99 0.4h-4.025c-2.109 0-3.163 0-3.99-0.4-0.727-0.353-1.331-0.917-1.731-1.62-0.455-0.798-0.525-1.85-0.665-3.954l-0.935-14.026"></path>
 </symbol>
