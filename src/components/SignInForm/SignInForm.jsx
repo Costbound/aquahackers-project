@@ -40,7 +40,7 @@ const SignInForm = () => {
       await dispatch(login(formData)).unwrap(); // Вызов операции login с передачей данных формы
       toast.success("Successfully signed in!"); // Уведомление об успешном входе
       reset();
-      navigate("/aqua-tracker"); // Перенаправление на страницу трекера
+      navigate("/tracker"); // Перенаправление на страницу трекера
     } catch (error) {
       toast.error(error || "Failed to sign in. Please try again later.");
     }
@@ -48,7 +48,7 @@ const SignInForm = () => {
 
   useEffect(() => {
     if (isSignedIn) {
-      navigate("/aqua-tracker"); // Перенаправление на страницу трекера, если пользователь уже вошел в систему
+      navigate("/tracker"); // Перенаправление на страницу трекера, если пользователь уже вошел в систему
     }
   }, [isSignedIn, navigate]);
 

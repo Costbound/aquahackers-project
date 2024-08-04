@@ -28,23 +28,17 @@ export default function App() {
       <Route
         path="/signup"
         element={
-          <RestrictedRoute
-            component={<SignUpPage />}
-            redirectTo="/aqua-tracker"
-          />
+          <RestrictedRoute component={<SignUpPage />} redirectTo="/tracker" />
         }
       />
       <Route
         path="/signin"
         element={
-          <RestrictedRoute
-            component={<SignInPage />}
-            redirectTo="/aqua-tracker"
-          />
+          <RestrictedRoute component={<SignInPage />} redirectTo="/tracker" />
         }
       />
       <Route
-        path="/aqua-tracker"
+        path="/tracker"
         element={
           <PrivateRoute component={<AquaTrackerPage />} redirectTo="/signin" />
         }
