@@ -1,0 +1,6 @@
+.text {
+  color: var(--color-error);
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}

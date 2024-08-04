@@ -5,12 +5,13 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #2F2F2F;
+    line-height: 1.28;
+    letter-spacing: -0.14px;
 }
 section {
     width: 343px;
     padding: 24px 16px;
     background-color: #F0EFF4;
-;
 }
 .container {
     max-width: 311px;
@@ -29,12 +30,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 h1 {
     font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.38px;
 }
 h2 {
     font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
 }
 h3 {
     font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.16px;
 }
 h4 {
     font-size: 16px;
@@ -44,15 +51,21 @@ h4 {
     body {
         font-size: 16px;
         padding: 32px;
+        line-height: 1.5;
+        letter-spacing: -0.16px;
     }
     section {
         padding: 32px;
     }
     h2 {
         font-size: 36px;
+        line-height: 1.14;
+        letter-spacing: -0.28px;
     }
     h3 {
         font-size: 28px;
+        line-height: 1.33;
+        letter-spacing: -0.18px;
     }
     h4 {
         font-size: 18px;
@@ -68,6 +81,8 @@ h4 {
     }
     h1 {
         font-size: 64px;
+        line-height: 1.09;
+        letter-spacing: -0.64px;
     }
 }
 
@@ -80,5 +95,7 @@ h4 {
     }
     h1 {
         font-size: 80px;
+        line-height: 0.95;
+        letter-spacing: -0.8px;
     }
 }

@@ -1,0 +1,22 @@
+.page {
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  position: relative;
+  
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+    margin: 32px 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .page {
+    position: relative;
+    flex-direction: row;
+    gap: 32px;
+  }
+}
