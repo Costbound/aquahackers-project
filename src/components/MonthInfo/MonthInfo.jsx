@@ -6,12 +6,11 @@ import {
   selectedMonth,
   selectedMonthDays,
   selectedYear,
+  selectorIsLoading,
 } from "../../redux/water/selectors-water";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
-
-//Testing list
-// import { list } from "./testList";
+import Loader from "../Loader/Loader";
 
 export default function MonthInfo() {
   const [month, setMonth] = useState(useSelector(selectedMonth));
@@ -21,68 +20,65 @@ export default function MonthInfo() {
 
   const date = useRef(null);
 
-  //Testing list
-  // const monthDays = list[month];
-
-  const monthDays = useDispatch(useSelector(selectedMonthDays));
-  console.log(monthDays);
+  const monthDays = useSelector(selectedMonthDays);
+  const isLoading = useSelector(selectorIsLoading);
 
   useEffect(() => {
     dispatch(fetchMonth({ year, month }));
   }, [dispatch, month, year]);
 
   const previousMonth = () => {
-    if (month === 0) {
-      setMonth(() => {
-        // date.current === null ? "" : dateInMonthCheck([11]);
-        return 11;
-      });
+    if (month === 1) {
+      setMonth(12);
       setYear(year - 1);
     } else {
-      setMonth(() => {
-        // date.current === null ? "" : dateInMonthCheck([month - 1]);
-        return month - 1;
-      });
+      setMonth(month - 1);
     }
-    dispatch(fetchMonth({ year, month }));
   };
 
   const nextMonth = () => {
-    if (month === 11) {
-      setMonth(() => {
-        // date.current === null ? "" : dateInMonthCheck([0]);
-        return 0;
-      });
+    if (month === 12) {
+      setMonth(1);
       setYear(year + 1);
     } else {
-      setMonth(() => {
-        // date.current === null ? "" : dateInMonthCheck([month + 1]);
-        return month + 1;
-      });
+      setMonth(month + 1);
     }
-    dispatch(fetchMonth({ year, month }));
   };
 
-  // const dateInMonthCheck = (changingMonth) => {
-  //   if (
-  //     list[changingMonth].some((item) => item.number === date.current.number)
-  //   ) {
-  //     setActiveItem(
-  //       list[changingMonth].find((item) => item.number === date.current.number)
-  //         .testId
-  //     );
-  //   } else {
-  //     const tempDate = list[changingMonth].find(
-  //       (item) => item.number == list[changingMonth].length
-  //     );
-  //     setActiveItem(tempDate.testId);
-  //     date.current = tempDate;
-  //   }
-  // };
+  useEffect(() => {
+    if (date.current !== null) {
+      dateInMonthCheck();
+    }
+  });
 
+  // Якщо обрати день та змінити місяць має зберегтися обрана дата, при зміні місяця
+  // спрацьовує ця функція, тому щоб одразу витягувало інформацію про ту саму дату але
+  // в новому місяці, потрібно додати функцію і сюди. Її потрібно буде додати 2 рази
+  // Ці два рази я виділив та описав далі.
+  const dateInMonthCheck = () => {
+    if (monthDays.some((item) => item.date.slice(-2) === date.current)) {
+      const tempDateId = monthDays.find(
+        (item) => item.date.slice(-2) === date.current
+      ).date;
+      setActiveItem(tempDateId);
+      // id дня це tempDateId - Функцію потрібно буде додати сюди
+    } else {
+      const tempDateId = monthDays.find(
+        (item) => item.date.slice(-2) == monthDays.length
+      ).date;
+      setActiveItem(tempDateId);
+      date.current = tempDateId.slice(-2);
+      // id дня це tempDateId - Функцію потрібно буде додати сюди
+    }
+  };
+
+  // Функція кліку на день
+  // data - це повна інформація по дню для тесту можна використати
+  // console.log(data) - в самій функціїї
+  // id дня це data.date
   const onItemClick = async (data) => {
-    setActiveItem(data.testId);
-    date.current = data;
+    setActiveItem(data.date);
+    date.current = data.date.slice(-2);
   };
 
   return (
@@ -93,11 +89,15 @@ export default function MonthInfo() {
         onPreviousMonth={previousMonth}
         onNextMonth={nextMonth}
       />
-      <Calendar
-        monthDays={monthDays}
-        activeItem={activeItem}
-        onItemClick={onItemClick}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Calendar
+          monthDays={monthDays}
+          activeItem={activeItem}
+          onItemClick={onItemClick}
+        />
+      )}
     </div>
   );
 }

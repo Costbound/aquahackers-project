@@ -1,6 +1,8 @@
 import css from "./CalendarPagination.module.css";
 import namingMonth from "../../helpers/Calendar/namingMonth";
 import icons from "../../img/icons.svg";
+import { selectorIsLoading } from "../../redux/water/selectors-water";
+import { useSelector } from "react-redux";
 
 export default function CalendarPagination({
   month,
@@ -9,6 +11,7 @@ export default function CalendarPagination({
   onNextMonth,
 }) {
   const namedMonth = namingMonth(month);
+  const isLoading = useSelector(selectorIsLoading);
 
   return (
     <div className={css.container}>
@@ -17,7 +20,7 @@ export default function CalendarPagination({
       <div className={css.paginationContainer}>
         <div className={css.paginationElements}>
           <button
-            className={css.button}
+            className={`${css.button} ${isLoading ? css.blockedButton : ""}`}
             type="button"
             onClick={() => onPreviousMonth()}
           >
@@ -31,7 +34,7 @@ export default function CalendarPagination({
           </p>
 
           <button
-            className={css.button}
+            className={`${css.button} ${isLoading ? css.blockedButton : ""}`}
             type="button"
             onClick={() => onNextMonth()}
           >

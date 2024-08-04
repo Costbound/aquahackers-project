@@ -11,6 +11,11 @@
   padding: 0;
 }
 
+.blockedButton {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .paginationIcon {
   height: 18px;
   width: 18px;
@@ -40,6 +45,7 @@
 .container {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .paginationContainer {

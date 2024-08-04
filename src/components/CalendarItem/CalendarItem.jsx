@@ -10,13 +10,13 @@ export default function CalendarItem({ data, date, onClick, activeCheck }) {
       <div
         className={`
           ${css.itemBall}
-          ${data.percentage < 100 ? css.itemBallGray : ""}
-          ${activeCheck == data.id ? css.itemOnClick : ""}
+          ${data.dailyProgress < 100 ? css.itemBallGray : ""}
+          ${activeCheck === data.date ? css.itemOnClick : ""}
         `}
       >
         <p className={css.ballText}>{date}</p>
       </div>
-      <p className={css.itemText}>{data.percentage}%</p>
+      <p className={css.itemText}>{data.dailyProgress}%</p>
     </button>
   );
 }

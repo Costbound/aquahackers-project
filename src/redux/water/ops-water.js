@@ -8,7 +8,10 @@ export const fetchMonth = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responce = await axios.get(
-        `/water/month?date=${payload.year}-${payload.month}`
+        `/water/month?date=${payload.year}-${String(payload.month).padStart(
+          2,
+          "0"
+        )}`
       );
       return responce.data;
     } catch (error) {

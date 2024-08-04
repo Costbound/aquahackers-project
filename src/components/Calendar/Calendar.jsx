@@ -5,7 +5,7 @@ export default function Calendar({ monthDays, activeItem, onItemClick }) {
   return (
     <ul className={css.containter}>
       {monthDays.map((day, index) => (
-        <li className={css.itemContainer} key={day.id}>
+        <li className={css.itemContainer} key={day.date}>
           <CalendarItem
             data={day}
             date={index + 1}
