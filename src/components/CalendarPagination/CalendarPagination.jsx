@@ -1,0 +1,52 @@
+import css from "./CalendarPagination.module.css";
+import namingMonth from "../../helpers/Calendar/namingMonth";
+import icons from "../../img/icons.svg";
+
+export default function CalendarPagination({
+  month,
+  year,
+  onPreviousMonth,
+  onNextMonth,
+}) {
+  const namedMonth = namingMonth(month);
+
+  return (
+    <div className={css.container}>
+      <h3 className={css.title}>Month</h3>
+
+      <div className={css.paginationContainer}>
+        <div className={css.paginationElements}>
+          <button
+            className={css.button}
+            type="button"
+            onClick={() => onPreviousMonth()}
+          >
+            <svg className={css.paginationIcon}>
+              <use href={`${icons}#icon-chevron-left`} />
+            </svg>
+          </button>
+
+          <p className={css.paginationText}>
+            {namedMonth}, {year}
+          </p>
+
+          <button
+            className={css.button}
+            type="button"
+            onClick={() => onNextMonth()}
+          >
+            <svg className={css.paginationIcon}>
+              <use href={`${icons}#icon-chevron-right`} />
+            </svg>
+          </button>
+        </div>
+
+        <button className={css.pieButton} type="button">
+          <svg className={css.pieIcon}>
+            <use href={`${icons}#icon-pie-for-statistics-active`} />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}

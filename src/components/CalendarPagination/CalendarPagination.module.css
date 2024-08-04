@@ -1,0 +1,76 @@
+.title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.button {
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: transparent;
+  padding: 0;
+}
+
+.paginationIcon {
+  height: 18px;
+  width: 18px;
+  stroke: rgba(50, 63, 71, 1);
+  fill: transparent;
+}
+
+.pieButton {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: transparent;
+  padding: 0;
+  opacity: 0.4;
+}
+
+.pieIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.paginationText {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.paginationElements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 158px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+  .paginationText {
+    font-size: 16px;
+  }
+  .paginationElements {
+    width: 176px;
+  }
+  .pieButton {
+    width: 24px;
+    height: 24px;
+  }
+  .pieIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
