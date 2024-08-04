@@ -8,6 +8,7 @@ import SignUpPage from "../../pages/SignUpPage/SignUpPage.jsx";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
     const isRefreshing = useSelector(selectIsRefreshing);
 
     return isRefreshing ? (
-        <p>Loading</p>
+        <Loader type="global" width="100" height="100"/>
     ) : (
         <Routes>
             <Route path='/' element={<HomePage />} />
