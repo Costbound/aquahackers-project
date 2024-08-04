@@ -13,8 +13,7 @@ const userDataSlice = createSlice({
         setName(state, action) {
             state.name = action.payload;
         }
-    },
-    extraReducers: (builder) => {}
+    }
 });
 
 export const { setName } = userDataSlice.actions;

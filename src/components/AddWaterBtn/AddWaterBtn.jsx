@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './AddWaterBtn.module.css';
 import icon from "../../img/icons.svg";
 
@@ -13,5 +14,9 @@ const AddWaterBtn = ({ onAddWater }) => {
         </div>
     );
 }
+
+AddWaterBtn.propTypes = {
+    onAddWater: PropTypes.func.isRequired,
+};
 
 export default AddWaterBtn;

@@ -17,8 +17,7 @@ const waterSlice = createSlice({
         setSelectedDate(state, action) {
             state.selectedDate = action.payload;
         },
-    },
-    extraReducers: (builder) => {}
+    }
 });
 
 export const { setSelectedDate } = waterSlice.actions;
