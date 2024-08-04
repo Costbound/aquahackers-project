@@ -28,3 +28,10 @@
     stroke: black;
     fill: none;
 }
+
+@media screen and (min-width: 768px) {
+    .addWaterContainer {
+
+    }
+    
+}

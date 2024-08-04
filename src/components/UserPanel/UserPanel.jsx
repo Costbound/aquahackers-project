@@ -8,7 +8,7 @@ const UserPanel = () => {
     const username = userName || 'User';
 
     return (
-        <div className={css.panel}>
+        <div className={css.userPanel}>
             <h1 className={css.greeting}>
                 Hello<span className={css.panelUsername}>, {username}!</span>
             </h1>

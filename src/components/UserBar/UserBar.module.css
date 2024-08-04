@@ -48,3 +48,27 @@
     cursor: pointer;
     padding-top: 5px;
 }
+
+@media screen and (min-width: 768px) {
+    .userBar {
+        width: 157px;
+        height: 56px;
+        margin-top: 0;
+        gap: 10px;
+    }
+
+    .svgIconChevron {
+        width: 20px;
+        height: 20px;
+    }
+
+    .avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .barUsername {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

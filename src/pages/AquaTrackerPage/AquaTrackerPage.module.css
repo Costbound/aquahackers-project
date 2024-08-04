@@ -4,6 +4,12 @@
         padding: 40px 20px 40px 20px;
         width: 343px;
         background-color: #F0EFF4;
-        border-radius: 30px;
-    
+        border-radius: 30px;   
+}
+
+@media screen and (min-width: 768px) {
+    .aquaTrackerPage{
+        width: 704px;
+        padding: 32px;
+    }
 }
