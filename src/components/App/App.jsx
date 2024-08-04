@@ -8,14 +8,21 @@ import SignUpPage from "../../pages/SignUpPage/SignUpPage.jsx";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
+import Loader from "../Loader/Loader.jsx";
+import {useEffect} from "react";
+import {refresh} from "../../redux/auth/ops-auth.js";
 
 
 export default function App() {
     const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);
 
+    useEffect(() => {
+        dispatch(refresh())
+    }, [dispatch])
+
     return isRefreshing ? (
-        <p>Loading</p>
+        <Loader type="global" width="100" height="100"/>
     ) : (
         <Routes>
             <Route path='/' element={<HomePage />} />

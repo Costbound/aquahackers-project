@@ -11,6 +11,6 @@ export const requestLogin = async (formData) => {
 };
 
 export const refreshToken = async () => {
-  const { data } = await publicInstance.get("/auth/refresh");
+  const { data } = await publicInstance.post("/auth/refresh", {});
   return data;
 };
