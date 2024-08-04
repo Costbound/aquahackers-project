@@ -1,32 +1,33 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
+import axios from "axios";
+// import toast from "react-hot-toast";
 
 //Віталія
+const API_BASE_URL = "https://final-team-pr-backend.onrender.com";
+
+// Асинхронний thunk для збереження даних
 export const saveWaterData = createAsyncThunk(
   "waterForm/saveWaterData",
-  async ({ type, waterId, data }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const url = type === "edit" ? `/api/water/${waterId}` : "/api/water";
-      const method = type === "edit" ? "PATCH" : "POST";
+      // Вибір методу POST або PATCH в залежності від типу дії
+      const method = data.id ? "PATCH" : "POST";
+      const url = data.id
+        ? `${API_BASE_URL}/water/${data.id}`
+        : `${API_BASE_URL}/water`;
 
-      const response = await fetch(url, {
+      const response = await axios({
         method,
+        url,
+        data,
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(errorData.message || "Failed to save water data");
-        throw new Error(errorData.message || "Failed to save water data");
-      }
-
-      return await response.json();
+      return response.data;
     } catch (error) {
-      toast.error(error.message);
-      throw error;
+      return rejectWithValue(error.response.data);
     }
   }
 );

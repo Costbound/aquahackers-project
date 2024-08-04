@@ -33,8 +33,12 @@ const WaterModal = ({
   useEffect(() => {
     if (type === "edit" && waterId) {
       // Оновлюємо дані з props
-      dispatch(setWaterAmount(initialWaterAmount));
-      dispatch(setDate(initialDate));
+
+      const formattedDate = date.slice(-5);
+      dispatch(setWaterAmount(waterAmount));
+      dispatch(setDate(formattedDate));
+      //   dispatch(setWaterAmount(initialWaterAmount));
+      //   dispatch(setDate(initialDate));
     } else {
       dispatch(resetWater());
     }
