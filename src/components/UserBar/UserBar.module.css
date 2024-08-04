@@ -24,9 +24,7 @@
     background-color: #fff;
 }
 
-.username {
-    width: 43px;
-    height:18px;
+.barUsername {
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;
@@ -48,4 +46,5 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    padding-top: 5px;
 }

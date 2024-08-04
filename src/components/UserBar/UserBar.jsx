@@ -1,17 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUsername } from '../../redux/auth/selectors-auth'; 
+import { selectUserName } from '../../redux/userData/selectors-userData'; // Импортируйте селектор из userData
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
+
+// import SettingsModal from '../SettingsModal/SettingsModal';- пример того как мне будет подсоединены модальные окна и я их буду использовать
+// import LogoutModal from '../LogoutModal/LogoutModal';
+
 import css from './UserBar.module.css';
 import userAvatar from '../../img/tracker-page/user.jpg';
 import icon from '../../img/icons.svg';
 
 const UserBar = () => {
     const [isPopoverOpen, setPopoverOpen] = useState(false);
+    // const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);- пример открытия модальных окон
+    // const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
     const popoverRef = useRef(null);
     const buttonRef = useRef(null);
-    const userName = useSelector(selectUsername); 
-    const username = userName || 'Guest';
+    const userName = useSelector(selectUserName);
+    const username = userName || 'User';
 
     const togglePopover = () => {
         setPopoverOpen(prevState => !prevState);
@@ -40,20 +46,30 @@ const UserBar = () => {
         };
     }, [isPopoverOpen]);
 
-    const handleSettingClick = (event) => {
-        event.stopPropagation();
-        console.log("Settings clicked");
-    };
+    // const handleSettingClick = (event) => {
+    //     event.stopPropagation();
+    //     setPopoverOpen(false);
+    //     setSettingsModalOpen(true);
+    // };
 
-    const handleLogoutClick = (event) => {
-        event.stopPropagation();
-        console.log("Log out clicked");
-    };
+    // const handleLogoutClick = (event) => {
+    //     event.stopPropagation();
+    //     setPopoverOpen(false);        логика открытия и закрытия модальных окон по клику
+    //     setLogoutModalOpen(true);
+    // };
+
+    // const closeSettingsModal = () => {
+    //     setSettingsModalOpen(false);
+    // };
+
+    // const closeLogoutModal = () => {
+    //     setLogoutModalOpen(false);
+    // };
 
     return (
         <div className={css.userBarContainer}>
             <div className={css.userBar}>
-                <span className={css.username}>{username}</span>
+                <span className={css.barUsername}>{username}</span>
                 <img src={userAvatar} className={css.avatar} alt="User Avatar"/>
                 <button onClick={togglePopover} className={css.userButton} ref={buttonRef}>
                     <span>
@@ -66,9 +82,8 @@ const UserBar = () => {
             {isPopoverOpen && (
                 <div ref={popoverRef}>
                     <UserBarPopover
-                        onClose={togglePopover}
-                        onSettingClick={handleSettingClick}
-                        onLogoutClick={handleLogoutClick}
+                        // onSettingClick={handleSettingClick}
+                        // onLogoutClick={handleLogoutClick}   добавление в USerBarPopover функций
                     />
                 </div>
             )}
