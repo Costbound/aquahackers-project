@@ -12,7 +12,6 @@ import Loader from "../Loader/Loader.jsx";
 import {useEffect} from "react";
 import {refresh} from "../../redux/auth/ops-auth.js";
 
-
 export default function App() {
     const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);
@@ -26,9 +25,9 @@ export default function App() {
     ) : (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/signup' element={<RestrictedRoute component={<SignUpPage />} redirectTo='/aqua-tracker' />} />
-            <Route path='/signin' element={<RestrictedRoute component={<SignInPage />} redirectTo='/aqua-tracker' />} />
-            <Route path='/aqua-tracker' element={<PrivateRoute component={<AquaTrackerPage />} redirectTo='/signin' />} />
+            <Route path='/signup' element={<RestrictedRoute component={<SignUpPage />} redirectTo='/tracker' />} />
+            <Route path='/signin' element={<RestrictedRoute component={<SignInPage />} redirectTo='/tracker' />} />
+            <Route path='/tracker' element={<PrivateRoute component={<AquaTrackerPage />} redirectTo='/signin' />} />
             <Route path='*' element={<div>Not Found</div>} />
         </Routes>
     )
