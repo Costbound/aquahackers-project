@@ -22,6 +22,8 @@ export default function MonthInfo() {
   const date = useRef(null);
 
   //Testing list
+  // const monthDays = list[month];
+
   const monthDays = useDispatch(useSelector(selectedMonthDays));
   console.log(monthDays);
 
@@ -32,13 +34,13 @@ export default function MonthInfo() {
   const previousMonth = () => {
     if (month === 0) {
       setMonth(() => {
-        date.current === null ? "" : dateInMonthCheck([11]);
+        // date.current === null ? "" : dateInMonthCheck([11]);
         return 11;
       });
       setYear(year - 1);
     } else {
       setMonth(() => {
-        date.current === null ? "" : dateInMonthCheck([month - 1]);
+        // date.current === null ? "" : dateInMonthCheck([month - 1]);
         return month - 1;
       });
     }
@@ -48,35 +50,35 @@ export default function MonthInfo() {
   const nextMonth = () => {
     if (month === 11) {
       setMonth(() => {
-        date.current === null ? "" : dateInMonthCheck([0]);
+        // date.current === null ? "" : dateInMonthCheck([0]);
         return 0;
       });
       setYear(year + 1);
     } else {
       setMonth(() => {
-        date.current === null ? "" : dateInMonthCheck([month + 1]);
+        // date.current === null ? "" : dateInMonthCheck([month + 1]);
         return month + 1;
       });
     }
     dispatch(fetchMonth({ year, month }));
   };
 
-  const dateInMonthCheck = (changingMonth) => {
-    if (
-      list[changingMonth].some((item) => item.number === date.current.number)
-    ) {
-      setActiveItem(
-        list[changingMonth].find((item) => item.number === date.current.number)
-          .testId
-      );
-    } else {
-      const tempDate = list[changingMonth].find(
-        (item) => item.number == list[changingMonth].length
-      );
-      setActiveItem(tempDate.testId);
-      date.current = tempDate;
-    }
-  };
+  // const dateInMonthCheck = (changingMonth) => {
+  //   if (
+  //     list[changingMonth].some((item) => item.number === date.current.number)
+  //   ) {
+  //     setActiveItem(
+  //       list[changingMonth].find((item) => item.number === date.current.number)
+  //         .testId
+  //     );
+  //   } else {
+  //     const tempDate = list[changingMonth].find(
+  //       (item) => item.number == list[changingMonth].length
+  //     );
+  //     setActiveItem(tempDate.testId);
+  //     date.current = tempDate;
+  //   }
+  // };
 
   const onItemClick = async (data) => {
     setActiveItem(data.testId);
@@ -91,11 +93,11 @@ export default function MonthInfo() {
         onPreviousMonth={previousMonth}
         onNextMonth={nextMonth}
       />
-      {/* <Calendar
+      <Calendar
         monthDays={monthDays}
         activeItem={activeItem}
         onItemClick={onItemClick}
-      /> */}
+      />
     </div>
   );
 }

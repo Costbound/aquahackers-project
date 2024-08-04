@@ -1,6 +1,6 @@
 import css from "./CalendarItem.module.css";
 
-export default function CalendarItem({ data, onClick, activeCheck }) {
+export default function CalendarItem({ data, date, onClick, activeCheck }) {
   return (
     <button
       className={css.container}
@@ -11,10 +11,10 @@ export default function CalendarItem({ data, onClick, activeCheck }) {
         className={`
           ${css.itemBall}
           ${data.percentage < 100 ? css.itemBallGray : ""}
-          ${activeCheck == data.testId ? css.itemOnClick : ""}
+          ${activeCheck == data.id ? css.itemOnClick : ""}
         `}
       >
-        <p className={css.ballText}>{data.date}</p>
+        <p className={css.ballText}>{date}</p>
       </div>
       <p className={css.itemText}>{data.percentage}%</p>
     </button>

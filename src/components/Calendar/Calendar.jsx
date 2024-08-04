@@ -4,10 +4,11 @@ import css from "./Calendar.module.css";
 export default function Calendar({ monthDays, activeItem, onItemClick }) {
   return (
     <ul className={css.containter}>
-      {monthDays.map((day) => (
-        <li className={css.itemContainer} key={day.testId}>
+      {monthDays.map((day, index) => (
+        <li className={css.itemContainer} key={day.id}>
           <CalendarItem
             data={day}
+            date={index + 1}
             onClick={onItemClick}
             activeCheck={activeItem}
           />
