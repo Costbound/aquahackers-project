@@ -14,7 +14,7 @@ export default function CalendarItem({ data, onClick, activeCheck }) {
           ${activeCheck == data.testId ? css.itemOnClick : ""}
         `}
       >
-        <p className={css.ballText}>{data.date.slice(-2)}</p>
+        <p className={css.ballText}>{data.date}</p>
       </div>
       <p className={css.itemText}>{data.percentage}%</p>
     </button>

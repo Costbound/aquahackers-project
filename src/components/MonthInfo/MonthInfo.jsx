@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import Calendar from "../Calendar/Calendar";
 import CalendarPagination from "../CalendarPagination/CalendarPagination";
 import css from "./MonthInfo.module.css";
-import { selectedMonth, selectedYear } from "../../redux/water/selectors-water";
+import {
+  selectedMonth,
+  selectedMonthDays,
+  selectedYear,
+} from "../../redux/water/selectors-water";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
 
 //Testing list
-import { list } from "./testList";
+// import { list } from "./testList";
 
 export default function MonthInfo() {
   const [month, setMonth] = useState(useSelector(selectedMonth));
@@ -18,9 +22,12 @@ export default function MonthInfo() {
   const date = useRef(null);
 
   //Testing list
-  const monthDays = list[month];
+  const monthDays = useDispatch(useSelector(selectedMonthDays));
+  console.log(monthDays);
 
-  // useEffect(() => dispatch(fetchMonth({ year, month })), [month, year]);
+  useEffect(() => {
+    dispatch(fetchMonth({ year, month }));
+  }, [dispatch, month, year]);
 
   const previousMonth = () => {
     if (month === 0) {
@@ -35,7 +42,7 @@ export default function MonthInfo() {
         return month - 1;
       });
     }
-    // dispatch(fetchMonth({ year, month }));
+    dispatch(fetchMonth({ year, month }));
   };
 
   const nextMonth = () => {
@@ -51,7 +58,7 @@ export default function MonthInfo() {
         return month + 1;
       });
     }
-    // dispatch(fetchMonth({ year, month }));
+    dispatch(fetchMonth({ year, month }));
   };
 
   const dateInMonthCheck = (changingMonth) => {
@@ -84,11 +91,11 @@ export default function MonthInfo() {
         onPreviousMonth={previousMonth}
         onNextMonth={nextMonth}
       />
-      <Calendar
+      {/* <Calendar
         monthDays={monthDays}
         activeItem={activeItem}
         onItemClick={onItemClick}
-      />
+      /> */}
     </div>
   );
 }
