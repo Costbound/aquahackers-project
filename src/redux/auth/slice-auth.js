@@ -66,7 +66,7 @@ const authSlice = createSlice({
       // Обработка состояния fulfilled для операции refresh
       .addCase(refresh.fulfilled, (state, action) => {
         state.isRefreshing = false;
-        state.accessToken = action.payload.token;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       // Обработка состояния rejected для операции refresh
