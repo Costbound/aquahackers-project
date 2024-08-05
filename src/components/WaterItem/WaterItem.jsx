@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import css from './WaterItem.module.css';
+import css from './WaterItem.module.css'; 
 import icon from "../../img/icons.svg";
 
 const WaterItem = ({ amount, time, onEdit, onDelete }) => {

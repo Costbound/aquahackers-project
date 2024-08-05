@@ -13,3 +13,9 @@
         padding: 32px;
     }
 }
+
+@media (min-width: 1440px) {
+    .aquaTrackerPage{
+        width: 672px;
+    }
+}

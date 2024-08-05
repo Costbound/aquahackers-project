@@ -12,3 +12,9 @@
         font-size: 28px;
     }   
 }
+
+@media screen and (min-width: 1440px) {
+    .dateDisplay {
+        width: 436px;
+    }
+}

@@ -60,3 +60,13 @@
         width: 235px;
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .waterList {
+        gap: 16px;
+    }
+
+    .slider {
+        width: 608px;
+    }
+}

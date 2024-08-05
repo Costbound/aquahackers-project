@@ -24,3 +24,11 @@
         font-size: 36px;
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .userPanel {
+        justify-content: flex-start;
+        gap: 257px;
+    }
+    
+}
