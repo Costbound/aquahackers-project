@@ -6,7 +6,8 @@ const initialState = {
   name: "",
   email: null,
   accessToken: null,
-  isLoggedIn: false,
+  // /isLogger при пуші змінити на false
+  isLoggedIn: true, 
   isRefreshing: false,
   error: null,
 };
