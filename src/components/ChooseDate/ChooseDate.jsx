@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import css from './ChooseDate.module.css';
 
 const ChooseDate = () => {
-    const dispatch = useDispatch();
     const selectedDate = useSelector(state => state.water.selectedDate);
 
     // Стрелочная функция для форматирования даты
