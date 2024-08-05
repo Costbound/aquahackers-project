@@ -18,9 +18,6 @@ export const AdvantagesSection = () => {
             <img className={css.customersImg} src={user3} alt="user3" />
           </li>
         </ul>
-        <p className={css.customersText}>
-          Our <span className={css.span}></span> happy customers
-        </p>
       </div>
       <div className={css.group}>
         <ul className={css.advantagesGroup}>
