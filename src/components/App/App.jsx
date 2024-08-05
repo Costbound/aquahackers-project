@@ -11,16 +11,16 @@ import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
-import { selectIsModalOpen, selectModalContent } from "../../redux/modal/selectors-modal.js";
-import Modal from "../Modal/Modal.jsx";
+// import { selectIsModalOpen, selectModalContent } from "../../redux/modal/selectors-modal.js";
+// import Modal from "../Modal/Modal.jsx";
 
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  const isModalOpen = useSelector(selectIsModalOpen);
-  const modalContent = useSelector(selectModalContent);
-  console.log(modalContent);
-  console.log(isModalOpen);
+  // const isModalOpen = useSelector(selectIsModalOpen);
+  // const modalContent = useSelector(selectModalContent);
+  // console.log(modalContent);
+  // console.log(isModalOpen);
 
   useEffect(() => {
     dispatch(refresh());
@@ -53,9 +53,9 @@ export default function App() {
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
 
-        {isModalOpen && <Modal isOpen={isModalOpen}>
+        {/* {isModalOpen && <Modal isOpen={isModalOpen}>
           {modalContent}
-        </Modal>}
+        </Modal>} */}
         </>
   );
 }
