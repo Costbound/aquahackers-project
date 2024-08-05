@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchMonth } from "./ops-water";
 
 const waterSlice = createSlice({
-    name: "water",
-    initialState: {
-        userParams: {
-            dailyWater: 0,
-            gender: 'female',
-            weight: 0,
-            sportTime: 0
-        },
-        selectedMonthWater: [],
-        month: new Date().getMonth(),
-        selectedDate: new Date().toISOString().split('T')[0], // default to today
-    },
-    reducers: {
-        setSelectedDate(state, action) {
-            state.selectedDate = action.payload;
-        },
-    }
+  name: "water",
+  initialState: {
+    selectedMonthWater: [],
+    selectedDayWater: [],
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+    isLoading: false,
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchMonth.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchMonth.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedMonthWater = action.payload.data.monthlyWater;
+      }),
 });
 
-export const { setSelectedDate } = waterSlice.actions;
 const waterReducer = waterSlice.reducer;
 export default waterReducer;
