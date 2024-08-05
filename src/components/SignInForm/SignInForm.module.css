@@ -1,3 +1,23 @@
+:root {
+  --dark-grey: #2f2f2f;
+  --grey: #323f47;
+  --lightGreenHover: #9be1a0;
+  --green: #87d28d;
+  --light: #f0eff4;
+  --white: #ffffff;
+  --lightGrey: #2f2f2f99;
+
+  --animation: 150ms ease-in;
+
+  color: var(--grey);
+  background-color: var(--white);
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
 .signUpWrap {
   border-radius: 30px;
   background: var(--light);
