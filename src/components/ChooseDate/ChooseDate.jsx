@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedDate } from '../../redux/water/slice-water';
 import css from './ChooseDate.module.css';
 
 const ChooseDate = () => {
