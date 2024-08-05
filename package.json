@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.3",
     "clsx": "^2.1.1",
@@ -25,6 +26,7 @@
     "react-redux": "^9.1.2",
     "react-router": "^6.25.1",
     "react-router-dom": "^6.26.0",
+    "redux": "^5.0.1",
     "reset-css": "^5.0.2",
     "yup": "^1.4.0"
   },
