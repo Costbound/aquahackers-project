@@ -1,8 +1,9 @@
+//WaterList.jsx
 import { useState, useLayoutEffect, useRef } from 'react';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
 
-/*Типо данные с бек энда */
+/*Типо данные с компонетна модалки addwater */
 const initialData = [
     { id: 1, amount: 250, time: '7:00 AM' },
     { id: 2, amount: 300, time: '11:00 AM' },

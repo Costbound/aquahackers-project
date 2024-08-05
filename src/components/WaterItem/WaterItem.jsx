@@ -1,3 +1,4 @@
+//WaterItem.jsx
 import PropTypes from 'prop-types';
 import css from './WaterItem.module.css'; 
 import icon from "../../img/icons.svg";
