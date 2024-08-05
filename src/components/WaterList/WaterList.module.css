@@ -41,3 +41,22 @@
     background: #323F47;
     cursor: pointer;
 }
+
+@media screen and (min-width: 768px) {
+
+    .waterListContainer {
+        width: 640px;
+    }
+
+    .waterList {
+        gap: 32px;
+    }
+
+    .slider {
+        width: 640px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        width: 235px;
+    }
+}

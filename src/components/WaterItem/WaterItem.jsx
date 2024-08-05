@@ -13,7 +13,7 @@ const WaterItem = ({ amount, time, onEdit, onDelete }) => {
 
     return (
     <div className={css.waterItemContainer}>
-            <svg className={css.svgIcon}>
+            <svg className={css.svgIconWater}>
                 <use href={`${icon}#icon-glass-of-water`} />
             </svg>
         <div className={css.waterInfo}>
