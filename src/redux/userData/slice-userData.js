@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const userDataSlice = createSlice({
     name: 'userData',
@@ -9,8 +9,13 @@ const userDataSlice = createSlice({
         waterRate: 1.5,
         sportTime: 0,
     },
-    extraReducers: (builder) => {}
-})
+    reducers: {
+        setName(state, action) {
+            state.name = action.payload;
+        }
+    }
+});
 
-const userDataReducer = userDataSlice.reducer
-export default userDataReducer
+export const { setName } = userDataSlice.actions;
+const userDataReducer = userDataSlice.reducer;
+export default userDataReducer;

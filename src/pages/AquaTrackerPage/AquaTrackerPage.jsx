@@ -1,12 +1,12 @@
-import WaterDetailedInfo from "../../components/WaterDetailedInfo/WaterDetailedInfo";
-import css from "./AquaTrackerPage.module.css";
+import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
+import css from './AquaTrackerPage.module.css';
 
-function AquaTrackerPage(props) {
-  return (
-    <div className={css.container}>
-      <WaterDetailedInfo />
-    </div>
-  );
-}
+const AquaTrackerPage = () => {
+    return (
+        <div className={css.aquaTrackerPage}>
+            <WaterDetailedInfo />
+        </div>
+    );
+};
 
 export default AquaTrackerPage;

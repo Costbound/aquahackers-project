@@ -1,14 +1,21 @@
-.container {
-  min-width: 320px;
-  max-width: 375px;
-  display: flex;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
+.aquaTrackerPage{
+        display: flex;
+        align-items: center;
+        padding: 40px 20px 40px 20px;
+        width: 343px;
+        background-color: #F0EFF4;
+        border-radius: 30px;   
 }
 
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
+    .aquaTrackerPage{
+        width: 704px;
+        padding: 32px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .aquaTrackerPage{
+        width: 672px;
+    }
 }
