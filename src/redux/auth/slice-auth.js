@@ -89,7 +89,14 @@ const initialState = {
 // Создание authSlice с использованием createSlice
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: {
+    name: "",
+    email: null,
+    accessToken: null,
+    isLoggedIn: false,
+    isRefreshing: false,
+    error: null,
+  },
   extraReducers: (builder) => {
     builder
       // Обработка состояния pending для операции signup
