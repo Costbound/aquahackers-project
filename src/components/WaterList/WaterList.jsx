@@ -2,6 +2,8 @@
 import { useState, useLayoutEffect, useRef } from 'react';
 import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
+import { useSelector } from 'react-redux';
+import { selectedWater } from '../../redux/water/selectors-water';
 
 /*Типо данные с компонетна модалки addwater */
 const initialData = [
@@ -14,6 +16,8 @@ const initialData = [
 ];
 
 const WaterList = () => {
+    const waters = useSelector(selectedWater);
+    console.log(waters);
     const [scrollPosition, setScrollPosition] = useState(0);
     const containerRef = useRef(null);
     const [maxScroll, setMaxScroll] = useState(0);

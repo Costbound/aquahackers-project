@@ -11,10 +11,16 @@ import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
+import { selectIsModalOpen, selectModalContent } from "../../redux/modal/selectors-modal.js";
+import Modal from "../Modal/Modal.jsx";
 
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isModalOpen = useSelector(selectIsModalOpen);
+  const modalContent = useSelector(selectModalContent);
+  console.log(modalContent);
+  console.log(isModalOpen);
 
   useEffect(() => {
     dispatch(refresh());
@@ -23,6 +29,7 @@ export default function App() {
   return isRefreshing ? (
     <Loader type="global" width="100" height="100" />
   ) : (
+      <>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route
@@ -43,7 +50,12 @@ export default function App() {
           <PrivateRoute component={<AquaTrackerPage />} redirectTo="/signin" />
         }
       />
-      <Route path="*" element={<div>Not Found</div>} />
-    </Routes>
+          <Route path="*" element={<div>Not Found</div>} />
+        </Routes>
+
+        {isModalOpen && <Modal isOpen={isModalOpen}>
+          {modalContent}
+        </Modal>}
+        </>
   );
 }

@@ -1,14 +1,12 @@
-import Modal from "../../Modal/Modal.jsx";
 import css from "./DeleteWaterModal.module.css";
 import { AiOutlineClose } from "react-icons/ai";
 
-const DeleteWaterModal = ({ isOpen, onClose }) => {
+const DeleteWaterModal = ({ onClose }) => {
   const handleSubmit = () => {
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
       <div className={css.deleteModalContainer}>
         <AiOutlineClose className={css.deleteModalCloseBtn} onClick={onClose} />
         <div className={css.deleteModalTextContainer}>
@@ -26,7 +24,6 @@ const DeleteWaterModal = ({ isOpen, onClose }) => {
           </button>
         </div>
       </div>
-    </Modal>
   );
 };
 

@@ -2,18 +2,24 @@
 import PropTypes from 'prop-types';
 import css from './WaterItem.module.css'; 
 import icon from "../../img/icons.svg";
+import Modal from '../Modal/Modal';
+import DeleteWaterModal from '../Modals/DeleteWaterModal/DeleteWaterModal';
+import { useState } from 'react';
 
-const WaterItem = ({ amount, time, onEdit, onDelete }) => {
+const WaterItem = ({ amount, time, onEdit }) => {
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const deleteModal = (<DeleteWaterModal onClose={() => setDeleteModalOpen(false)}/>);
     const handleEdit = () => {
         onEdit();
     };
 
     const handleDelete = () => {
-        onDelete();
+        setDeleteModalOpen(true);
     };
 
     return (
-    <div className={css.waterItemContainer}>
+        <>
+            <div className={css.waterItemContainer}>
             <svg className={css.svgIconWater}>
                 <use href={`${icon}#icon-glass-of-water`} />
             </svg>
@@ -32,8 +38,14 @@ const WaterItem = ({ amount, time, onEdit, onDelete }) => {
                     <use href={`${icon}#icon-bin`} />
                 </svg>
             </button>   
+            </div>
         </div>
-    </div>
+            <Modal isOpen={isDeleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+                <DeleteWaterModal onClose={() => setDeleteModalOpen(false)}/>
+            </Modal>
+        </>
+
+        
     );
 };
 

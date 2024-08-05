@@ -1,22 +1,22 @@
-import PropTypes from 'prop-types';
-import css from './AddWaterBtn.module.css';
-import icon from "../../img/icons.svg";
+// import PropTypes from 'prop-types';
+// import css from './AddWaterBtn.module.css';
+// import icon from "../../img/icons.svg";
 
-const AddWaterBtn = ({ onAddWater }) => {
-    return (
-        <div className={css.addWaterContainer}>
-            <button onClick={onAddWater} className={css.addWaterButton}>
-                <svg className={css.svgIconPlus}>
-                    <use href={`${icon}#icon-plus-1`} />
-                </svg>
-            </button>
-            <span className={css.addWaterText}>Add water</span>
-        </div>
-    );
-}
+// const AddWaterBtn = ({ onAddWater }) => {
+//     return (
+//         <div className={css.addWaterContainer}>
+//             <button onClick={onAddWater} className={css.addWaterButton}>
+//                 <svg className={css.svgIconPlus}>
+//                     <use href={`${icon}#icon-plus-1`} />
+//                 </svg>
+//             </button>
+//             <span className={css.addWaterText}>Add water</span>
+//         </div>
+//     );
+// }
 
-AddWaterBtn.propTypes = {
-    onAddWater: PropTypes.func.isRequired,
-};
+// AddWaterBtn.propTypes = {
+//     onAddWater: PropTypes.func.isRequired,
+// };
 
-export default AddWaterBtn;
+// export default AddWaterBtn;
