@@ -4,7 +4,7 @@
     background-size: 262px;
     background-repeat: no-repeat;
     background-position: center;
-    width: auto;
+    width: 343px;
     height: 415px;
     border-radius: 30px;
     position: relative;
@@ -21,8 +21,8 @@
 
 .addWater{
     position: absolute;
-    bottom: 100px;
-    right: 32px;
+    bottom: 32px;
+    right: 16px;
 }
  @media (-webkit-min-device-pixel-ratio: 2),
  (min-resolution: 192dpi) {
@@ -33,6 +33,7 @@
 @media screen and (min-width: 768px) {
    .container{ background-image: url('../../img/tracker-page/bottle_tablet.png');
 height: 578px;
+width: 704px;
 background-size: 374px;
 }
 .text{
@@ -40,10 +41,16 @@ background-size: 374px;
     padding-left: 33px;
         padding-top: 32px;
 }
+
+.addWater{
+    bottom: 64px;
+    right: 32px;
+}
  @media (-webkit-min-device-pixel-ratio: 2),
  (min-resolution: 192dpi) {
      .container {
          background-image: url('../../img/tracker-page/bottle_tablet@2x.png');
+        
      }
  }
 }
@@ -54,6 +61,7 @@ background-size: 374px;
         height: 736px;
         width: 672px;
         background-size: 472px;
+        width: 672px;
     }
 
         @media (-webkit-min-device-pixel-ratio: 2),
