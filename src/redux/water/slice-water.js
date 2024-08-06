@@ -39,6 +39,7 @@ const waterSlice = createSlice({
           (item) => item.id === action.payload.id
         );
         // state.selectedDayWater ?????!!
+        state.selectedDayWater[index] = action.payload
       }),
 });
 
