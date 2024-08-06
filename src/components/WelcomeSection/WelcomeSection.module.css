@@ -1,8 +1,7 @@
 .welcomeSection {
-  border-radius: 30px;
+  padding-top: 118px;
+  padding-bottom: 67px;
   background: var(--light);
-  padding: 100px 16px 54px 16px;
-  margin-bottom: 16px;
   min-width: 288px;
 }
 
@@ -15,13 +14,12 @@
 }
 
 .title {
-  margin: 0;
+  margin: 0 0 32px 0;
   color: var(--grey);
   font-size: 38px;
   font-weight: 700;
   line-height: 38px;
   letter-spacing: -0.38px;
-  margin-bottom: 32px;
 }
 
 .linkBox {

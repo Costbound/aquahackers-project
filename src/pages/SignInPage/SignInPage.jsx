@@ -2,22 +2,24 @@ import css from "./SignInPage.module.css";
 import { AdvantagesSection } from "../../components/AdvantagesSection/AdvantagesSection";
 import SignInForm from "../../components/SignInForm/SignInForm";
 import { Helmet } from "react-helmet-async";
+import screenWidth from "../../helpers/screenWidth.js";
 
 import Page from "../../components/Page/Page";
+import SectionWithLogo from "../../components/SectionWithLogo/SectionWithLogo.jsx";
 
-function SignInPage(props) {
+function SignInPage() {
+
   return (
     <>
       <Helmet>
         <title>AquaTrack</title>
       </Helmet>
-      <Page>
-        <title>Sign In Page</title>
-        <SignInForm />
-        <div className={css.divDesktopOnly}>
-          <AdvantagesSection />
-        </div>
-      </Page>
+        <Page>
+            <SectionWithLogo className={css.signInSection}>
+                <SignInForm/>
+            </SectionWithLogo>
+            {screenWidth > 1439 && <AdvantagesSection/>}
+        </Page>
     </>
   );
 }

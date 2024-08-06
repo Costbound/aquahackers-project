@@ -1,9 +1,7 @@
 .advantagesSection {
   min-width: 288px;
   height: 363px;
-  border-radius: 30px;
   background-color: var(--light);
-
   background-image: url(../../img/home-page/lady-mob.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,6 +19,12 @@
   font-size: 18px;
   line-height: 1;
   letter-spacing: -0.08px;
+}
+
+@media screen and (max-width: 374px) {
+  .advantagesSection {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-resolution: 192dpi) {
