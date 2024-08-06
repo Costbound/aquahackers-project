@@ -1,0 +1,85 @@
+.container{
+    width: 198px;
+    height: 70px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 120px;
+left:73px;
+}
+
+.containerToday{
+    margin: 12px;
+}
+.text{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.spanProgress{
+    position: absolute; 
+    top: 20px; 
+    left:0;
+    right: 0; 
+    display: flex; 
+    justify-content:space-between;
+    font-size: 12px;
+    font-weight: 400;
+    color: #2F2F2F99;
+}
+.progressContainer{
+    background-color: #F0EFF4;
+    width: 100%;
+    position: relative;
+    height: 6px;
+border-radius: 9px;
+margin-top: 8px;
+}
+.progressBar{
+    background-color: #9BE1A0;
+margin-top: 8px;
+height: 100%;
+}
+
+.elipce{
+    position: absolute;
+   bottom: -3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border-color: #6a726a;
+        border: 1px solid #9BE1A0;
+        background-color: #FFFFFF;
+        border-radius: 50%;
+}
+
+.interest{
+    position: absolute;
+   top: 24px;
+   font-size: 10px;
+   color: #9BE1A0;
+}
+
+@media  screen and (min-width: 768px) {
+    .container{
+        bottom: 150px;
+        left:204px;
+        width: 295px;
+        height: 106px;
+    }
+    .containerToday{
+        margin: 20px;
+    }
+
+    .text{
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+            bottom: 180px;
+            left: 188px;
+           
+        }
+}
