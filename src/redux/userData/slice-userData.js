@@ -15,7 +15,7 @@ const userDataSlice = createSlice({
     extraReducers: () => { //примерная логика чтоб я мог получать данные на имя, но это не точно тк это скорее относится к сеттингам
 
     }
-})
+});
 
 const userDataReducer = userDataSlice.reducer
 export default userDataReducer
