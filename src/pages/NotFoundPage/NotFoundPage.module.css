@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 30px;
+    color: #666262;
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 288px;
+    text-shadow: 2px;
+    color: #ddaaaa;
+    background: #ffffff;
+    text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+}
+
+.txt {
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #464444;
+}
+
+.wrap {
+    display: flex;
+    font-size: 28px;
+}
+
+.link {
+    margin-left: 8px;
+    text-decoration: none;
+    color: rgb(80, 80, 212);
+}
+
+.link:hover,
+.link:focus {
+    color: blue;
+}

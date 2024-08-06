@@ -1,37 +1,32 @@
-.addWaterContainer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/* .button{
+    height: 46px;
+  font-size: 14px;
+  
+  padding: 14px 20px;
+} */
 
-.addWaterButton {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    color: #323F47;
-    background-color: #9BE1A0;
-    border: #9BE1A0;
-}
-
-.addWaterText {
-    display: flex;
-    font-weight: 700;
-    line-height: 24px;
-    color: #323F47;
-    font-size: 16px;
-    align-items: center;
-}
-
-.svgIconPlus {
-    width: 20px;
-    height: 20px;
-    stroke: black;
-    fill: none;
+.svgIconAdd {
+    height: 16px;
+    width: 16px;
+    stroke: #FFFFFF;
+    margin-right: 10px;
 }
 
 @media screen and (min-width: 768px) {
-    .addWaterContainer {
-        white-space: nowrap;
+    /* .button {
+     font-size: 16px;
+    padding: 18px 30px;
+    } */
+
+    .svgIconAdd {
+        height: 24px;
+        width: 24px;
     }
-    
+
 }
+
+/* @media screen and (min-width: 1440px) {
+    .button{
+       
+    }
+} */
