@@ -8,7 +8,6 @@ import { useState } from 'react';
 
 const WaterItem = ({ amount, time, onEdit }) => {
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-    const deleteModal = (<DeleteWaterModal onClose={() => setDeleteModalOpen(false)}/>);
     const handleEdit = () => {
         onEdit();
     };
