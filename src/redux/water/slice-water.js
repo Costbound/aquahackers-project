@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMonth } from "./ops-water";
+import { fetchMonth, addWater, editWater } from "./ops-water";
 
 const waterSlice = createSlice({
   name: "water",
@@ -18,6 +18,27 @@ const waterSlice = createSlice({
       .addCase(fetchMonth.fulfilled, (state, action) => {
         state.isLoading = false;
         state.selectedMonthWater = action.payload.data.monthlyWater;
+      })
+      .addCase(addWater.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addWater.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedDayWater.push(action.payload);
+      })
+      // .addCase(addWater.rejected, (state) => {
+      //   state.isLoading = false;
+      //   state.error = true;
+      // })
+      .addCase(editWater.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editWater.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const index = state.selectedDayWater.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        // state.selectedDayWater ?????!!
       }),
 });
 
