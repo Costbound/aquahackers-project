@@ -3,6 +3,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import css from "./WaterForm.module.css";
+import icon from "../../img/icons.svg";
 
 // import React from "react";
 // import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -20,6 +22,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({
+  type,
   waterAmount,
   date,
   onWaterAmountChange,
@@ -43,29 +46,70 @@ const WaterForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <button type="button" onClick={handleDecrement}>
-          -
-        </button>
-        <input
-          type="number"
-          {...register("waterAmount")}
-          value={waterAmount}
-          onChange={(e) => onWaterAmountChange(Number(e.target.value))}
-        />
-        <button type="button" onClick={handleIncrement}>
-          +
-        </button>
-        {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
+      <h4 className={css.title}>
+        {type === "edit" ? "Correct entered data" : "Choose a value"}
+      </h4>
+      <div className={css.inputAutomaticDiv}>
+        <label className={css.label} htmlFor="waterAutomatic">
+          Amount of water
+        </label>
+        <div className={css.btnAmount}>
+          <button
+            className={css.btnAmountChange}
+            type="button"
+            onClick={handleDecrement}
+          >
+            <svg className={css.svgIcon}>
+              <use href={`${icon}#icon-minus-for-modal-add-edit-water`} />
+            </svg>
+          </button>
+          <div className={css.inputAutomatic}>{waterAmount} ml</div>
+
+          {/* <input
+            className={css.inputAutomatic}
+            type="number"
+            id="waterAutomatic"
+            {...register("waterAmount")}
+            value={waterAmount}
+            onChange={(e) => onWaterAmountChange(Number(e.target.value))}
+          /> */}
+          <button
+            className={css.btnAmountChange}
+            type="button"
+            onClick={handleIncrement}
+          >
+            <svg className={css.svgIcon}>
+              <use href={`${icon}#icon-plus-for-modal-add-edit-water`} />
+            </svg>
+          </button>
+          {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
+        </div>
       </div>
-      <div>
+      <div className={css.input}>
+        <label className={css.label} htmlFor="time">
+          Recording time
+        </label>
         <input
+          className={css.inputSize}
+          id="time"
           type="time"
           {...register("date")}
           value={date}
           onChange={(e) => onDateChange(e.target.value)}
         />
         {errors.date && <p>{errors.date.message}</p>}
+      </div>
+      <div className={css.input}>
+        <label className={css.labelManual} htmlFor="waterManual">
+          Enter the value of the water used
+        </label>
+        <input
+          className={css.inputSize}
+          id="waterManual"
+          type="number"
+          {...register("waterAmount")}
+        />
+        {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
       </div>
       <Button
         width="150px"
