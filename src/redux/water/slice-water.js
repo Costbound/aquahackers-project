@@ -5,7 +5,7 @@ const waterSlice = createSlice({
   name: "water",
   initialState: {
     selectedMonthWater: [],
-    selectedDayWater: [],
+    selectedDayWater: [67],
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
     isLoading: false,

@@ -82,7 +82,7 @@ const initialState = {
   email: null,
   accessToken: null,
   // /isLogger при пуші змінити на false
-  isLoggedIn: true, 
+  isLoggedIn: false, 
   isRefreshing: false,
   error: null,
 };
