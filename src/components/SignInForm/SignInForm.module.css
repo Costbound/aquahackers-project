@@ -1,17 +1,4 @@
-:root {
-  --dark-grey: #2f2f2f;
-  --grey: #323f47;
-  --lightGreenHover: #9be1a0;
-  --green: #87d28d;
-  --light: #f0eff4;
-  --white: #ffffff;
-  --lightGrey: #2f2f2f99;
 
-  --animation: 150ms ease-in;
-
-  color: var(--grey);
-  background-color: var(--white);
-}
 .form {
   max-width: 311px;
   margin-bottom: 16px;
