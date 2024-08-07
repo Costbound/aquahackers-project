@@ -20,13 +20,21 @@ const waterSlice = createSlice({
     year: new Date().getFullYear(),
     isLoading: false,
     water: {
-      items: [],
+      items: [
+        { id: 1, amount: 250, time: "2022-04-13T07:00:00Z" },//сделано для проверки как приходят данные
+        { id: 2, amount: 300, time: "2022-04-13T11:00:00Z" },
+        { id: 3, amount: 350, time: "2022-04-13T13:00:00Z" },
+        { id: 4, amount: 400, time: "2022-04-13T15:00:00Z" },
+        { id: 5, amount: 450, time: "2022-04-13T17:00:00Z" },
+        { id: 6, amount: 1000, time: "2022-04-13T19:00:00Z" },
+      ],
       loading: false,
       error: null,
     },
     modalFlags: {
       isDeleteWaterModalOpen: false,
       isLogoutModalOpen: false,
+      isSettingsModalOpen: false,
     },
     selectedWaterId: null,
   },
@@ -39,6 +47,9 @@ const waterSlice = createSlice({
     },
     changeLogoutModalOpen(state, action) {
       state.modalFlags.isLogoutModalOpen = action.payload;
+    },
+    changeSettingsModalOpen(state, action) {
+      state.modalFlags.isSettingsModalOpen = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -96,8 +107,9 @@ const waterSlice = createSlice({
 
 export const {
   changeDeleteWaterModalOpen,
-  setSelectedWaterId,
+  changeSettingsModalOpen,
   changeLogoutModalOpen,
+  setSelectedWaterId,
 } = waterSlice.actions;
 
 const waterReducer = waterSlice.reducer;

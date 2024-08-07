@@ -4,7 +4,6 @@ import css from "./WaterItem.module.css";
 import icon from "../../img/icons.svg";
 import Modal from "../Modal/Modal";
 import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectChosenWaterCardId,
