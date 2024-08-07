@@ -1,10 +1,3 @@
-.signUpWrap {
-  border-radius: 30px;
-  background: var(--light);
-  padding: 170px 16px 0 16px;
-  height: 780px;
-  min-width: 288px;
-}
 
 .form {
   max-width: 311px;
@@ -12,18 +5,13 @@
 }
 
 .formTitle {
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 32px;
-  letter-spacing: -0.32px;
-  color: var(--grey);
   margin-bottom: 32px;
 }
 
 .label {
   font-weight: 700;
   font-size: 14px;
-  line-height: 18.06px;
+  line-height: 1.28;
   letter-spacing: -0.14px;
   color: var(--dark-grey);
   margin-bottom: 8px;
@@ -41,6 +29,8 @@
   padding: 16px;
   width: 100%;
   background-color: inherit;
+}
+.emailInput {
   margin-bottom: 16px;
 }
 
@@ -56,25 +46,11 @@
 .inputWrapper {
   position: relative;
   display: flex;
+  margin-bottom: 16px;
 }
 
-.iconButton {
-  position: absolute;
-  right: 16px;
-  top: 18px;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  border: none;
-  fill: none;
-  background-color: inherit;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.8px;
-  stroke: #2f2f2f;
+.lastInputWrapper {
+  margin-bottom: 32px;
 }
 
 .errorMessage {
@@ -117,7 +93,7 @@
   letter-spacing: -0.14px;
   text-wrap: nowrap;
   transition: background-color var(--animation);
-  margin: 16px 0 16px 0;
+  margin-bottom: 16px;
 }
 
 .signUpButton:hover,
@@ -168,13 +144,10 @@
 
   .form {
     min-width: 436px;
-    margin: auto;
+    margin: 0 auto;
   }
 
   .formTitle {
-    font-size: 36px;
-    line-height: 38px;
-    letter-spacing: -0.36px;
     margin-bottom: 32px;
   }
 
@@ -184,8 +157,16 @@
     letter-spacing: -0.16px;
   }
 
-  .input {
+  .emailInput {
     margin-bottom: 20px;
+  }
+
+  .inputWrapper {
+    margin-bottom: 20px;
+  }
+
+  .lastInputWrapper {
+    margin-bottom: 32px;
   }
 
   .input::placeholder {
@@ -207,13 +188,5 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.16px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .signUpWrap {
-    width: 672px;
-    height: 736px;
-    padding: 130px 118px 0 118px;
   }
 }

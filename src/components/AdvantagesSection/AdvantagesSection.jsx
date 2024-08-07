@@ -5,7 +5,7 @@ import user3 from "../../img/home-page/customer-3.jpg";
 
 export const AdvantagesSection = () => {
   return (
-    <div className={css.advantagesSection}>
+    <section className={css.advantagesSection}>
       <div className={css.customersBox}>
         <ul className={css.customersList}>
           <li className={css.customersItem}>
@@ -18,9 +18,6 @@ export const AdvantagesSection = () => {
             <img className={css.customersImg} src={user3} alt="user3" />
           </li>
         </ul>
-        <p className={css.customersText}>
-          Our <span className={css.span}></span> happy customers
-        </p>
       </div>
       <div className={css.group}>
         <ul className={css.advantagesGroup}>
@@ -36,6 +33,6 @@ export const AdvantagesSection = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 };

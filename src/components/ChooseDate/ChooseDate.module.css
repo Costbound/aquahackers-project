@@ -1,0 +1,20 @@
+.dateDisplay {
+    width: 98px;
+    height: 24px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .dateDisplay {
+        width: 463px;
+        height: 32px;
+        font-size: 28px;
+    }   
+}
+
+@media screen and (min-width: 1440px) {
+    .dateDisplay {
+        width: 436px;
+    }
+}

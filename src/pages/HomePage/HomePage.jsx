@@ -6,7 +6,7 @@ import Page from "../../components/Page/Page";
 import Modal from "../../components/Modal/Modal";
 import WaterModal from "../../components/WaterModal/WaterModal";
 
-function HomePage(props) {
+function HomePage() {
   return (
     <>
       <Helmet>
@@ -15,8 +15,6 @@ function HomePage(props) {
       <Page>
         <WelcomeSection />
         <AdvantagesSection />
-
-        <WaterModal type={"edit"}></WaterModal>
       </Page>
     </>
   );

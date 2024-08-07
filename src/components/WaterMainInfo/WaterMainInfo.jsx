@@ -4,14 +4,14 @@ import Logo from '../Logo/Logo.jsx';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
 import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
 import css from './WaterMainInfo.module.css';
+import SectionWithLogo from "../SectionWithLogo/SectionWithLogo.jsx";
 
 export default function WaterMainInfo(){
     return (
-        <div className={css.container}>
-            <Logo/>
+        <SectionWithLogo className={css.container}>
             <WaterDailyNorma />
             <WaterProgressBar />
             <div className={css.addWater}><AddWaterBtn/></div>
-        </div>
+        </SectionWithLogo>
     )
-};
+}
