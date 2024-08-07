@@ -6,6 +6,7 @@
 
 .label {
   font-size: 14px;
+  font-weight: 400;
 }
 
 .input {
@@ -16,6 +17,8 @@
 }
 
 .inputAutomaticDiv {
+  font-size: 15px;
+  font-weight: bold;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -50,10 +53,12 @@
 }
 
 .inputSize {
+  font-size: 16px;
   max-width: 303px;
   min-height: 46;
   border-radius: 15px;
   padding: 14px 16px 14px 16px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
 }
 
 .svgIcon {
@@ -66,4 +71,47 @@
 .labelManual {
   font-size: 16px;
   font-weight: bold;
+}
+
+.myButton {
+  width: 116px;
+  height: 46px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .inputSize {
+    max-width: 438px;
+    min-height: 56;
+  }
+
+  .inputAutomatic {
+    width: 92px;
+    height: 43px;
+  }
+
+  .myButton {
+    width: 141px;
+    height: 60px;
+  }
+
+  .btnAmountChange {
+    border-radius: 50%;
+    border: 1.5px solid #323f47;
+    width: 43px;
+    height: 43px;
+    padding: 0;
+  }
+
+  .svgIcon {
+    width: 43px;
+    height: 43px;
+  }
 }

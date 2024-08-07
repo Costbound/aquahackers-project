@@ -8,3 +8,14 @@
   width: 303px;
   height: 450px;
 }
+
+@media screen and (min-width: 768px) {
+  .divModal {
+    width: 438px;
+    height: 503px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}

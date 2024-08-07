@@ -7,7 +7,10 @@ import css from "./WaterModal.module.css";
 //   resetWater,
 // } from "../../redux/water/slice-waterForm";
 // import { saveWaterData } from "../../redux/water/ops-water";
+
+import WaterFormFormik from "../WaterForm/WaterFormFormik";
 import WaterForm from "../WaterForm/WaterForm";
+
 // import { selectWaterStatus, selectWaterError } from "./selectors";
 import toast, { Toaster } from "react-hot-toast";
 

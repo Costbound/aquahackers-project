@@ -1,17 +1,14 @@
 import Button from "../Button/Button";
-import React from "react";
+import { useState, useId } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
 
-// import React from "react";
-// import { Formik, Form, Field, ErrorMessage } from "formik";
-// import * as Yup from "yup";
-// import Button from "../../components/Button/Button.jsx";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const validationSchema = Yup.object().shape({
+const WaterValidSchema = Yup.object().shape({
   waterAmount: Yup.number()
     .min(50, "Мінімальна кількість 50ml")
     .max(2000, "Максимальна кількість 2000ml")
@@ -22,19 +19,19 @@ const validationSchema = Yup.object().shape({
 });
 
 const WaterForm = ({
+  date,
   type,
   waterAmount,
-  date,
   onWaterAmountChange,
-  onDateChange,
   onSubmit,
+  onDateChange,
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(WaterValidSchema),
     defaultValues: {
       waterAmount,
       date,
@@ -50,9 +47,7 @@ const WaterForm = ({
         {type === "edit" ? "Correct entered data" : "Choose a value"}
       </h4>
       <div className={css.inputAutomaticDiv}>
-        <label className={css.label} htmlFor="waterAutomatic">
-          Amount of water
-        </label>
+        <h5 className={css.label}>Amount of water</h5>
         <div className={css.btnAmount}>
           <button
             className={css.btnAmountChange}
@@ -64,15 +59,6 @@ const WaterForm = ({
             </svg>
           </button>
           <div className={css.inputAutomatic}>{waterAmount} ml</div>
-
-          {/* <input
-            className={css.inputAutomatic}
-            type="number"
-            id="waterAutomatic"
-            {...register("waterAmount")}
-            value={waterAmount}
-            onChange={(e) => onWaterAmountChange(Number(e.target.value))}
-          /> */}
           <button
             className={css.btnAmountChange}
             type="button"
@@ -111,15 +97,7 @@ const WaterForm = ({
         />
         {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
       </div>
-      <Button
-        width="150px"
-        height="50px"
-        color="#323f47"
-        backgroundColor="#9be1a0"
-        border="none"
-        fontSize="16px"
-        onClick={handleSubmit(onSubmit)}
-      >
+      <Button styleType="green" className={css.myButton}>
         Save
       </Button>
     </form>
