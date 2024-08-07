@@ -1,0 +1,36 @@
+.avatarWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+}
+.hiddenFileInput {
+  display: none;
+}
+.fileLabel {
+  width: 151px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settingsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.genderWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.radiobuttonWrapper {
+  display: flex;
+}

@@ -4,6 +4,8 @@ import Page from "../../components/Page/Page";
 import { Helmet } from "react-helmet-async";
 
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import screenWidth from "../../helpers/screenWidth.js";
+import SectionWithLogo from "../../components/SectionWithLogo/SectionWithLogo.jsx";
 
 function SignUpPage(props) {
   return (
@@ -12,10 +14,10 @@ function SignUpPage(props) {
         <title>AquaTrack</title>
       </Helmet>
       <Page>
-        <SignUpForm />
-        <div className={css.divDesktopOnly}>
-          <AdvantagesSection />
-        </div>
+          <SectionWithLogo className={css.sighnUpSection}>
+              <SignUpForm />
+          </SectionWithLogo>
+          {screenWidth > 1439 && <AdvantagesSection/>}
       </Page>
     </>
   );

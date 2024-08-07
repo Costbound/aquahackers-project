@@ -1,0 +1,66 @@
+.popover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 137px;
+    height: 72px;
+    border-radius: 15px;
+    color: white;
+    background-color: white;
+    gap: 8px;
+    position: absolute;
+    transform: translateY(4px);
+    padding: 14px 20px 14px 20px;
+}
+
+.popoverButtonSetting {
+    background: none;
+    border: none;
+    color: #323F47;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    gap: 5px;
+}
+
+.popoverButtonLogout {
+    background: none;
+    border: none;
+    color: rgba(50, 63, 71, 0.4);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    gap: 5px;
+}
+
+.svgIconLogout {
+    width: 16px;
+    height: 16px;
+    stroke:  rgba(50, 63, 71, 0.4);
+    fill: none;
+}
+
+.svgIconSetting {
+    width: 16px;
+    height: 16px;
+    stroke: #323F47;
+    fill: none;
+}
+
+@media screen and (min-width: 768px) {
+    .popover {
+        width: 157px;
+        height: 82px;
+        padding: 14px 57px 14px 20px;
+    }
+
+    .popoverButtonSetting {
+        font-size: 15px;
+    }
+    
+    .popoverButtonLogout {
+        font-size: 15px;
+        white-space: nowrap;
+    }
+}

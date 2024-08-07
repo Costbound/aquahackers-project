@@ -8,15 +8,19 @@ body {
     line-height: 1.28;
     letter-spacing: -0.14px;
 }
+
 section {
     width: 343px;
     padding: 24px 16px;
     background-color: #F0EFF4;
+    border-radius: 30px;
 }
+
 .container {
     max-width: 311px;
     margin: 0 auto;
 }
+
 button {
     cursor: pointer;
     display: flex;
@@ -25,26 +29,43 @@ button {
     font-weight: 700;
     color: #323F47;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #323F47;
+    font-weight: 700;
 }
+
 h1 {
     font-size: 38px;
     line-height: 1;
     letter-spacing: -0.38px;
 }
+
 h2 {
     font-size: 32px;
     line-height: 1.2;
     letter-spacing: -0.2px;
 }
+
 h3 {
     font-size: 20px;
     line-height: 1.25;
     letter-spacing: -0.16px;
 }
+
 h4 {
     font-size: 16px;
+}
+
+@media screen and (max-width: 374px) {
+    section {
+        width: auto;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -54,19 +75,23 @@ h4 {
         line-height: 1.5;
         letter-spacing: -0.16px;
     }
+
     section {
         padding: 32px;
     }
+
     h2 {
         font-size: 36px;
         line-height: 1.14;
         letter-spacing: -0.28px;
     }
+
     h3 {
         font-size: 28px;
         line-height: 1.33;
         letter-spacing: -0.18px;
     }
+
     h4 {
         font-size: 18px;
     }
@@ -76,9 +101,11 @@ h4 {
     section {
         width: 704px;
     }
+
     .container {
         max-width: 640px;
     }
+
     h1 {
         font-size: 64px;
         line-height: 1.09;
@@ -90,9 +117,11 @@ h4 {
     section {
         width: 672px;
     }
+
     .container {
         min-width: 608px;
     }
+
     h1 {
         font-size: 80px;
         line-height: 0.95;
