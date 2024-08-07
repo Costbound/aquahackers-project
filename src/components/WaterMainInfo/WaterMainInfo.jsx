@@ -14,4 +14,4 @@ export default function WaterMainInfo(){
             <div className={css.addWater}><AddWaterBtn/></div>
         </div>
     )
-};
+}
