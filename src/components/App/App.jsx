@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router";
 import HomePage from '../../pages/HomePage/HomePage'
 import SignInPage from "../../pages/SignInPage/SignInPage.jsx";
 import SignUpPage from "../../pages/SignUpPage/SignUpPage.jsx";
+import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage.jsx";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import AquaTrackerPage from "../../pages/AquaTrackerPage/AquaTrackerPage.jsx";
@@ -22,6 +23,7 @@ export default function App() {
             <Route path='/signup' element={<RestrictedRoute component={<SignUpPage />} redirectTo='/aqua-tracker' />} />
             <Route path='/signin' element={<RestrictedRoute component={<SignInPage />} redirectTo='/aqua-tracker' />} />
             <Route path='/aqua-tracker' element={<PrivateRoute component={<AquaTrackerPage />} redirectTo='/signin' />} />
+            <Route path="/reset/:resetToken" element={<RestrictedRoute redirectTo="/tracker"component={<ResetPasswordPage />} /> } />
             <Route path='*' element={<div>Not Found</div>} />
         </Routes>
     )
