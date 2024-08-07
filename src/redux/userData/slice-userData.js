@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUserData} from "./ops-userData.js";
+import {getUserData, updateUserData} from "./ops-userData.js";
 
 const userDataSlice = createSlice({
     name: 'userData',
@@ -17,6 +17,15 @@ const userDataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getUserData.fulfilled, (state, action) => {
+                state.user.name = action.payload.name;
+                state.user.gender = action.payload.gender;
+                state.user.weight = action.payload.weight;
+                state.user.waterRate = action.payload.waterToDrink;
+                state.user.sportTime = action.payload.timeOfSportActivities;
+                state.user.email = action.payload.email;
+            })
+            .addCase(updateUserData.fulfilled, (state, action) => {
+                console.log(action.payload);
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;
