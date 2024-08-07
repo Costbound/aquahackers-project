@@ -74,7 +74,7 @@
 // export default authReducer;
 
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, login, refresh } from "./ops-auth.js";
+import { signup, login, refresh, apiLogout } from "./ops-auth.js";
 
 // Начальное состояние auth
 const initialState = {
@@ -96,6 +96,16 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
     error: null,
+  },
+  reducers: {
+    clearState(state) {
+      state.name = "";
+      state.email = null;
+      state.accessToken = null;
+      state.isLoggedIn = false;
+      state.isRefreshing = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -141,9 +151,19 @@ const authSlice = createSlice({
       .addCase(refresh.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+      })
+      .addCase(apiLogout.fulfilled, (state) => {
+        state.name = "";
+        state.email = null;
+        state.accessToken = null;
+        state.isLoggedIn = false;
+        state.isRefreshing = false;
+        state.error = null;
       });
   },
 });
+
+export const { clearState } = authSlice.actions;
 
 const authReducer = authSlice.reducer;
 export default authReducer;

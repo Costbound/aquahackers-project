@@ -42,8 +42,14 @@
 // });
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { refreshToken, requestLogin, requestRegister } from "../services/aquatrack.js";
+import {
+  refreshToken,
+  requestLogin,
+  requestRegister,
+} from "../services/aquatrack.js";
 import axios from "axios";
+import { instance } from "../services/instance.js";
+import { clearState } from "./slice-auth.js";
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -54,34 +60,54 @@ const clearAuthHeader = () => {
 };
 
 // Операция для регистрации пользователя
-export const signup = createAsyncThunk("auth/signup", async (formData, thunkAPI) => {
-  try {
-    const res = await requestRegister(formData); // Выполнение запроса на регистрацию
-    thunkAPI.dispatch(login(formData)); // Выполнение запроса на логин после успешной регистрации
-    return res;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message || err.message); // Обработка ошибок
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await requestRegister(formData); // Выполнение запроса на регистрацию
+      return res;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message); // Обработка ошибок
+    }
   }
-});
+);
 
 // Операция для входа пользователя
-export const login = createAsyncThunk("auth/login", async (formData, thunkAPI) => {
-  try {
-    const res = await requestLogin(formData); // Выполнение запроса на вход
-    setAuthHeader(res.accessToken); // Установка заголовка авторизации
-    return res;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message || err.message); // Обработка ошибок
+export const login = createAsyncThunk(
+  "auth/login",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await requestLogin(formData); // Выполнение запроса на вход
+      return res;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message || err.message); // Обработка ошибок
+    }
   }
-});
+);
 
 // Операция для обновления токена
-export const refresh = createAsyncThunk("auth/refresh", async (_, { rejectWithValue }) => {
-  try {
-    const response = await refreshToken();
-    setAuthHeader(response.data.accessToken);
-    return response;
-  } catch (error) {
-    return rejectWithValue(error.response.data);
+export const refresh = createAsyncThunk(
+  "auth/refresh",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await refreshToken();
+      setAuthHeader(response.data.accessToken);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
+
+export const apiLogout = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkApi) => {
+    try {
+      await instance.post("/auth/logout");
+      clearAuthHeader();
+      thunkApi.dispatch(clearState());
+    } catch (e) {
+      return thunkApi.rejectWithValue(e.message);
+    }
+  }
+);

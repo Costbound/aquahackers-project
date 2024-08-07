@@ -1,31 +1,14 @@
 .deleteModalContainer {
-  padding: 40px 14px;
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 28px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-}
-
-.deleteModalCloseBtn {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 20px;
-  right: 16px;
-  stroke-width: 2px;
 }
 
 .deleteModalTextContainer {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 316px;
+  width: 304px;
 }
 
 .deleteModalTitle {
@@ -85,16 +68,7 @@
 
 @media (min-width: 768px) {
   .deleteModalContainer {
-    padding: 40px;
     gap: 24px;
-  }
-
-  .deleteModalCloseBtn {
-    width: 28px;
-    height: 28px;
-    top: 20px;
-    right: 20px;
-    stroke-width: 3px;
   }
 
   .deleteModalTextContainer {
