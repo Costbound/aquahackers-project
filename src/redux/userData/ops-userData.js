@@ -1,34 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const axiosInstance = axios.create({
-  baseURL: "https://final-team-pr-backend.onrender.com",
-});
+export const getUserData = createAsyncThunk(
+    'userData/getUserData',
+    async (_, thunkAPI) => {
+        try {
+            const res = await axios.get('/users/current')
+            return res.data.data.userData
+        } catch (err) {
+            thunkAPI.rejectWithValue(err.response.data.message)
+        }
+    })
 
-const setAuthHeader = (token) => {
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const currentEdit = createAsyncThunk(
-  "user/currentEdit",
-  async (editedUser, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedAccessToken = state.user.accessToken;
-
-    if (persistedAccessToken === null) {
-      return thunkAPI.rejectWithValue("Unable to get current user");
+export const updateUserData = createAsyncThunk(
+    'userData/updateUserData',
+    async (payload, thunkAPI) => {
+        try {
+            const res = await axios.patch('/users/current', payload)
+            console.log(res.data)
+            return res.data.data.data
+        } catch (err) {
+            thunkAPI.rejectWithValue(err.response.data.message);
+        }
     }
-
-    try {
-      setAuthHeader(persistedAccessToken);
-      const response = await axiosInstance.patch(
-        `/users/current/edit`,
-        editedUser
-      );
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+)

@@ -1,7 +1,7 @@
 import css from "./Button.module.css";
 import clsx from "clsx";
 
-const Button = ({ children, onClick, styleType, className }) => {
+const Button = ({ children, onClick, styleType, className, type = 'submit' }) => {
   return (
     <button
       onClick={onClick}
@@ -11,6 +11,7 @@ const Button = ({ children, onClick, styleType, className }) => {
         [css.dark]: styleType === "dark",
         [css.white]: styleType === "white",
       })}
+      type={type}
     >
       {children}
     </button>
