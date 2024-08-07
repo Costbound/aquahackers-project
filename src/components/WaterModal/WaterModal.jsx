@@ -57,7 +57,7 @@ const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
       </h2>
 
       <WaterForm
-        waterAmount={waterAmount}
+        waterAmount={200}
         date={date}
         onWaterAmountChange={(amount) => dispatch(setWaterAmount(amount))}
         onDateChange={(newDate) => dispatch(setDate(newDate))}
