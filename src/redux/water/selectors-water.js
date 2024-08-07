@@ -5,6 +5,7 @@ export const selectedMonth = (state) => state.water.month;
 export const selectedYear = (state) => state.water.year;
 
 export const selectorIsLoading = (state) => state.water.isLoading;
+
 export const selectedWater = (state) => state.water.selectedDayWater;
 
 export const selectWaters = (state) => state.water.water.items;
