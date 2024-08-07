@@ -35,7 +35,6 @@ export default function WaterProgressBar() {
         </div>
         <div className={css.elipce} style={{ left: `60%` }}>
               <span className={css.interest}>{ '60%' }</span>                 
-                            
         </div>
       </div>
      
