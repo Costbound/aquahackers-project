@@ -1,0 +1,8 @@
+.container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    gap: 16px;
+    padding: 6px;
+}
