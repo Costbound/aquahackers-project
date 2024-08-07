@@ -6,7 +6,6 @@ import css from './UserSettingsForm.module.css';
 import { FormValidateError } from '../FormValidateError/FormValidateError';
 import { calcRequiredWater } from '../../helpers/calcRequiredWater.js';
 import { selectUser } from '../../redux/userData/selectors-userData.js';
-import { currentEdit } from '../../redux/userData/ops-userData.js';
 // import { Modal } from '../Modal/Modal.jsx';
 import { useState } from 'react';
 // import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
