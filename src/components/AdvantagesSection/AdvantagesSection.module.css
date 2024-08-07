@@ -1,0 +1,265 @@
+.advantagesSection {
+  min-width: 288px;
+  height: 363px;
+  background-color: var(--light);
+  background-image: url(../../img/home-page/lady-mob.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.totalUsers {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.08px;
+}
+
+@media screen and (max-width: 374px) {
+  .advantagesSection {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .advantagesSection {
+    background-image: url(../../img/home-page/lady-mob@2x.jpg);
+  }
+}
+
+.group {
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.advantagesGroup {
+  max-width: 168px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.textAdvantage {
+  display: flex;
+  padding: 9px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.textAdvantage:nth-child(2) {
+  background: var(--green);
+  width: 83px;
+}
+
+.textAdvantage:nth-child(1) {
+  background: var(--grey);
+  width: 81px;
+  gap: 4px;
+}
+
+.textAdvantage:nth-child(3) {
+  background: var(--white);
+  width: 108px;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: var(--green);
+}
+
+.text {
+  color: var(--white);
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 8px;
+  letter-spacing: -0.08px;
+}
+
+.textBlack {
+  color: var(--grey);
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 8px;
+  letter-spacing: -0.08px;
+}
+
+.customersBox {
+  display: inline-flex;
+  position: absolute;
+  width: 168px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  background: var(--white);
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+  bottom: 96px;
+  left: 16px;
+}
+
+.customersList {
+  display: flex;
+}
+
+.customersItem {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  overflow: hidden;
+}
+
+.customersItem:nth-child(1) {
+  z-index: 3;
+  position: relative;
+}
+
+.customersItem:nth-child(2) {
+  z-index: 2;
+  left: -10px;
+  position: relative;
+}
+
+.customersItem:nth-child(3) {
+  z-index: 1;
+  left: -20px;
+  position: relative;
+}
+
+.customersImg {
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.customersText {
+  color: var(--grey);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.16;
+  margin-left: -20px;
+}
+
+.span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+}
+
+@media (min-width: 768px) {
+  .group {
+    position: absolute;
+    right: 32px;
+    height: 78px;
+  }
+
+  .advantagesGroup {
+    gap: 10px;
+    max-width: 242px;
+    height: 78px;
+  }
+
+  .textAdvantage {
+    font-size: 12px;
+    padding: 11px 16px;
+  }
+
+  .textAdvantage:nth-child(2) {
+    width: 121px;
+  }
+
+  .textAdvantage:nth-child(1) {
+    width: 111px;
+    gap: 4px;
+  }
+
+  .textAdvantage:nth-child(3) {
+    width: 158px;
+  }
+
+  .text {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.12px;
+  }
+
+  .textBlack {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: -0.12px;
+  }
+
+  .customersBox {
+    left: 32px;
+    width: 252px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .customersItem {
+    height: 47px;
+    width: 47px;
+  }
+  .customersItem:nth-child(2) {
+    left: -18px;
+  }
+  .customersItem:nth-child(3) {
+    left: -36px;
+  }
+  .customersText {
+    font-size: 15px;
+    line-height: 1.49;
+    margin-left: -34px;
+
+  }
+
+  .span {
+    font-size: 15px;
+    line-height: 1.49;
+  }
+
+  .totalUsers {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .group {
+    bottom: 64px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .advantagesSection {
+    width: 704px;
+    height: 446px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .advantagesSection {
+    width: 672px;
+    height: 736px;
+  }
+
+  .customersBox {
+    bottom: 140px;
+  }
+}
+

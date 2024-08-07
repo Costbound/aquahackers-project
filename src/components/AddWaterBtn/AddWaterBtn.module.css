@@ -1,0 +1,32 @@
+/* .button{
+    height: 46px;
+  font-size: 14px;
+  
+  padding: 14px 20px;
+} */
+
+.svgIconAdd {
+    height: 16px;
+    width: 16px;
+    stroke: #FFFFFF;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    /* .button {
+     font-size: 16px;
+    padding: 18px 30px;
+    } */
+
+    .svgIconAdd {
+        height: 24px;
+        width: 24px;
+    }
+
+}
+
+/* @media screen and (min-width: 1440px) {
+    .button{
+       
+    }
+} */

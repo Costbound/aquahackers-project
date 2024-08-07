@@ -1,0 +1,22 @@
+.dailyInfo {
+margin-top: 40px;
+}
+
+.dailyInfoContainer {
+    display: flex;
+    align-items: center;
+    gap:80px;
+    margin-bottom: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .dailyInfoContainer {
+        gap: 53px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .dailyInfoContainer {
+        gap: 48px;
+    }
+}

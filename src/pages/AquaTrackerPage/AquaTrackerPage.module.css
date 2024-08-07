@@ -1,1 +1,33 @@
+.waterDetailedInfoContainer{
+        display: flex;
+        align-items: center;
+        padding: 40px 20px 40px 20px;
+        width: 343px;
+        background-color: #F0EFF4;
+        border-radius: 30px;   
+}
 
+.waterMainInfoContainer{
+    min-width: 320px;
+    max-width: 375px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    .waterDetailedInfoContainer{
+        width: 704px;
+        padding: 32px;
+    }
+
+    .waterMainInfoContainer{
+        min-width: 768px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .waterDetailedInfoContainer{
+        width: 672px;
+    }
+}

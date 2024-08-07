@@ -1,0 +1,22 @@
+.containter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  row-gap: 20px;
+}
+
+.itemContainer {
+  height: 44px;
+  width: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  .containter {
+    gap: 48px;
+    row-gap: 15px;
+  }
+  .itemContainer {
+    height: 65px;
+    width: 38px;
+  }
+}

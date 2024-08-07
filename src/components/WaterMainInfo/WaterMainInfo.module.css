@@ -1,0 +1,78 @@
+.container {
+    background-image: url('../../img/tracker-page/bottle-mob.png');
+    background-color: #9BE1A0;
+    background-size: 262px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 343px;
+    height: 415px;
+    border-radius: 30px;
+    position: relative;
+}
+
+.text {
+    font-size: 18px;
+    color: #323F47;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 24px;
+}
+
+.addWater {
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .container {
+        background-image: url('../../img/tracker-page/bottle-mob@2x.png');
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        background-image: url('../../img/tracker-page/bottle-tab.png');
+        height: 578px;
+        width: 704px;
+        background-size: 374px;
+    }
+
+    .text {
+        font-size: 24px;
+        padding-left: 33px;
+        padding-top: 32px;
+    }
+
+    .addWater {
+        bottom: 64px;
+        right: 32px;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+        .container {
+            background-image: url('../../img/tracker-page/bottle-tab@2x.png');
+
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        background-image: url('../../img/tracker-page/bottle-desk.png');
+        height: 736px;
+        width: 672px;
+        background-size: 472px;
+        width: 672px;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+        .container {
+            background-image: url('../../img/tracker-page/bottle-desk@2x.png');
+        }
+    }
+}

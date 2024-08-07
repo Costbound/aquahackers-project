@@ -7,9 +7,9 @@ import { FormValidateError } from '../FormValidateError/FormValidateError';
 import { calcRequiredWater } from '../../helpers/calcRequiredWater.js';
 import { selectUser } from '../../redux/userData/selectors-userData.js';
 import { currentEdit } from '../../redux/userData/ops-userData.js';
-import { Modal } from '../Modal/Modal';
+// import { Modal } from '../Modal/Modal.jsx';
 import { useState } from 'react';
-import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal';
+// import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -345,9 +345,9 @@ export const UserSettingsForm = ({ onClose }) => {
         </button>
       </form>
 
-      <Modal isOpen={isPassModalOpen} onClose={closeModal}>
-        <PasswordChangeModal closeModal={closeModal} />
-      </Modal>
+      {/*<Modal isOpen={isPassModalOpen} onClose={closeModal}>*/}
+      {/*  <PasswordChangeModal closeModal={closeModal} />*/}
+      {/*</Modal>*/}
     </>
   );
 };

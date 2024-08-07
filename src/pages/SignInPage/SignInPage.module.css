@@ -1,0 +1,18 @@
+.signInSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 780px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+    .signInSection{
+        height: 960px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .signInSection {
+        height: 736px;
+    }
+}

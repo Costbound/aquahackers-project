@@ -1,0 +1,22 @@
+.logo {
+  position: absolute;
+  text-decoration: none;
+  z-index: 999;
+  top: 24px;
+  left: 16px;
+  color: var(--grey);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.24px;
+  text-transform: uppercase;
+  font-family: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    top: 32px;
+    left: 32px;
+    font-size: 24px;
+  }
+}

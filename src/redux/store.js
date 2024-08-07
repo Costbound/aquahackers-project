@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
         auth: authReducer,
         water: waterReducer,
-        userData: userDataReducer
+        userData: userDataReducer,
     }
 })
 

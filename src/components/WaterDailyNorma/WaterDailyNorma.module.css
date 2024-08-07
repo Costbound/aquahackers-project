@@ -1,0 +1,51 @@
+.container {
+    background-color: #FFFFFF;
+    width: 102px;
+    height: 54px;
+    border-radius: 15px;
+    margin-top: 78px;
+    margin-left: 16px;
+    padding: 12px;
+}
+
+.textAllWater {
+    font-size: 14px;
+    font-weight: 700;
+    color: #323F47;
+}
+
+.textNorma {
+    color: #2F2F2F99;
+    font-size: 10px;
+    padding-top: 6px;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        margin-top: 101px;
+        margin-left: 32px;
+        height: 78px;
+        width: 129px;
+        padding: 14px 18px;
+    }
+
+    .textAllWater {
+        font-size: 15px;
+        font-weight: 700;
+        height: 22px;
+    }
+
+    .textNorma {
+        height: 23px;
+        font-size: 12px;
+        padding-top: 4px;
+
+    }
+
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        margin-left: 64px;
+    }
+}

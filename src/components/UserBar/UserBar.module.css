@@ -1,0 +1,74 @@
+.userBarContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.userBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 137px;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 30px;
+    gap: 8px;
+    padding: 6px 12px 6px 12px;
+    background-color: #323F47;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color:#F0EFF4;
+    background-color: #fff;
+}
+
+.barUsername {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -1%;
+    align-items: center;
+    color: #fff
+}
+
+.svgIconChevron {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    fill: none;
+}
+
+.userButton {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+@media screen and (min-width: 768px) {
+    .userBar {
+        width: 157px;
+        height: 56px;
+        margin-top: 0;
+        gap: 10px;
+    }
+
+    .svgIconChevron {
+        width: 20px;
+        height: 20px;
+    }
+
+    .avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .barUsername {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

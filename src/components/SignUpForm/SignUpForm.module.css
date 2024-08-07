@@ -1,0 +1,192 @@
+
+.form {
+  max-width: 311px;
+  margin-bottom: 16px;
+}
+
+.formTitle {
+  margin-bottom: 32px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.14px;
+  color: var(--dark-grey);
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  font-family: inherit;
+  letter-spacing: -0.16px;
+  color: var(--dark-grey);
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  outline: none;
+  padding: 16px;
+  width: 100%;
+  background-color: inherit;
+}
+.emailInput {
+  margin-bottom: 16px;
+}
+
+.input:focus,
+.input:active {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+
+.inputError {
+  border: 1px solid #ef5050;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.lastInputWrapper {
+  margin-bottom: 32px;
+}
+
+.errorMessage {
+  color: #ef5050;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  margin-bottom: 8px;
+}
+
+.input::placeholder {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.06px;
+  letter-spacing: -0.14px;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.inputError::placeholder {
+  color: #ef5050;
+}
+
+.signUpButton {
+  text-decoration: none;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 30px;
+  background: var(--green);
+  color: var(--grey);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.29;
+  letter-spacing: -0.14px;
+  text-wrap: nowrap;
+  transition: background-color var(--animation);
+  margin-bottom: 16px;
+}
+
+.signUpButton:hover,
+.signUpButton:active,
+.signUpButton:focus {
+  background-color: var(--lightGreenHover);
+}
+
+.text {
+  color: rgba(47, 47, 47, 0.5);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.14px;
+  text-align: center;
+}
+
+.spanLink {
+  color: var(--dark-grey);
+  text-decoration-line: underline;
+  font-weight: 700;
+  letter-spacing: -0.16px;
+}
+
+.line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  margin: 16px 0;
+  background-color: #d4d4d4;
+}
+
+.line::before {
+  content: "Or";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--light);
+  color: rgba(47, 47, 47, 0.5);
+  padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+  .signUpWrap {
+    padding: 227px 134px 0 134px;
+    height: 960px;
+  }
+
+  .form {
+    min-width: 436px;
+    margin: 0 auto;
+  }
+
+  .formTitle {
+    margin-bottom: 32px;
+  }
+
+  .label {
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: -0.16px;
+  }
+
+  .emailInput {
+    margin-bottom: 20px;
+  }
+
+  .inputWrapper {
+    margin-bottom: 20px;
+  }
+
+  .lastInputWrapper {
+    margin-bottom: 32px;
+  }
+
+  .input::placeholder {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+
+  .signUpButton {
+    width: 436px;
+    height: 60px;
+    padding: 18px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+  }
+}

@@ -1,0 +1,132 @@
+.deleteModalContainer {
+  padding: 40px 14px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.deleteModalCloseBtn {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 20px;
+  right: 16px;
+  stroke-width: 2px;
+}
+
+.deleteModalTextContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 316px;
+}
+
+.deleteModalTitle {
+  color: #323f47;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  justify-content: center;
+}
+
+.deleteModalText {
+  color: #323f47;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.deleteModalBtnWrapper {
+  display: flex;
+  gap: 9px;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.deleteModalBtn {
+  padding: 14px 129px;
+  background-color: #9be1a0;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+}
+
+.deleteModalCancelBtn {
+  padding: 14px;
+  background-color: #f0eff4;
+  border: none;
+  border-radius: 30px;
+  color: #323f474d;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+}
+
+.deleteModalBtn:hover {
+  background-color: #87d28d;
+}
+
+.deleteModalCancelBtn:hover {
+  color: #2f2f2f;
+}
+
+@media (min-width: 768px) {
+  .deleteModalContainer {
+    padding: 40px;
+    gap: 24px;
+  }
+
+  .deleteModalCloseBtn {
+    width: 28px;
+    height: 28px;
+    top: 20px;
+    right: 20px;
+    stroke-width: 3px;
+  }
+
+  .deleteModalTextContainer {
+    width: 436px;
+    gap: 24px;
+  }
+
+  .deleteModalTitle {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .deleteModalText {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .deleteModalBtnWrapper {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .deleteModalBtn {
+    padding: 18px 59px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .deleteModalCancelBtn {
+    padding: 18px 59px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,18 @@
+.sighnUpSection{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 780px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .sighnUpSection{
+    height: 960px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .sighnUpSection {
+    height: 736px;
+  }
+}

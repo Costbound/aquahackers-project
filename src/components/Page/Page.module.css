@@ -1,0 +1,14 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+@media screen and (min-width: 1440px) {
+  .page {
+    flex-direction: row;
+    gap: 32px;
+    justify-content: center;
+  }
+}
