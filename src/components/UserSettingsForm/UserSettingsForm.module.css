@@ -1,0 +1,57 @@
+.avatarWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+}
+.hiddenFileInput {
+  display: none;
+}
+.fileLabel {
+  width: 151px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settingsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.genderWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.radiobuttonWrapper {
+  display: flex;
+}
+.form {
+  width: 343px;
+}
+
+@media screen and (max-width: 374px) {
+  .form {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .form {
+    width: 648px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .form {
+    width: 920px;
+  }
+}

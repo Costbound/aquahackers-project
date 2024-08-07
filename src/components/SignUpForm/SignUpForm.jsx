@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { signup } from "../../redux/auth/ops-auth";
-import icon from "../../img/icons.svg";
 import { toast, Toaster } from "react-hot-toast";
+import screenWidth from "../../helpers/screenWidth.js";
+import ShowPwdButton from "../ShowPwdButton/ShowPwdButton.jsx";
 
 // Определение схемы валидации с использованием yup
 const schema = yup.object().shape({
@@ -26,8 +27,8 @@ const SignUpForm = () => {
   const dispatch = useDispatch(); // Инициализация функции dispatch из Redux
   const [inputTypePassword, setTypePassword] = useState("password"); // Состояние для типа поля ввода пароля
   const [inputTypeRePassword, setTypeRePassword] = useState("password"); // Состояние для типа поля ввода повторного пароля
-  const [iconPassword, setIconPassword] = useState("eye-off"); // Состояние для иконки пароля(в процессе)
-  const [iconRePassword, setIconRePassword] = useState("eye-off"); // Состояние для иконки повторного пароля(в процессе)
+  const [isPwdVisible, setIsPwdVisible] = useState(false); // Состояние для иконки пароля(в процессе)
+  const [isRePwdVisible, setIsRePwdVisible] = useState(false) // Состояние для иконки повторного пароля(в процессе)
 
   const navigate = useNavigate(); // Инициализация функции navigate из react-router-dom
   const {
@@ -56,16 +57,16 @@ const SignUpForm = () => {
 
   const toggleShowPassword = () => {
     setTypePassword((prevType) => (prevType === "password" ? "text" : "password")); // Переключение типа поля ввода пароля
-    setIconPassword((prevIcon) => (prevIcon === "eye-off" ? "eye" : "eye-off")); // Переключение иконки пароля
+    setIsPwdVisible(!isPwdVisible) // Переключение иконки пароля
   };
 
   const toggleShowRePassword = () => {
     setTypeRePassword((prevType) => (prevType === "password" ? "text" : "password")); // Переключение типа поля ввода повторного пароля
-    setIconRePassword((prevIcon) => (prevIcon === "eye-off" ? "eye" : "eye-off")); // Переключение иконки повторного пароля
+    setIsRePwdVisible(!isRePwdVisible); // Переключение иконки повторного пароля
   };
 
   return (
-    <div className={css.signUpWrap}>
+    <div>
       {/* Контейнер для формы регистрации */}
       <Toaster position="top-center" /> {/* Компонент для отображения уведомлений */}
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
@@ -73,7 +74,7 @@ const SignUpForm = () => {
         <h2 className={css.formTitle}>Sign Up</h2>
         <label className={css.label}>Email</label>
         <input
-          className={`${css.input} ${errors.email ? css.inputError : ""}`} // Класс для поля ввода с проверкой ошибок
+          className={`${css.input} ${errors.email ? css.inputError : ""} ${css.emailInput}`} // Класс для поля ввода с проверкой ошибок
           {...register("email")}
           placeholder="Enter your email"
         />
@@ -88,43 +89,23 @@ const SignUpForm = () => {
             type={inputTypePassword}
             placeholder="Enter your password"
           />
-          <button type="button" onClick={toggleShowPassword} className={css.iconButton}>
-            {iconPassword === "eye" ? (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye`} />
-              </svg>
-            ) : (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye-off`} />
-              </svg>
-            )}
-          </button>
+          {screenWidth > 767 && <ShowPwdButton onClick={toggleShowPassword} isPwdVisible={isPwdVisible}/>}
         </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p> // Сообщение об ошибке
         )}
         <label className={css.label}>Repeat password</label>
-        <div className={css.inputWrapper}>
+        <div className={`${css.inputWrapper} ${css.lastInputWrapper}`}>
           <input
             className={`${css.input} ${errors.repeatPassword ? css.inputError : ""}`} // Класс для поля ввода с проверкой ошибок
             {...register("repeatPassword")}
             type={inputTypeRePassword}
             placeholder="Repeat password"
           />
-          <button type="button" onClick={toggleShowRePassword} className={css.iconButton}>
-            {iconRePassword === "eye" ? (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye`} />
-              </svg>
-            ) : (
-              <svg className={css.icon}>
-                <use href={`${icon}#eye-off`} />
-              </svg>
-            )}
-          </button>
+          {screenWidth > 767 && <ShowPwdButton onClick={toggleShowRePassword} isPwdVisible={isRePwdVisible}/>}
         </div>
         {errors.repeatPassword && (
-          <p className={css.errorMessage}>{errors.repeatPassword.message}</p> // Сообщение об ошибке
+            <p className={css.errorMessage}>{errors.repeatPassword.message}</p> // Сообщение об ошибке
         )}
         <button className={css.signUpButton} type="submit">
           Sign Up

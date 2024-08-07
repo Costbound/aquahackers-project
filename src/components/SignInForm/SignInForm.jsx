@@ -7,8 +7,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/auth/ops-auth.js";
 import { selectIsLoggedIn } from "../../redux/auth/selectors-auth.js";
-import icon from "../../img/icons.svg";
 import { toast, Toaster } from "react-hot-toast";
+import screenWidth from "../../helpers/screenWidth.js";
+import ShowPwdButton from "../ShowPwdButton/ShowPwdButton.jsx";
 
 // Определение схемы валидации с использованием yup
 const schema = yup.object().shape({
@@ -19,12 +20,14 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
+
+
 const SignInForm = () => {
   const navigate = useNavigate(); // Инициализация функции navigate из react-router-dom
   const dispatch = useDispatch(); // Инициализация функции dispatch из Redux
   const isSignedIn = useSelector(selectIsLoggedIn); // Получение состояния входа из Redux
   const [inputTypePassword, setTypePassword] = useState("password"); // Состояние для типа поля ввода пароля
-  const [iconPassword, setIconPassword] = useState("eye-off"); // Состояние для иконки пароля
+  const [isPwdVisible, setIsPwdVisible] = useState(false); // Состояние для иконки пароля
 
   const {
     register,
@@ -54,11 +57,11 @@ const SignInForm = () => {
 
   const toggleShowPassword = () => {
     setTypePassword((prevType) => (prevType === "password" ? "text" : "password")); // Переключение типа поля ввода пароля(позже)
-    setIconPassword((prevIcon) => (prevIcon === "eye-off" ? "eye" : "eye-off")); // Переключение иконки пароля(позже)
+    setIsPwdVisible(!isPwdVisible); // Переключение иконки пароля(позже)
   };
 
   return (
-    <div className={css.signUpWrap}>
+    <div>
       {/* Контейнер для формы входа */}
       <Toaster position="top-center" /> {/* Компонент для отображения уведомлений */}
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
@@ -66,21 +69,14 @@ const SignInForm = () => {
         <h2 className={css.formTitle}>Sign In</h2>
         <label className={css.label}>Email</label>
         <input
-          className={`${css.input} ${errors.email ? css.inputError : ""}`} // Класс для поля ввода с проверкой ошибок
+          className={`${css.input} ${errors.email ? css.inputError : ""} ${css.emailInput}`} // Класс для поля ввода с проверкой ошибок
           {...register("email")}
           placeholder="Enter your email"
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p> // Сообщение об ошибке
         )}
-        <div
-          style={{
-            marginBottom: 25,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
+        <div className={css.pwdInputWrapper} >
           <label className={css.label}>Password</label>
           <div className={css.inputWrapper}>
             <input
@@ -89,21 +85,12 @@ const SignInForm = () => {
               type={inputTypePassword}
               placeholder="Enter your password"
             />
-            <button type="button" onClick={toggleShowPassword} className={css.iconButton}>
-              {iconPassword === "eye" ? (
-                <svg className={css.icon}>
-                  <use href={`${icon}#eye`} />
-                </svg>
-              ) : (
-                <svg className={css.icon}>
-                  <use href={`${icon}#eye-off`} />
-                </svg>
-              )}
-            </button>
+            {screenWidth > 767 && <ShowPwdButton onClick={toggleShowPassword} is isPwdVisible={isPwdVisible}/>}
+
           </div>
 
           {errors.password && (
-            <p className={css.errorMessage}>{errors.password.message}</p> // Сообщение об ошибке
+              <p className={css.errorMessage}>{errors.password.message}</p> // Сообщение об ошибке
           )}
 
           <p className={css.text}></p>
@@ -113,7 +100,7 @@ const SignInForm = () => {
         </button>
       </form>
       <p className={css.text}>
-        Don’t have an account?
+        Don’t have an account?{" "}
         <Link to="/signup">
           <span className={css.spanLink}>Sign Up</span>
         </Link>

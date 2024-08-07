@@ -1,10 +1,17 @@
-import MonthInfo from "../MonthInfo/MonthInfo";
+// WaterDetailedInfo.jsx
+import UserPanel from "../UserPanel/UserPanel";
+import DailyInfo from "../DailyInfo/DailyInfo";
 import css from "./WaterDetailedInfo.module.css";
+import MonthInfo from "../MonthInfo/MonthInfo";
 
-export default function WaterDetailedInfo(props) {
+function WaterDetailedInfo() {
   return (
-    <div className={css.container}>
+    <div className={css.waterDetailedInfo}>
+      <UserPanel />
+      <DailyInfo />
       <MonthInfo />
     </div>
   );
 }
+
+export default WaterDetailedInfo;

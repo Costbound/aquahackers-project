@@ -42,4 +42,4 @@ export default function WaterProgressBar() {
            </div> 
         </div>
     )
-};
+}
