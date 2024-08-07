@@ -1,0 +1,12 @@
+.icon {
+    stroke: #2f2f2f;
+}
+.iconButton {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    fill: none;
+    background-color: transparent;
+}

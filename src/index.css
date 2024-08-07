@@ -13,6 +13,7 @@ section {
     width: 343px;
     padding: 24px 16px;
     background-color: #F0EFF4;
+    border-radius: 30px;
 }
 
 .container {
@@ -36,6 +37,7 @@ h4,
 h5,
 h6 {
     color: #323F47;
+    font-weight: 700;
 }
 
 h1 {
@@ -58,6 +60,12 @@ h3 {
 
 h4 {
     font-size: 16px;
+}
+
+@media screen and (max-width: 374px) {
+    section {
+        width: auto;
+    }
 }
 
 @media screen and (min-width: 768px) {
