@@ -76,15 +76,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, login, refresh, apiLogout } from "./ops-auth.js";
 
-// Начальное состояние auth
-const initialState = {
-  name: "",
-  email: null,
-  accessToken: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-  error: null,
-};
 
 // Создание authSlice с использованием createSlice
 const authSlice = createSlice({

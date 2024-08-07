@@ -34,3 +34,24 @@
 .radiobuttonWrapper {
   display: flex;
 }
+.form {
+  width: 343px;
+}
+
+@media screen and (max-width: 374px) {
+  .form {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .form {
+    width: 648px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .form {
+    width: 920px;
+  }
+}

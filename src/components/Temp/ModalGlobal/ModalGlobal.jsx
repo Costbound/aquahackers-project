@@ -28,8 +28,8 @@ function ModalGlobal() {
     return (isModalOpen ? (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
             {
-                modalType === 'logOut' ? <LogOutModal /> :
-                    modalType === 'settings' ? <UserSettingsModal /> : null
+                modalType === 'logOut' ? <LogOutModal onClose={handleModalClose} /> :
+                    modalType === 'settings' ? <UserSettingsModal onClose={handleModalClose}/> : null
             }
         </Modal>
         ) : (
