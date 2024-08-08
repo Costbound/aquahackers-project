@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
+import { selectTodaysProgress } from '../../redux/water/selectors-water.js';
 import css from './WaterProgressBar.module.css';
 
+
 export default function WaterProgressBar() {
-//      const progress = useSelector((state) => state.progressBar.progress);
+
+     const progress = useSelector(selectTodaysProgress);
 //   const dispatch = useDispatch();
 
 //   const fetchProgressData = async () => {
@@ -26,16 +30,15 @@ export default function WaterProgressBar() {
        <div>
         <div className={css.progressContainer}>
         <div className={css.progressBar}
-          style={{width: '60%'}}
+          style={{width: `${progress}%`}}
         ></div>
         <div className={css.spanProgress}>
           <span>0%</span>
           <span>50%</span>
           <span>100%</span>
         </div>
-        <div className={css.elipce} style={{ left: `60%` }}>
-              <span className={css.interest}>{ '60%' }</span>                 
-                            
+        <div className={css.elipce} style={{ left:`${progress}%`}}>
+              <span className={css.interest}>{`${progress}%` }</span>                 
         </div>
       </div>
      

@@ -18,9 +18,11 @@ const waterSlice = createSlice({
     selectedDayWater: [],
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
-    isLoading: false,
+      isLoading: false,
+      todaysProgress: 0,
     water: {
-      items: [],
+        items: [],
+        progress: 0,
       loading: false,
       error: null,
     },

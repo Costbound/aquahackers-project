@@ -9,7 +9,7 @@ const userDataSlice = createSlice({
             email: '',
             gender: 'woman',
             weight: 0,
-            waterRate: 1.5,
+            waterRate: 1500,
             sportTime: 0,
         }
 
