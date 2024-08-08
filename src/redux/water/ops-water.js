@@ -27,8 +27,7 @@ export const fetchWater = createAsyncThunk(
       const response = await axios.get(
         `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
       );
-      console.log(response)
-      return response.data.data.waters;
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(true);
     }
@@ -76,3 +75,18 @@ export const deleteWater = createAsyncThunk(
     }
   }
 );
+
+export const getTodayProgress = createAsyncThunk(
+    'water/getTodayProgress',
+    async (_, thunkApi) => {
+        try {
+            const response = await axios.get(
+                `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
+            );
+            return response.data.data.dailyProgress;
+        } catch (err) {
+            thunkApi.rejectWithValue(err.response?.data )
+        }
+    }
+)
+

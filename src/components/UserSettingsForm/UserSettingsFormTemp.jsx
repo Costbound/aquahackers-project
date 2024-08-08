@@ -6,68 +6,56 @@ import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
 // import { Modal } from '../Modal/Modal.jsx';
 // import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
-import { useId } from "react";
-import { Formik, Form, Field } from "formik";
-import { updateUserData } from "../../redux/userData/ops-userData.js";
+import Button from '../Button/Button.jsx';
+import {useId} from "react";
+import {Formik, Form, Field} from "formik";
+import {updateUserData} from "../../redux/userData/ops-userData.js";
+import {getTodayProgress} from "../../redux/water/ops-water.js";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
 
-  gender: yup
-    .string()
-    .nullable()
-    .oneOf(["Woman", "Man"], "Please select your gender"),
+    gender: yup
+        .string()
+        .nullable()
+        .oneOf(['woman', 'man'], 'Please select your gender'),
 
   name: yup
     .string()
     .min(2, "Name must be greater than or equal to 2 characters long")
     .max(40, "Name must be less than or equal to 40 characters long"),
 
-  email: yup.string().email("Please enter a valid email address"),
+    weight: yup
+        .number()
+        .nullable()
+        .min(20, 'Weight must be greater than or equal to 20')
+        .max(600, 'Weight must be less than or equal to 600'),
 
-  weight: yup
-    .number()
-    .nullable()
-    .min(20, "Weight must be greater than or equal to 20")
-    .max(600, "Weight must be less than or equal to 600")
-    .transform((value, originalValue) => {
-      if (originalValue === "") return null;
-      return value;
-    }),
+    activityTime: yup
+        .number()
+        .nullable()
+        .min(0)
+        .max(12, 'Time must be less than or equal to 12'),
 
-  activityTime: yup
-    .number()
-    .nullable()
-    .min(0)
-    .max(12, "Time must be less than or equal to 12")
-    .transform((value, originalValue) => {
-      if (originalValue === "") return null;
-      return value;
-    }),
-
-  desiredVolume: yup
-    .string()
-    .nullable()
-    .transform((value, originalValue) => {
-      if (originalValue === "") return null;
-      return value;
-    })
-    .test("is-decimal", "Please enter a valid number", (value) => {
-      if (value === undefined || value === null || value === "") return true;
-      return !isNaN(parseFloat(value)) && isFinite(value);
-    })
-    .test(
-      "min-value",
-      "Value must be greater than or equal to 0.1",
-      (value) => {
-        if (value === undefined || value === null || value === "") return true;
-        return parseFloat(value) >= 0.1;
-      }
-    )
-    .test("max-value", "Value must be less than or equal to 31.2", (value) => {
-      if (value === undefined || value === null || value === "") return true;
-      return parseFloat(value) <= 31.2;
-    }),
+    desiredVolume: yup
+        .number()
+        .nullable()
+        .test('is-decimal', 'Please enter a valid number', (value) => {
+            if (value === undefined || value === null || value === '') return true;
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        })
+        .test(
+            'min-value',
+            'Value must be greater than or equal to 0.1',
+            (value) => {
+                if (value === undefined || value === null || value === '') return true;
+                return parseFloat(value) >= 0.1;
+            }
+        )
+        .test('max-value', 'Value must be less than or equal to 31.2', (value) => {
+            if (value === undefined || value === null || value === '') return true;
+            return parseFloat(value) <= 31.2;
+        }),
 });
 
 export const UserSettingsForm = ({ onClose }) => {
@@ -156,6 +144,41 @@ export const UserSettingsForm = ({ onClose }) => {
                 >
                   Woman
                 </label>
+    const handleSubmit = async (values) => {
+        const filteredValues = {
+            name: values.name,
+            weight: Number(values.weight),
+            gender: values.gender,
+            timeOfSportActivities: Number(values.activityTime),
+            waterToDrink: Number(values.desiredVolume) * 1000
+        }
+        try {
+            await dispatch(updateUserData(filteredValues))
+
+            if (filteredValues.waterToDrink !== user.waterRate) {
+                await dispatch(getTodayProgress())
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        onClose()
+    }
+
+    return (
+        <Formik
+            validationSchema={schema}
+            initialValues={{
+                name: user.name,
+                email: user.email,
+                gender: user.gender,
+                weight: user.weight,
+                activityTime: user.sportTime,
+                desiredVolume: user.waterRate / 1000,
+            }}
+            onSubmit={handleSubmit}
+            // validationSchema={schema}
+        >
+            <Form className={css.form}>
 
                 <Field
                   className={css.hiddenRadioInput}
