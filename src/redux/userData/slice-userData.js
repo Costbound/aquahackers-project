@@ -1,39 +1,59 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getUserData, updateUserData} from "./ops-userData.js";
+import { createSlice } from "@reduxjs/toolkit";
+import { getUserData, updateUserData, totalUsers } from "./ops-userData.js";
+
+const initialState = {
+  user: {
+    name: "",
+    email: "",
+    gender: "woman",
+    weight: 0,
+    waterRate: 1500,
+    sportTime: 0,
+  },
+  totalUsers: 0,
+  isLoading: false,
+  error: null,
+};
+
+const handlePending = (state) => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 const userDataSlice = createSlice({
-    name: 'userData',
-    initialState: {
-        user: {
-            name: '',
-            email: '',
-            gender: 'woman',
-            weight: 0,
-            waterRate: 1500,
-            sportTime: 0,
-        }
+  name: "userData",
+  initialState,
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserData.fulfilled, (state, action) => {
+        state.user.name = action.payload.name;
+        state.user.gender = action.payload.gender;
+        state.user.weight = action.payload.weight;
+        state.user.waterRate = action.payload.waterToDrink;
+        state.user.sportTime = action.payload.timeOfSportActivities;
+        state.user.email = action.payload.email;
+      })
+      .addCase(updateUserData.fulfilled, (state, action) => {
+        state.user.name = action.payload.name;
+        state.user.gender = action.payload.gender;
+        state.user.weight = action.payload.weight;
+        state.user.waterRate = action.payload.waterToDrink;
+        state.user.sportTime = action.payload.timeOfSportActivities;
+        state.user.email = action.payload.email;
+      })
+      .addCase(totalUsers.pending, handlePending)
+      .addCase(totalUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.totalUsers = action.payload;
+      })
+      .addCase(totalUsers.rejected, handleRejected);
+  },
+});
 
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(getUserData.fulfilled, (state, action) => {
-                state.user.name = action.payload.name;
-                state.user.gender = action.payload.gender;
-                state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
-                state.user.email = action.payload.email;
-            })
-            .addCase(updateUserData.fulfilled, (state, action) => {
-                state.user.name = action.payload.name;
-                state.user.gender = action.payload.gender;
-                state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
-                state.user.email = action.payload.email;
-            })
-    }
-})
-
-const userDataReducer = userDataSlice.reducer
-export default userDataReducer
+const userDataReducer = userDataSlice.reducer;
+export default userDataReducer;
