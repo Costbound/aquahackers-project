@@ -1,20 +1,11 @@
 import { useSelector } from 'react-redux';
-import { selectProgress } from '../../redux/water/selectors-water.js';
+import {selectTodayProgress} from '../../redux/water/selectors-water.js';
 import css from './WaterProgressBar.module.css';
 
 
 export default function WaterProgressBar() {
 
-    const progress = useSelector(selectProgress);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     fetchProgressData();
-//   }, []);
-
-//   const updateProgress = (newProgress) => {
-//     dispatch(setProgress(newProgress));
-//   };
+    const progress = useSelector(selectTodayProgress);
 
     return (
         <div className={css.container}>

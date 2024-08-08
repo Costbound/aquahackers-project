@@ -8,12 +8,6 @@ import { selectWaterRate } from '../../redux/userData/selectors-userData.js';
 
 export default function WaterDailyNorma() {
     const waterRate = useSelector(selectWaterRate)/1000;
-    // const dispatch = useDispatch(fetchWater);
-
-    // useEffect(() => {
-    //     dispatch(fetchWater());
-    // }, [dispatch]);
-
     
     return (
         <div className={css.container}>
