@@ -1,7 +1,7 @@
 .containter {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 17.3px;
   row-gap: 20px;
 }
 
@@ -10,9 +10,17 @@
   width: 28px;
 }
 
+@media screen and (max-width: 374px) {
+  .containter {
+    gap: calc((100% - 7 * 28px) / 6);
+    row-gap: 20px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .containter {
-    gap: 48px;
+    width: 609px;
+    gap: 43px;
     row-gap: 15px;
   }
   .itemContainer {
