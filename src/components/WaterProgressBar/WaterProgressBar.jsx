@@ -1,19 +1,12 @@
 import { useSelector } from 'react-redux';
-import { selectTodayProgress } from '../../redux/water/selectors-water.js';
+import { selectProgress } from '../../redux/water/selectors-water.js';
 import css from './WaterProgressBar.module.css';
 
 
 export default function WaterProgressBar() {
 
-     const progress = useSelector(selectTodayProgress);
+    const progress = useSelector(selectProgress);
 //   const dispatch = useDispatch();
-
-//   const fetchProgressData = async () => {
-//     // Це приклад запиту до API для отримання прогресу з бази даних
-//     const response = await fetch('https://api.example.com/progress');
-//     const data = await response.json();
-//     dispatch(setProgress(data.progress));
-//   };
 
 //   useEffect(() => {
 //     fetchProgressData();
@@ -27,23 +20,20 @@ export default function WaterProgressBar() {
         <div className={css.container}>
             <div className={css.containerToday}>
                 <h2 className={css.text}>Today</h2>
-       <div>
-        <div className={css.progressContainer}>
-        <div className={css.progressBar}
-          style={{width: `${progress}%`}}
-        ></div>
-        <div className={css.spanProgress}>
-          <span>0%</span>
-          <span>50%</span>
-          <span>100%</span>
+                <div>
+                    <div className={css.progressContainer}>
+                        <div className={css.progressBar}
+                           style={{ width: `${Math.min(Math.max(progress, 0), 100)}%` }}
+                        ></div>
+                        <div className={css.spanProgress}>
+                            <span>0%</span>
+                            <span>50%</span>
+                            <span>100%</span>
+                        </div>
+                        <div className={css.elipce} style={{ left: `calc(${Math.min(Math.max(progress, 0), 100)}% - 6px)` }}>{progress !== 0 && progress !== 50 && progress !== 100 && progress <100 ? (<span className={css.interest}>{`${progress}%`}</span>) : null}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className={css.elipce} style={{ left:`${progress}%`}}>
-              <span className={css.interest}>{`${progress}%` }</span>                 
-        </div>
-      </div>
-     
-    </div>
-           </div> 
-        </div>
-    )
+    );
 }

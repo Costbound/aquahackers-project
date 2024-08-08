@@ -20,11 +20,11 @@ const waterSlice = createSlice({
     year: new Date().getFullYear(),
     // todayDate: getTodayDate(),
     todayDate: '2024-04-13',
-    todayProgress: 0,
+    todayProgress: 70,
     isLoading: false,
     selectedDay: {
       items: [],
-      progress: 0,
+      progress: 70,
       loading: false,
       error: null,
     },
