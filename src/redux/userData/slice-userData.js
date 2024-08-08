@@ -11,17 +11,14 @@ const initialState = {
     sportTime: 0,
   },
   totalUsers: 0,
-  isLoading: false,
   error: null,
 };
 
 const handlePending = (state) => {
-  state.isLoading = true;
   state.error = null;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
   state.error = action.payload;
 };
 
@@ -48,7 +45,6 @@ const userDataSlice = createSlice({
         })
         .addCase(totalUsers.pending, handlePending)
         .addCase(totalUsers.fulfilled, (state, action) => {
-          state.isLoading = false;
           state.totalUsers = action.payload;
         })
         .addCase(totalUsers.rejected, handleRejected);
