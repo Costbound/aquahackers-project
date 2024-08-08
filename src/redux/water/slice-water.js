@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMonth, addWater, editWater } from "./ops-water";
+import {fetchMonth, addWater, editWater, getTodayProgress} from "./ops-water";
 import { deleteWater, fetchWater } from "./ops-water";
 import getTodayDate from "../../helpers/getTodayDate.js";
 
@@ -99,7 +99,10 @@ const waterSlice = createSlice({
           (water) => water._id !== action.payload
         );
       })
-      .addCase(deleteWater.rejected, handleRejected),
+      .addCase(deleteWater.rejected, handleRejected)
+      .addCase(getTodayProgress.fulfilled, (state, action) => {
+        state.todayProgress = action.payload;
+      })
 });
 
 export const {
