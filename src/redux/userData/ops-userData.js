@@ -17,9 +17,10 @@ export const updateUserData = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             const res = await axios.patch('/users/current', payload)
-            return res.data.data.userData
+            console.log(res.data)
+            return res.data.data.data
         } catch (err) {
-            thunkAPI.rejectWithValue(err.response.data.message || err.message);
+            thunkAPI.rejectWithValue(err.response.data.message);
         }
     }
 )

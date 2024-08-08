@@ -1,3 +1,8 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
 .avatarWrapper {
   display: flex;
   flex-direction: column;
@@ -11,6 +16,16 @@
   width: 75px;
   height: 75px;
 }
+
+.settingsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.leftDesktopWrapper {
+  display: flex;
+  flex-direction: column;
+}
 .hiddenFileInput {
   display: none;
 }
@@ -21,21 +36,102 @@
   align-items: center;
   justify-content: center;
 }
-.settingsWrapper {
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
-}
+
 .genderWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 14px;
+  margin-bottom: 24px;
+}
+.subtitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--grey);
+}
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--dark-grey);
+}
+.normaFormula {
+  font-weight: 700;
+  color: var(--green);
 }
 .radiobuttonWrapper {
   display: flex;
+  gap: 20px;
 }
-.form {
-  width: 343px;
+.radiobuttonContainer {
+  display: flex;
+  gap: 10px;
+}
+.hiddenRadioInput {
+  width: 20px;
+  height: 20px;
+  outline: none;
+  accent-color: var(--green);
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+.infoInputContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+}
+.input {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 0px 14px 16px;
+  width: 303px;
+  height: 46px;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--dark-grey);
+}
+.input:active {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
+.normaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 303px;
+}
+.normaAsterisk {
+  color: var(--green);
+}
+.footnote {
+  color: var(--green);
+  font-size: 20px;
+}
+.normaTextArea {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+.rightDesktopWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 @media screen and (max-width: 374px) {
