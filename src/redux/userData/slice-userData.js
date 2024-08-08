@@ -11,6 +11,7 @@ const userDataSlice = createSlice({
             weight: 0,
             waterRate: 1500,
             sportTime: 0,
+            avatar: ""
         }
 
     },
@@ -20,16 +21,16 @@ const userDataSlice = createSlice({
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
+                state.user.waterRate = action.payload.waterRate;
+                state.user.sportTime = action.payload.sportTime;
                 state.user.email = action.payload.email;
             })
             .addCase(updateUserData.fulfilled, (state, action) => {
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
+                state.user.waterRate = action.payload.waterRate;
+                state.user.sportTime = action.payload.sportTime;
                 state.user.email = action.payload.email;
             })
     }
