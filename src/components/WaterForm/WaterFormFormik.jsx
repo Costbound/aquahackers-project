@@ -1,11 +1,14 @@
 import Button from "../Button/Button";
 import { useState, useId } from "react";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import clsx from 'clsx';
+import { addWater } from "../../redux/water/ops-water";
 
 const WaterFormFormik = ({ time, type }) => {
   const WaterValidSchema = Yup.object().shape({
@@ -21,6 +24,9 @@ const WaterFormFormik = ({ time, type }) => {
   const valueWaterId = useId();
   const timeId = useId();
   const waterId = useId();
+  const dispatch = useDispatch();
+
+  
 
   const [waterAmount, setWaterAmount] = useState(50);
   const decreaseWater = () => {
@@ -29,7 +35,7 @@ const WaterFormFormik = ({ time, type }) => {
     }
   };
   const increaseWater = () => {
-    if (waterAmount < 2500) {
+    if (waterAmount < 2000) {
       setWaterAmount(waterAmount + 50);
     }
   };
@@ -38,15 +44,40 @@ const WaterFormFormik = ({ time, type }) => {
     setWaterAmount(parseInt(event.target.value, 10) || 50);
   };
 
+  const now = new Date();
+  const year = String(now.getFullYear());
+  const month = String(now.getMonth() + 1).padStart(2, 0);
+  const day = String(now.getDay()).padStart(2, 0);
+  const hours = String(now.getHours()).padStart(2, 0);
+  const minutes = String(now.getMinutes()).padStart(2, 0);
+  const dateDefault = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+  const date = `${year}-${month}-${day}T`;
+
+  const currentTime = `${hours}:${minutes}`;
+
+  const changeDate = (value) => {
+    const arrDate = [date, currentTime];
+    const newDate = arrDate.splice(1, 1, value).join("");
+
+  }
+
+  const initValue = {
+    waterAmount: 50,
+    date: dateDefault
+  };
+
+  const handleSubmit = (values, actions) => {
+    dispatch(addWater(values))
+    console.log(values);
+    actions.resetForm();
+    
+}
+
   return (
     <Formik
-      initialValues={{
-        waterAmount: 50,
-        date: "",
-      }}
-      onSubmit={(values) => {
-        console.log(values);
-      }}
+      initialValues={initValue}
+      onSubmit={handleSubmit}
       validationShema={WaterValidSchema}
     >
       <Form>
@@ -73,7 +104,6 @@ const WaterFormFormik = ({ time, type }) => {
               value={waterAmount}
               onChange={handleChange}
               id={valueWaterId}
-              readOnly
             />
             <button
               className={css.btnAmountChange}
@@ -93,12 +123,11 @@ const WaterFormFormik = ({ time, type }) => {
           <Field
             className={css.inputSize}
             type="text"
-            name="time"
-            value={time}
-            onChange={"handleChangeTime"}
+            name="date"
+            value={dateDefault}
             id={timeId}
           />
-          <ErrorMessage name="time" component="span" />
+          <ErrorMessage className={clsx(css.formValid, css.formName)} name="time" component="span" />
         </div>
         <div className={css.input}>
           <label className={css.labelManual} htmlFor="waterId">
@@ -112,7 +141,7 @@ const WaterFormFormik = ({ time, type }) => {
             onChange={handleChange}
             id={waterId}
           />
-          <ErrorMessage name="waterAmount" component="span" />
+          <ErrorMessage className={clsx(css.formValid, css.formNum)} name="waterAmount" component="span" />
         </div>
 
         <Button styleType="green" className={css.myButton}>

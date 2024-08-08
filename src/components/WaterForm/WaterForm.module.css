@@ -115,3 +115,16 @@
     height: 43px;
   }
 }
+
+.formValid {
+  color: crimson;
+  position: absolute;
+}
+
+.formNum {
+  bottom: 60px;
+}
+
+.formName {
+  bottom: 155px;
+}
