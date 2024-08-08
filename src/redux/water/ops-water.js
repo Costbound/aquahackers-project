@@ -27,8 +27,7 @@ export const fetchWater = createAsyncThunk(
       const response = await axios.get(
         `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
       );
-      console.log(response)
-      return response.data.data.waters;
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(true);
     }
@@ -76,3 +75,4 @@ export const deleteWater = createAsyncThunk(
     }
   }
 );
+
