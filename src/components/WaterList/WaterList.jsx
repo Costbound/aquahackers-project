@@ -2,13 +2,13 @@ import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import WaterItem from "../WaterItem/WaterItem";
 import css from "./WaterList.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { selectedWater } from "../../redux/water/selectors-water";
+import { selectWaters } from "../../redux/water/selectors-water";
 import { fetchWater } from "../../redux/water/ops-water";
 import { changeDeleteWaterModalOpen, setSelectedWaterId } from "../../redux/water/slice-water";
 
 const WaterList = () => {
   const dispatch = useDispatch();
-  const waters = useSelector(selectedWater);
+  const waters = useSelector(selectWaters);
   const [scrollPosition, setScrollPosition] = useState(0);
   const containerRef = useRef(null);
   const [maxScroll, setMaxScroll] = useState(0);
