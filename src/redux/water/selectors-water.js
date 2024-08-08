@@ -19,3 +19,5 @@ export const selectChosenWaterCardId = (state) => state.water.selectedWaterId;
 export const selectProgress = (state) => state.water.selectedDay.progress;
 
 export const selectTodayProgress = (state) => state.water.todayProgress;
+
+export const selectTodayDate = (state) => state.water.todayDate;

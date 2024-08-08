@@ -9,6 +9,7 @@ import Button from '../Button/Button.jsx';
 import {useId} from "react";
 import {Formik, Form, Field} from "formik";
 import {updateUserData} from "../../redux/userData/ops-userData.js";
+import {getTodayProgress} from "../../redux/water/ops-water.js";
 
 const schema = yup.object().shape({
     avatar: yup.mixed(),
@@ -16,42 +17,28 @@ const schema = yup.object().shape({
     gender: yup
         .string()
         .nullable()
-        .oneOf(['Woman', 'Man'], 'Please select your gender'),
+        .oneOf(['woman', 'man'], 'Please select your gender'),
 
     name: yup
         .string()
         .min(2, 'Name must be greater than or equal to 2 characters long')
         .max(40, 'Name must be less than or equal to 40 characters long'),
 
-    email: yup.string().email('Please enter a valid email address'),
-
     weight: yup
         .number()
         .nullable()
         .min(20, 'Weight must be greater than or equal to 20')
-        .max(600, 'Weight must be less than or equal to 600')
-        .transform((value, originalValue) => {
-            if (originalValue === '') return null;
-            return value;
-        }),
+        .max(600, 'Weight must be less than or equal to 600'),
 
     activityTime: yup
         .number()
         .nullable()
         .min(0)
-        .max(12, 'Time must be less than or equal to 12')
-        .transform((value, originalValue) => {
-            if (originalValue === '') return null;
-            return value;
-        }),
+        .max(12, 'Time must be less than or equal to 12'),
 
     desiredVolume: yup
-        .string()
+        .number()
         .nullable()
-        .transform((value, originalValue) => {
-            if (originalValue === '') return null;
-            return value;
-        })
         .test('is-decimal', 'Please enter a valid number', (value) => {
             if (value === undefined || value === null || value === '') return true;
             return !isNaN(parseFloat(value)) && isFinite(value);
@@ -92,12 +79,21 @@ export const UserSettingsForm = ({ onClose }) => {
             timeOfSportActivities: Number(values.activityTime),
             waterToDrink: Number(values.desiredVolume) * 1000
         }
-        await dispatch(updateUserData(filteredValues))
+        try {
+            await dispatch(updateUserData(filteredValues))
+
+            if (filteredValues.waterToDrink !== user.waterRate) {
+                await dispatch(getTodayProgress())
+            }
+        } catch (error) {
+            console.log(error)
+        }
         onClose()
     }
 
     return (
         <Formik
+            validationSchema={schema}
             initialValues={{
                 name: user.name,
                 email: user.email,
@@ -250,10 +246,6 @@ export const UserSettingsForm = ({ onClose }) => {
                     Save
                 </Button>
             </Form>
-
-            {/*<Modal isOpen={isPassModalOpen} onClose={closeModal}>*/}
-            {/*  <PasswordChangeModal closeModal={closeModal} />*/}
-            {/*</Modal>*/}
         </Formik>
     );
 };
