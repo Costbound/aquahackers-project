@@ -7,8 +7,6 @@ import { useEffect } from 'react';
 import { selectWaterRate } from '../../redux/userData/selectors-userData.js';
 
 export default function WaterDailyNorma() {
-    // const allWaterInMilliliters = useSelector(selectedWater);
-    // const allWaterInLiters = allWaterInMilliliters / 1000;
     const waterRate = useSelector(selectWaterRate)/1000;
     // const dispatch = useDispatch(fetchWater);
 

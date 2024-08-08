@@ -5,8 +5,7 @@ import Button from '../../components/Button/Button.jsx'
 export default function AddWaterBtn() {
     return (
       
-        <Button type='button' width={'140px'} 
-        height={'46px'}
+        <Button className={css.addButton }type='button' 
             styleType={"dark"}>
              <svg className={css.svgIconAdd}>
                 <use href={`${icon}#icon-plus-1`} />
