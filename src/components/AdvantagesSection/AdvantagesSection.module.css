@@ -2,24 +2,14 @@
   min-width: 288px;
   height: 363px;
   background-color: var(--light);
-  background-image: url(../../img/home-page/lady-mob.jpg);
+  background-image: url(../../img/home-page/lady-mob.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
 }
 
-.totalUsers {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
 
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1;
-  letter-spacing: -0.08px;
-}
 
 @media screen and (max-width: 374px) {
   .advantagesSection {
@@ -29,7 +19,7 @@
 
 @media only screen and (min-resolution: 192dpi) {
   .advantagesSection {
-    background-image: url(../../img/home-page/lady-mob@2x.jpg);
+    background-image: url(../../img/home-page/lady-mob@2x.png);
   }
 }
 
@@ -141,7 +131,7 @@
 }
 
 .customersImg {
-  width: 100%;
+  width: 105%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -235,9 +225,7 @@
     line-height: 1.49;
   }
 
-  .totalUsers {
-    font-size: 24px;
-  }
+  
 }
 
 @media (min-width: 1440px) {

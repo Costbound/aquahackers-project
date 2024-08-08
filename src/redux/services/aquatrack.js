@@ -34,3 +34,8 @@ export const refreshToken = async () => {
   const { data } = await publicInstance.post("/auth/refresh", {}, { withCredentials: true });
   return data;
 };
+
+export const requestTotalUsers = async () => {
+  const { data } = await publicInstance.get("/users");
+  return data;
+};
