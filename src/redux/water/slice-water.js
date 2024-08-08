@@ -1,26 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMonth, addWater, editWater } from "./ops-water";
+import {fetchMonth, addWater, editWater, getTodayProgress} from "./ops-water";
 import { deleteWater, fetchWater } from "./ops-water";
+import getTodayDate from "../../helpers/getTodayDate.js";
 
 const handlePending = (state) => {
-  state.water.loading = true;
+  state.selectedDay.loading = true;
 };
 
 const handleRejected = (state, action) => {
-  state.water.loading = false;
-  state.water.error = action.payload;
+  state.selectedDay.loading = false;
+  state.selectedDay.error = action.payload;
 };
 
 const waterSlice = createSlice({
   name: "water",
   initialState: {
     selectedMonthWater: [],
-    selectedDayWater: [],
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
+    // todayDate: getTodayDate(),
+    todayDate: '2024-04-13',
+    todayProgress: 0,
     isLoading: false,
-    water: {
+    selectedDay: {
       items: [],
+      progress: 0,
       loading: false,
       error: null,
     },
@@ -59,7 +63,7 @@ const waterSlice = createSlice({
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.selectedDayWater.push(action.payload);
+        state.selectedDay.items.push(action.payload);
       })
       // .addCase(addWater.rejected, (state) => {
       //   state.isLoading = false;
@@ -70,32 +74,39 @@ const waterSlice = createSlice({
       })
       .addCase(editWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.selectedDayWater.findIndex(
+        const index = state.selectedDay.items.findIndex(
           (item) => item.id === action.payload.id
         );
-        // state.selectedDayWater ?????!!
-        state.selectedDayWater[index] = action.payload;
+        // state.selectedDay.items ?????!!
+        state.selectedDay.items[index] = action.payload;
       })
       .addCase(fetchWater.pending, handlePending)
       .addCase(fetchWater.fulfilled, (state, action) => {
-        state.water.loading = false;
-        state.water.error = null;
-        state.water.items = action.payload;
+        state.selectedDay.loading = false;
+        state.selectedDay.error = null;
+        state.selectedDay.items = action.payload.waters;
+        if (state.todayDate !== getTodayDate()) {
+          state.todayDate = getTodayDate()
+          state.todayProgress = action.payload.dailyProgress;
+        }
       })
       .addCase(fetchWater.rejected, (state, action) => {
         console.log("Failed to fetch water data:", action.payload);
-        state.water.loading = false;
-        state.water.error = action.payload;
+        state.selectedDay.loading = false;
+        state.selectedDay.error = action.payload;
       })
       .addCase(deleteWater.pending, handlePending)
       .addCase(deleteWater.fulfilled, (state, action) => {
-        state.water.loading = false;
-        state.water.error = null;
-        state.water.items = state.water.items.filter(
+        state.selectedDay.loading = false;
+        state.selectedDay.error = null;
+        state.selectedDay.items = state.selectedDay.items.filter(
           (water) => water._id !== action.payload
         );
       })
-      .addCase(deleteWater.rejected, handleRejected),
+      .addCase(deleteWater.rejected, handleRejected)
+      .addCase(getTodayProgress.fulfilled, (state, action) => {
+        state.todayProgress = action.payload;
+      })
 });
 
 export const {

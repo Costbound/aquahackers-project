@@ -9,7 +9,7 @@ const userDataSlice = createSlice({
             email: '',
             gender: 'woman',
             weight: 0,
-            waterRate: 1.5,
+            waterRate: 1500,
             sportTime: 0,
         }
 
@@ -25,7 +25,6 @@ const userDataSlice = createSlice({
                 state.user.email = action.payload.email;
             })
             .addCase(updateUserData.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;

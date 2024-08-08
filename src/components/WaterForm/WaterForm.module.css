@@ -1,0 +1,117 @@
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.inputAutomaticDiv {
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btnAmount {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.btnAmountChange {
+  border-radius: 50%;
+  border: 1.5px solid #323f47;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.inputAutomatic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 81px;
+  height: 40px;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #323f47;
+  color: #ffff;
+  border: 1.5px solid #323f47;
+}
+
+.inputSize {
+  font-size: 16px;
+  max-width: 303px;
+  min-height: 46;
+  border-radius: 15px;
+  padding: 14px 16px 14px 16px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+}
+
+.svgIcon {
+  stroke: #323f47;
+  fill: none;
+  width: 40px;
+  height: 40px;
+}
+
+.labelManual {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.myButton {
+  width: 116px;
+  height: 46px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .inputSize {
+    max-width: 438px;
+    min-height: 56;
+  }
+
+  .inputAutomatic {
+    width: 92px;
+    height: 43px;
+  }
+
+  .myButton {
+    width: 141px;
+    height: 60px;
+  }
+
+  .btnAmountChange {
+    border-radius: 50%;
+    border: 1.5px solid #323f47;
+    width: 43px;
+    height: 43px;
+    padding: 0;
+  }
+
+  .svgIcon {
+    width: 43px;
+    height: 43px;
+  }
+}
