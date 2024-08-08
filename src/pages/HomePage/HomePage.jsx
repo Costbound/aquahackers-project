@@ -8,7 +8,7 @@ import WaterFormFormik from "../../components/WaterForm/WaterFormFormik";
 function HomePage() {
   return (
     <>
-      <WaterFormFormik/>
+      <WaterFormFormik waterAmount={1500}/>
       <Helmet>
         <title>AquaTracker</title>
       </Helmet>

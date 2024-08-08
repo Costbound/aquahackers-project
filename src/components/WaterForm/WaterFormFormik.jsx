@@ -9,8 +9,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import clsx from 'clsx';
 import { addWater } from "../../redux/water/ops-water";
+import getCurerntTime from "../../helpers/getCurerntTime.js";
+import generateWaterString from "../../helpers/generateWaterString.js";
 
-const WaterFormFormik = ({ time, type }) => {
+const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
   const WaterValidSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(50, "Мінімальна кількість 50ml")
@@ -23,26 +25,25 @@ const WaterFormFormik = ({ time, type }) => {
 
   const valueWaterId = useId();
   const timeId = useId();
-  const waterId = useId();
-  const dispatch = useDispatch();
+  const waterFieldId = useId();
 
-  
+  const [waterAmountState, setWaterAmountState] = useState(waterAmount || 50);
 
-  const [waterAmount, setWaterAmount] = useState(50);
-  const decreaseWater = () => {
+  const decreaseWater = (e) => {
     if (waterAmount > 50) {
-      setWaterAmount(waterAmount - 50);
+      setWaterAmountState(waterAmount - 50);
     }
   };
   const increaseWater = () => {
     if (waterAmount < 2000) {
-      setWaterAmount(waterAmount + 50);
+      setWaterAmountState(waterAmount + 50);
     }
   };
 
   const handleChange = (event) => {
-    setWaterAmount(parseInt(event.target.value, 10) || 50);
+    setWaterAmountState(waterAmount);
   };
+
 
   const now = new Date();
   const year = String(now.getFullYear());
@@ -52,7 +53,7 @@ const WaterFormFormik = ({ time, type }) => {
   const minutes = String(now.getMinutes()).padStart(2, 0);
   const dateDefault = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-  const date = `${year}-${month}-${day}T`;
+  // const date = `${year}-${month}-${day}T`;
 
   const currentTime = `${hours}:${minutes}`;
 
@@ -63,14 +64,16 @@ const WaterFormFormik = ({ time, type }) => {
   }
 
   const initValue = {
-    waterAmount: 50,
-    date: dateDefault
+    waterAmount: waterAmountState,
+    date: date ? date.slice(-5) : getCurerntTime()
   };
 
   const handleSubmit = (values, actions) => {
-    dispatch(addWater(values))
-    console.log(values);
-    actions.resetForm();
+  const filteredValues = {
+    waterId,
+    waterAmount: Number(values.waterAmount),
+    date: `${date}T${values.time}`
+  }
     
 }
 
@@ -98,13 +101,10 @@ const WaterFormFormik = ({ time, type }) => {
                 <use href={`${icon}#icon-minus-for-modal-add-edit-water`} />
               </svg>
             </button>
-            <Field
-              className={css.inputAutomatic}
-              type="number"
-              value={waterAmount}
-              onChange={handleChange}
-              id={valueWaterId}
-            />
+            <div
+              className={css.inputAutomatic} >
+              {generateWaterString(waterAmount)}
+            </div>
             <button
               className={css.btnAmountChange}
               type="button"
@@ -124,22 +124,20 @@ const WaterFormFormik = ({ time, type }) => {
             className={css.inputSize}
             type="text"
             name="date"
-            value={dateDefault}
             id={timeId}
           />
           <ErrorMessage className={clsx(css.formValid, css.formName)} name="time" component="span" />
         </div>
         <div className={css.input}>
-          <label className={css.labelManual} htmlFor="waterId">
+          <label className={css.labelManual} htmlFor={waterFieldId}>
             Enter the value of the water used
           </label>
           <Field
             className={css.inputSize}
             type="text"
             name="waterAmount"
-            value={waterAmount}
             onChange={handleChange}
-            id={waterId}
+            id={waterFieldId}
           />
           <ErrorMessage className={clsx(css.formValid, css.formNum)} name="waterAmount" component="span" />
         </div>
