@@ -76,13 +76,13 @@ export const UserSettingsForm = ({ onClose }) => {
             name: values.name,
             weight: Number(values.weight),
             gender: values.gender,
-            timeOfSportActivities: Number(values.activityTime),
-            waterToDrink: Number(values.desiredVolume) * 1000
+            sportTime: Number(values.activityTime),
+            waterRate: Number(values.desiredVolume) * 1000
         }
         try {
             await dispatch(updateUserData(filteredValues))
 
-            if (filteredValues.waterToDrink !== user.waterRate) {
+            if (filteredValues.waterRate !== user.waterRate) {
                 await dispatch(getTodayProgress())
             }
         } catch (error) {

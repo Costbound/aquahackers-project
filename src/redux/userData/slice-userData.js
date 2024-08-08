@@ -30,28 +30,28 @@ const userDataSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getUserData.fulfilled, (state, action) => {
-        state.user.name = action.payload.name;
-        state.user.gender = action.payload.gender;
-        state.user.weight = action.payload.weight;
-        state.user.waterRate = action.payload.waterToDrink;
-        state.user.sportTime = action.payload.timeOfSportActivities;
-        state.user.email = action.payload.email;
-      })
-      .addCase(updateUserData.fulfilled, (state, action) => {
-        state.user.name = action.payload.name;
-        state.user.gender = action.payload.gender;
-        state.user.weight = action.payload.weight;
-        state.user.waterRate = action.payload.waterToDrink;
-        state.user.sportTime = action.payload.timeOfSportActivities;
-        state.user.email = action.payload.email;
-      })
-      .addCase(totalUsers.pending, handlePending)
-      .addCase(totalUsers.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.totalUsers = action.payload;
-      })
-      .addCase(totalUsers.rejected, handleRejected);
+        .addCase(getUserData.fulfilled, (state, action) => {
+          state.user.name = action.payload.name;
+          state.user.gender = action.payload.gender;
+          state.user.weight = action.payload.weight;
+          state.user.waterRate = action.payload.waterToDrink;
+          state.user.sportTime = action.payload.timeOfSportActivities;
+          state.user.email = action.payload.email;
+        })
+        .addCase(updateUserData.fulfilled, (state, action) => {
+          state.user.name = action.payload.name;
+          state.user.gender = action.payload.gender;
+          state.user.weight = action.payload.weight;
+          state.user.waterRate = action.payload.waterToDrink;
+          state.user.sportTime = action.payload.timeOfSportActivities;
+          state.user.email = action.payload.email;
+        })
+        .addCase(totalUsers.pending, handlePending)
+        .addCase(totalUsers.fulfilled, (state, action) => {
+          state.isLoading = false;
+          state.totalUsers = action.payload;
+        })
+        .addCase(totalUsers.rejected, handleRejected);
   },
 });
 
