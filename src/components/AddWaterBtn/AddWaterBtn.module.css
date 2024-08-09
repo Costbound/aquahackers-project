@@ -12,7 +12,7 @@
 }
 
  .addButton:hover .svgIconAdd {
-    stroke: var(--green);
+    stroke: var(--lightGreenHover);
    
 } 
 @media screen and (min-width: 768px) {
