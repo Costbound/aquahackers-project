@@ -27,7 +27,6 @@ const WaterItem = ({ id, handleOpenModal, amount, date, onEdit }) => {
   };
 
   const isDeleteWaterModalOpen = useSelector(selectIsDeleteWaterModalOpen);
-  const selectedWaterId = useSelector(selectChosenWaterCardId);
 
   const dateObject = new Date(date);
   const hours = dateObject.getHours().toString().padStart(2, "0");
@@ -72,7 +71,7 @@ const WaterItem = ({ id, handleOpenModal, amount, date, onEdit }) => {
       <Modal isOpen={isDeleteWaterModalOpen} onClose={handleCloseModal}>
         {isDeleteWaterModalOpen && (
           <DeleteWaterModal
-            waterId={selectedWaterId}
+            waterId={id}
             onClose={handleCloseModal}
           />
         )}

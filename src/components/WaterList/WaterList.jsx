@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectWaters } from "../../redux/water/selectors-water";
 import { fetchWater } from "../../redux/water/ops-water";
 import { changeDeleteWaterModalOpen, setSelectedWaterId } from "../../redux/water/slice-water";
+import useScreenWidth from "../../helpers/useScreenWidth"; // Импортируем хелпер
 
 const WaterList = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const WaterList = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const containerRef = useRef(null);
   const [maxScroll, setMaxScroll] = useState(0);
+  const screenWidth = useScreenWidth(); // Получаем ширину экрана
 
   useEffect(() => {
     dispatch(fetchWater());
@@ -47,6 +49,11 @@ const WaterList = () => {
     };
   }, [waters]);
 
+  const showSlider =
+    (screenWidth < 768 && waters.length > 2) || 
+    (screenWidth >= 768 && screenWidth < 1440 && waters.length > 3) || 
+    (screenWidth >= 1440 && waters.length > 3);
+
   return (
     <div className={css.waterListContainer}>
       <div className={css.waterList} ref={containerRef}>
@@ -62,7 +69,7 @@ const WaterList = () => {
           />
         ))}
       </div>
-      {waters.length > 2 && (
+      {showSlider && (
         <div className={css.sliderContainer}>
           <input
             type="range"
