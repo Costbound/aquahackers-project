@@ -14,10 +14,10 @@ export default function AddWaterBtn() {
        <Button
             className={css.addButton}
             type='button' 
-                styleType={"dark"}
+            styleType={"dark"}
             onClick={openModal}>
              <svg className={css.svgIconAdd}>
-                <use href={`${icon}#icon-plus-1`} />
+                    <use href={`${icon}#icon-plus-1`} />
             </svg>Add water
         </Button >
         <Modal isOpen={isModalOpen} onClose={closeModal}><p>AddModal</p></Modal>

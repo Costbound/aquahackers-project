@@ -1,15 +1,20 @@
 .addButton{
     width: 140px;
     height: 46px;
+    cursor: pointer;
 }
 
 .svgIconAdd {
     height: 16px;
     width: 16px;
-    stroke: #FFFFFF;
+    stroke: var(--white);
     margin-right: 10px;
 }
 
+ .addButton:hover .svgIconAdd {
+    stroke: var(--green);
+   
+} 
 @media screen and (min-width: 768px) {
     .addButton {
      font-size: 16px;
@@ -22,10 +27,5 @@
         width: 24px;
     }
 
-}
 
-/* @media screen and (min-width: 1440px) {
-    .button{
-       
-    }
-} */
+}
