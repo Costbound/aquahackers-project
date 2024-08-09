@@ -19,7 +19,7 @@
 
 .spanProgress {
     position: absolute;
-    top: 20px;
+    top: 12px;
     left: 0;
     right: 0;
     display: flex;
@@ -54,11 +54,12 @@
     border: 1px solid #9BE1A0;
     background-color: #FFFFFF;
     border-radius: 50%;
+
 }
 
 .interest {
     position: absolute;
-    top: 24px;
+    top: 15px;
     font-size: 10px;
     color: #9BE1A0;
 }
@@ -77,6 +78,15 @@
 
     .text {
         font-size: 15px;
+    }
+
+    .spanProgress{
+        top: 20px;
+    }
+
+    .interest{
+        font-size: 10px;
+        top: 23px;
     }
 }
 

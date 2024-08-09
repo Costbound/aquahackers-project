@@ -6,7 +6,6 @@ import {
   selectedMonth,
   selectedMonthDays,
   selectedYear,
-  selectorIsLoading,
 } from "../../redux/water/selectors-water";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
@@ -16,16 +15,21 @@ export default function MonthInfo() {
   const [month, setMonth] = useState(useSelector(selectedMonth));
   const [year, setYear] = useState(useSelector(selectedYear));
   const [activeItem, setActiveItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const date = useRef(null);
 
   const monthDays = useSelector(selectedMonthDays);
-  const isLoading = useSelector(selectorIsLoading);
 
   useEffect(() => {
-    dispatch(fetchMonth({ year, month }));
-  }, [dispatch, month, year]);
+    const loadingToggle = async () => {
+      setIsLoading(true);
+      await dispatch(fetchMonth({ year, month }));
+      setIsLoading(false);
+    };
+    loadingToggle();
+  }, [dispatch, year, month]);
 
   const previousMonth = () => {
     if (month === 1) {
@@ -90,7 +94,9 @@ export default function MonthInfo() {
         onNextMonth={nextMonth}
       />
       {isLoading ? (
-        <Loader />
+        <div className={css.loader}>
+          <Loader />
+        </div>
       ) : (
         <Calendar
           monthDays={monthDays}

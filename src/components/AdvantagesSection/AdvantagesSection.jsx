@@ -1,9 +1,21 @@
 import css from "./AdvantagesSection.module.css";
-import user1 from "../../img/home-page/customer-1.jpg";
-import user2 from "../../img/home-page/customer-2.jpg";
-import user3 from "../../img/home-page/customer-3.jpg";
+import { totalUsers } from "../../redux/userData/ops-userData";
+import { selectUserCount } from "../../redux/userData/selectors-userData";
+import { useSelector, useDispatch } from "react-redux";
+
+import user1 from "../../img/home-page/customer-1.png";
+import user2 from "../../img/home-page/customer-2.png";
+import user3 from "../../img/home-page/customer-3.png";
+
+import { useEffect } from "react";
 
 export const AdvantagesSection = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(totalUsers()).unwrap();
+  }, [dispatch]);
+
+  const userCount = useSelector(selectUserCount);
   return (
     <section className={css.advantagesSection}>
       <div className={css.customersBox}>
@@ -18,6 +30,10 @@ export const AdvantagesSection = () => {
             <img className={css.customersImg} src={user3} alt="user3" />
           </li>
         </ul>
+        <p className={css.customersText}>
+
+          Our <span className={css.span}>{userCount}</span> happy customers
+        </p>
       </div>
       <div className={css.group}>
         <ul className={css.advantagesGroup}>
@@ -36,3 +52,4 @@ export const AdvantagesSection = () => {
     </section>
   );
 };
+
