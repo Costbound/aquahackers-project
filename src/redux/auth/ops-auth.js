@@ -78,6 +78,7 @@ export const login = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const res = await requestLogin(formData); // Выполнение запроса на вход
+        setAuthHeader(res.data.accessToken);
       return res;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message || err.message); // Обработка ошибок
