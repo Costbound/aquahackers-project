@@ -43,14 +43,6 @@ const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
   //     toast.error("Error saving water data");
   //   }
   // };
-  console.log(type);
-
-  const handleAddSubmit = async (data) => {
-    "addWaterData";
-  };
-  const handleEditSubmit = async (data) => {
-    "updateWaterData";
-  };
 
   return (
     <div className={css.divModal}>
@@ -59,13 +51,12 @@ const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
         {type === "edit" ? "Edit the entered amount of water" : "Add water"}
       </h2>
 
-      <WaterForm
-        waterAmount={200}
+      <WaterFormFormik
+        waterAmount={waterAmount}
         date={date}
-        onWaterAmountChange={(amount) => dispatch(setWaterAmount(amount))}
-        onDateChange={(newDate) => dispatch(setDate(newDate))}
-        onSubmit={type === "edit" ? handleEditSubmit : handleAddSubmit}
         type={type}
+        waterId={waterId}
+        onClose={onClose}
       />
       {status === "loading" && <p>Loading...</p>}
       {/* {error && <p>Error: {error}</p>} */}
