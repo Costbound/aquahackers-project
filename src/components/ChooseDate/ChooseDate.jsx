@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux';
 import css from './ChooseDate.module.css';
-import { selectTodayDate } from '../../redux/water/selectors-water';
+import { selectSelectedDate } from '../../redux/water/selectors-water';
+// import { setSelectedDate } from '../../redux/water/slice-water';
 import namingMonth from '../../helpers/Calendar/namingMonth';
 
 const ChooseDate = () => {
-    const date = useSelector(selectTodayDate); // Получение данных о выбранной дате из состояния Redux
+    // const dispatch = useDispatch();
+    const date = useSelector(selectSelectedDate); // Получение данных о выбранной дате из состояния Redux
     
     const today = new Date().toISOString().split('T')[0]; // Получение сегодняшней даты в формате "YYYY-MM-DD"
     const day = new Date(date).getDate();
@@ -13,8 +15,12 @@ const ChooseDate = () => {
 
     const displayDate = date === today ? "Today" : formattedDate; // Проверка, если выбранная дата совпадает с сегодняшней
 
+    const handleClick = () => {
+        // Можно добавить дополнительную логику здесь
+    };
+
     return (
-        <div className={css.dateDisplay}>
+        <div className={css.dateDisplay} onClick={handleClick}>
             <span>{displayDate}</span>
         </div>
     );
