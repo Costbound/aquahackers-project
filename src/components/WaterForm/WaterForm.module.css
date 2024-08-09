@@ -55,7 +55,7 @@
 .inputSize {
   font-size: 16px;
   max-width: 303px;
-  min-height: 46;
+  min-height: 46px;
   border-radius: 15px;
   padding: 14px 16px 14px 16px;
   border: 1px solid rgba(47, 47, 47, 0.15);
