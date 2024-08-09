@@ -79,7 +79,7 @@ const SignUpForm = () => {
           placeholder="Enter your email"
         />
         {errors.email && (
-          <p className={css.errorMessage}>{errors.email.message}</p> // Сообщение об ошибке
+          <p className={css.error + ' ' + css.errorEmail}>{errors.email.message}</p> // Сообщение об ошибке
         )}
         <label className={css.label}>Password</label>
         <div className={css.inputWrapper}>
@@ -92,7 +92,7 @@ const SignUpForm = () => {
           {screenWidth > 767 && <ShowPwdButton onClick={toggleShowPassword} isPwdVisible={isPwdVisible}/>}
         </div>
         {errors.password && (
-          <p className={css.errorMessage}>{errors.password.message}</p> // Сообщение об ошибке
+          <p className={css.error + ' ' + css.errorPassword}>{errors.password.message}</p> // Сообщение об ошибке
         )}
         <label className={css.label}>Repeat password</label>
         <div className={`${css.inputWrapper} ${css.lastInputWrapper}`}>
@@ -105,7 +105,7 @@ const SignUpForm = () => {
           {screenWidth > 767 && <ShowPwdButton onClick={toggleShowRePassword} isPwdVisible={isRePwdVisible}/>}
         </div>
         {errors.repeatPassword && (
-            <p className={css.errorMessage}>{errors.repeatPassword.message}</p> // Сообщение об ошибке
+            <p className={css.error + ' ' + css.errorRepeat}>{errors.repeatPassword.message}</p> // Сообщение об ошибке
         )}
         <button className={css.signUpButton} type="submit">
           Sign Up
