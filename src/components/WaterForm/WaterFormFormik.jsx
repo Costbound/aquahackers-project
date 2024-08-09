@@ -27,7 +27,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
 
   const handleChange = (e, setFieldValue) => {
     const value = Number(e.target.value);
-    if (value < 20000) { 
+    if (value < 2001) { 
     setWaterAmountState(value);
     setFieldValue('waterAmount', value); 
     }
