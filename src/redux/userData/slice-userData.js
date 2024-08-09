@@ -11,7 +11,7 @@ const userDataSlice = createSlice({
             weight: 0,
             waterRate: 1500,
             sportTime: 0,
-            avatar: '',  // Добавлено поле для аватара
+            avatar: '',  
         }
     },
     extraReducers: (builder) => {
