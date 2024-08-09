@@ -10,49 +10,49 @@ import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
 
 const schema = yup.object().shape({
-    avatar: yup.mixed(),
+  avatar: yup.mixed(),
 
-    gender: yup
-        .string()
-        .nullable()
-        .oneOf(['woman', 'man'], 'Please select your gender'),
+  gender: yup
+    .string()
+    .nullable()
+    .oneOf(["woman", "man"], "Please select your gender"),
 
-    name: yup
-        .string()
-        .min(2, 'Name must be greater than or equal to 2 characters long')
-        .max(40, 'Name must be less than or equal to 40 characters long'),
+  name: yup
+    .string()
+    .min(2, "Name must be greater than or equal to 2 characters long")
+    .max(40, "Name must be less than or equal to 40 characters long"),
 
-    weight: yup
-        .number()
-        .nullable()
-        .min(20, 'Weight must be greater than or equal to 20')
-        .max(600, 'Weight must be less than or equal to 600'),
+  weight: yup
+    .number()
+    .nullable()
+    .min(20, "Weight must be greater than or equal to 20")
+    .max(600, "Weight must be less than or equal to 600"),
 
-    activityTime: yup
-        .number()
-        .nullable()
-        .min(0)
-        .max(12, 'Time must be less than or equal to 12'),
+  activityTime: yup
+    .number()
+    .nullable()
+    .min(0)
+    .max(12, "Time must be less than or equal to 12"),
 
-    desiredVolume: yup
-        .number()
-        .nullable()
-        .test('is-decimal', 'Please enter a valid number', (value) => {
-            if (value === undefined || value === null || value === '') return true;
-            return !isNaN(parseFloat(value)) && isFinite(value);
-        })
-        .test(
-            'min-value',
-            'Value must be greater than or equal to 0.1',
-            (value) => {
-                if (value === undefined || value === null || value === '') return true;
-                return parseFloat(value) >= 0.1;
-            }
-        )
-        .test('max-value', 'Value must be less than or equal to 31.2', (value) => {
-            if (value === undefined || value === null || value === '') return true;
-            return parseFloat(value) <= 31.2;
-        }),
+  desiredVolume: yup
+    .number()
+    .nullable()
+    .test("is-decimal", "Please enter a valid number", (value) => {
+      if (value === undefined || value === null || value === "") return true;
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    })
+    .test(
+      "min-value",
+      "Value must be greater than or equal to 0.1",
+      (value) => {
+        if (value === undefined || value === null || value === "") return true;
+        return parseFloat(value) >= 0.1;
+      }
+    )
+    .test("max-value", "Value must be less than or equal to 31.2", (value) => {
+      if (value === undefined || value === null || value === "") return true;
+      return parseFloat(value) <= 31.2;
+    }),
 });
 
 export const UserSettingsForm = ({ onClose }) => {

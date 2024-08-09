@@ -74,7 +74,7 @@ const SignInForm = () => {
           placeholder="Enter your email"
         />
         {errors.email && (
-          <p className={css.errorMessage}>{errors.email.message}</p> // Сообщение об ошибке
+          <p className={css.error + ' ' + css.errorEmail}>{errors.email.message}</p> // Сообщение об ошибке
         )}
         <div className={css.pwdInputWrapper} >
           <label className={css.label}>Password</label>
@@ -90,7 +90,7 @@ const SignInForm = () => {
           </div>
 
           {errors.password && (
-              <p className={css.errorMessage}>{errors.password.message}</p> // Сообщение об ошибке
+              <p className={css.error + ' ' + css.errorPassword}>{errors.password.message}</p> // Сообщение об ошибке
           )}
 
           <p className={css.text}></p>

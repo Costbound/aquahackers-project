@@ -6,11 +6,11 @@ import MonthInfo from "../MonthInfo/MonthInfo";
 
 function WaterDetailedInfo() {
   return (
-    <div className={css.waterDetailedInfo}>
+    <section className={css.section}>
       <UserPanel />
       <DailyInfo />
       <MonthInfo />
-    </div>
+    </section>
   );
 }
 

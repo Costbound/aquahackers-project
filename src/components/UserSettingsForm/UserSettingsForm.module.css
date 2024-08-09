@@ -61,6 +61,7 @@
 .normaFormula {
   font-weight: 700;
   color: var(--green);
+  width: 149px;
 }
 .radiobuttonWrapper {
   display: flex;
@@ -70,6 +71,7 @@
   display: flex;
   gap: 10px;
 }
+
 .hiddenRadioInput {
   width: 20px;
   height: 20px;
@@ -95,7 +97,7 @@
 .input {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
-  padding: 14px 0px 14px 16px;
+  padding: 14px 0 14px 16px;
   width: 303px;
   height: 46px;
   outline: none;
@@ -114,6 +116,16 @@
   gap: 14px;
   width: 303px;
 }
+.formulaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.formulaSubwrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .normaAsterisk {
   color: var(--green);
 }
@@ -127,13 +139,59 @@
   line-height: 1.28571;
   letter-spacing: -0.01em;
   color: rgba(47, 47, 47, 0.6);
+
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+  width: 303px;
+  height: 140px;
 }
 .rightDesktopWrapper {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
+.metricsWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+}
+.metricsSubWrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+.waterAmountWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+}
+.amountField {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  width: 303px;
+}
+.volumeWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  width: 303px;
+}
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
+}
 @media screen and (max-width: 374px) {
   .form {
     width: auto;
@@ -142,7 +200,50 @@
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .form {
-    width: 648px;
+    width: 568px;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .input {
+    font-size: 16px;
+    line-height: 1.5;
+
+    padding: 16px 0 16px 16px;
+    width: 568px;
+    height: 56px;
+  }
+  .formulaWrapper {
+    flex-direction: row;
+    gap: 28px;
+  }
+  .submitButton {
+    padding: 16px 50px;
+    width: 141px;
+    height: 56px;
+  }
+  .normaFormula {
+    width: 170px;
+  }
+  .normaTextArea {
+    width: 568px;
+    height: 128px;
+  }
+  .amountField {
+    width: 568px;
+  }
+  .volumeWrapper {
+    width: 568px;
   }
 }
 

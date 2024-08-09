@@ -4,7 +4,6 @@
     background-size: 262px;
     background-repeat: no-repeat;
     background-position: center;
-    width: 343px;
     height: 415px;
     border-radius: 30px;
     position: relative;
@@ -36,7 +35,6 @@
     .container {
         background-image: url('../../img/tracker-page/bottle-tab.png');
         height: 578px;
-        width: 704px;
         background-size: 374px;
     }
 
@@ -64,9 +62,7 @@
     .container {
         background-image: url('../../img/tracker-page/bottle-desk.png');
         height: 736px;
-        width: 672px;
         background-size: 472px;
-        width: 672px;
     }
 
     @media (-webkit-min-device-pixel-ratio: 2),
