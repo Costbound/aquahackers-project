@@ -1,14 +1,15 @@
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.css';
-import { FormValidateError } from '../FormValidateError/FormValidateError';
-import { calcRequiredWater } from '../../helpers/calcRequiredWater.js';
-import { selectUser } from '../../redux/userData/selectors-userData.js';
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import css from "./UserSettingsForm.module.css";
+import { FormValidateError } from "../FormValidateError/FormValidateError";
+import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
+import { selectUser } from "../../redux/userData/selectors-userData.js";
 // import { Modal } from '../Modal/Modal.jsx';
-import { useState } from 'react';
+import { useState } from "react";
 // import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
+import { FiLogOut } from "react-icons/fi";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -16,22 +17,22 @@ const schema = yup.object().shape({
   gender: yup
     .string()
     .nullable()
-    .oneOf(['Woman', 'Man'], 'Please select your gender'),
+    .oneOf(["Woman", "Man"], "Please select your gender"),
 
   name: yup
     .string()
-    .min(2, 'Name must be greater than or equal to 2 characters long')
-    .max(40, 'Name must be less than or equal to 40 characters long'),
+    .min(2, "Name must be greater than or equal to 2 characters long")
+    .max(40, "Name must be less than or equal to 40 characters long"),
 
-  email: yup.string().email('Please enter a valid email address'),
+  email: yup.string().email("Please enter a valid email address"),
 
   weight: yup
     .number()
     .nullable()
-    .min(20, 'Weight must be greater than or equal to 20')
-    .max(600, 'Weight must be less than or equal to 600')
+    .min(20, "Weight must be greater than or equal to 20")
+    .max(600, "Weight must be less than or equal to 600")
     .transform((value, originalValue) => {
-      if (originalValue === '') return null;
+      if (originalValue === "") return null;
       return value;
     }),
 
@@ -39,9 +40,9 @@ const schema = yup.object().shape({
     .number()
     .nullable()
     .min(0)
-    .max(12, 'Time must be less than or equal to 12')
+    .max(12, "Time must be less than or equal to 12")
     .transform((value, originalValue) => {
-      if (originalValue === '') return null;
+      if (originalValue === "") return null;
       return value;
     }),
 
@@ -49,23 +50,23 @@ const schema = yup.object().shape({
     .string()
     .nullable()
     .transform((value, originalValue) => {
-      if (originalValue === '') return null;
+      if (originalValue === "") return null;
       return value;
     })
-    .test('is-decimal', 'Please enter a valid number', (value) => {
-      if (value === undefined || value === null || value === '') return true;
+    .test("is-decimal", "Please enter a valid number", (value) => {
+      if (value === undefined || value === null || value === "") return true;
       return !isNaN(parseFloat(value)) && isFinite(value);
     })
     .test(
-      'min-value',
-      'Value must be greater than or equal to 0.1',
+      "min-value",
+      "Value must be greater than or equal to 0.1",
       (value) => {
-        if (value === undefined || value === null || value === '') return true;
+        if (value === undefined || value === null || value === "") return true;
         return parseFloat(value) >= 0.1;
       }
     )
-    .test('max-value', 'Value must be less than or equal to 31.2', (value) => {
-      if (value === undefined || value === null || value === '') return true;
+    .test("max-value", "Value must be less than or equal to 31.2", (value) => {
+      if (value === undefined || value === null || value === "") return true;
       return parseFloat(value) <= 31.2;
     }),
 });
@@ -108,21 +109,21 @@ export const UserSettingsForm = ({ onClose }) => {
     const formData = new FormData();
 
     for (const key in data) {
-      if (key === 'avatar') {
+      if (key === "avatar") {
         if (data[key][0] !== undefined) {
           formData.append(key, data[key][0]);
         }
         continue;
       }
 
-      if (data[key] === '' || data[key] === undefined || data[key] === null) {
+      if (data[key] === "" || data[key] === undefined || data[key] === null) {
         continue;
       }
       formData.append(key, data[key]);
     }
 
     const response = await dispatch(currentEdit(formData));
-    response.meta.requestStatus === 'fulfilled' && onClose();
+    response.meta.requestStatus === "fulfilled" && onClose();
   };
 
   const { avatar, gender, name, email, weight, activityTime, desiredVolume } =
@@ -138,11 +139,30 @@ export const UserSettingsForm = ({ onClose }) => {
     desiredVolume;
 
   const requiredWater = calcRequiredWater(gender, weight, activityTime);
+  // ====================
 
+  const [photoPreview, setPhotoPreview] = useState(null);
+
+  // const onSubmit = async (data) => {
+  //   const formData = new FormData();
+  //   formData.append("photoUrl", data.photoUrl[0]);
+  //   formData.append("gender", data.gender);
+  //   formData.append("name", data.name);
+  //   formData.append("email", data.email);
+  //   formData.append("weight", data.weight);
+  //   formData.append("activeTime", data.activeTime);
+  //   formData.append("waterIntake", data.waterIntake);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPhotoPreview(URL.createObjectURL(file));
+    }
+  };
   return (
     <>
       <form className={css.wrapper} onSubmit={handleSubmit(onSubmit)}>
-        <div className={css.avatarWrapper}>
+        {/* <div className={css.avatarWrapper}>
           <img className={css.avatar} src={user.avatarURL} alt="Avatar" />
 
           {!avatar || avatar.length === 0 ? (
@@ -165,14 +185,46 @@ export const UserSettingsForm = ({ onClose }) => {
           {errors.avatar && (
             <FormValidateError message={errors.avatar.message} />
           )}
+        </div> */}
+
+        <div className={css.photoUrlWrapper}>
+          {photoPreview ? (
+            <img
+              className={css.photoUrl}
+              src={photoPreview}
+              alt="Photo Preview"
+            />
+          ) : (
+            <img
+              className={css.photoUrl}
+              src={"src/img/userImg.png"}
+              alt="Default Preview"
+            />
+          )}
+          <div className={css.fileWrapper}>
+            <div className={css.uploadPhotoBtnContainer}>
+              <button className={css.uploadPhoto}>
+                <FiLogOut className={css.downloadIcon} />
+                <p>Upload a photo</p>
+                <input
+                  className={css.file}
+                  type="file"
+                  name="file"
+                  {...register("photoUrl")}
+                  onChange={handleFileChange}
+                />
+              </button>
+            </div>
+          </div>
         </div>
+        {errors.photoUrl && <p>{errors.photoUrl.message}</p>}
 
         <div className={css.settingsWrapper}>
           <div className={css.leftDesktopWrapper}>
             <div className={css.genderWrapper}>
               <p className={css.subtitle}>Your gender identity</p>
               <input
-                {...register('gender')}
+                {...register("gender")}
                 className={css.hiddenRadioInput}
                 type="radio"
                 name="gender"
@@ -187,7 +239,7 @@ export const UserSettingsForm = ({ onClose }) => {
               </label>
 
               <input
-                {...register('gender')}
+                {...register("gender")}
                 className={css.hiddenRadioInput}
                 type="radio"
                 name="gender"
@@ -208,7 +260,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 Your name
               </label>
               <input
-                {...register('name')}
+                {...register("name")}
                 className={css.input}
                 type="text"
                 name="name"
@@ -222,7 +274,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 Email
               </label>
               <input
-                {...register('email')}
+                {...register("email")}
                 className={css.input}
                 type="text"
                 name="email"
@@ -272,7 +324,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 Your weight in kilograms:
               </label>
               <input
-                {...register('weight')}
+                {...register("weight")}
                 className={css.input}
                 type="number"
                 name="weight"
@@ -286,7 +338,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 The time of active participation in sports:
               </label>
               <input
-                {...register('activityTime')}
+                {...register("activityTime")}
                 className={css.input}
                 type="number"
                 name="activityTime"
@@ -305,8 +357,8 @@ export const UserSettingsForm = ({ onClose }) => {
 
                 <span className={css.amount}>
                   {!gender || !weight
-                    ? 'Waiting for your metrics'
-                    : requiredWater + ' L'}
+                    ? "Waiting for your metrics"
+                    : requiredWater + " L"}
                 </span>
               </div>
 
@@ -314,7 +366,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 Write down how much water you will drink:
               </label>
               <input
-                {...register('desiredVolume')}
+                {...register("desiredVolume")}
                 className={css.input}
                 type="text"
                 name="desiredVolume"
@@ -350,6 +402,3 @@ export const UserSettingsForm = ({ onClose }) => {
     </>
   );
 };
-
-
- 
