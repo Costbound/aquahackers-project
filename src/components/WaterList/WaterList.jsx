@@ -1,30 +1,36 @@
+//WaterList.jsx
 import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import WaterItem from "../WaterItem/WaterItem";
 import css from "./WaterList.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectWaters } from "../../redux/water/selectors-water";
-import { fetchWater } from "../../redux/water/ops-water";
-import { changeDeleteWaterModalOpen, setSelectedWaterId } from "../../redux/water/slice-water";
+import { useDispatch } from "react-redux";
+import { fetchWater } from "../../redux/water/ops-water.js";
+import {
+  changeDeleteWaterModalOpen,
+  setSelectedWaterId,
+} from "../../redux/water/slice-water.js";
 import useScreenWidth from "../../helpers/useScreenWidth"; // Импортируем хелпер
 
 const WaterList = () => {
+  const data = useSelector(selectWaters);
   const dispatch = useDispatch();
-  const waters = useSelector(selectWaters);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const containerRef = useRef(null);
-  const [maxScroll, setMaxScroll] = useState(0);
-  const screenWidth = useScreenWidth(); // Получаем ширину экрана
 
   useEffect(() => {
     dispatch(fetchWater());
-  }, [dispatch]);
+  }, []);
 
   const handleOpenModal = (id) => {
     dispatch(setSelectedWaterId(id));
     dispatch(changeDeleteWaterModalOpen(true));
   };
 
-  /* Логика скрола слайдера (ползунка) */
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const containerRef = useRef(null);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const screenWidth = useScreenWidth(); // Получаем ширину экрана
+
+  /*Логика скрола слайдера(ползунка) */
   const handleSliderChange = (event) => {
     const value = event.target.value;
     setScrollPosition(value);
@@ -32,37 +38,37 @@ const WaterList = () => {
       containerRef.current.scrollLeft = value;
     }
   };
-
-  /* Логика скрола слайдера (ползунка) */
+  /*Логика скрола слайдера(ползунка) */
   const updateMaxScroll = () => {
     if (containerRef.current) {
-      setMaxScroll(containerRef.current.scrollWidth - containerRef.current.clientWidth);
+      setMaxScroll(
+        containerRef.current.scrollWidth - containerRef.current.clientWidth
+      );
     }
   };
-
-  /* Логика скрола слайдера (ползунка) */
+  /*Логика скрола слайдера(ползунка) */
   useLayoutEffect(() => {
     updateMaxScroll();
     window.addEventListener("resize", updateMaxScroll);
     return () => {
       window.removeEventListener("resize", updateMaxScroll);
     };
-  }, [waters]);
+  }, [data]);
 
   const showSlider =
-    (screenWidth < 768 && waters.length > 2) || 
-    (screenWidth >= 768 && screenWidth < 1440 && waters.length > 3) || 
-    (screenWidth >= 1440 && waters.length > 3);
+    (screenWidth < 768 && data.length > 2) || 
+    (screenWidth >= 768 && screenWidth < 1440 && data.length > 3) || 
+    (screenWidth >= 1440 && data.length > 3);
 
   return (
     <div className={css.waterListContainer}>
       <div className={css.waterList} ref={containerRef}>
-        {waters.map((item) => (
+        {data.map((item) => (
           <WaterItem
-            key={item.id}
-            id={item.id}
-            amount={item.amount}
-            date={item.time}
+            key={item._id}
+            id={item._id}
+            amount={item.waterAmount}
+            date={item.date}
             onEdit={() => console.log("Edit item")}
             onDelete={() => console.log("Delete item")}
             handleOpenModal={handleOpenModal}
