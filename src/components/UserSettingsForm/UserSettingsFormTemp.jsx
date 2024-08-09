@@ -4,12 +4,10 @@ import * as yup from "yup";
 import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
 import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
-// import { Modal } from '../Modal/Modal.jsx';
-// import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
 import { useId } from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
-import {getTodayProgress} from "../../redux/water/ops-water.js";
+import { getTodayProgress } from "../../redux/water/ops-water.js";
 
 const schema = yup.object().shape({
     avatar: yup.mixed(),
@@ -79,19 +77,20 @@ export const UserSettingsForm = ({ onClose }) => {
             weight: Number(values.weight),
             gender: values.gender,
             timeOfSportActivities: Number(values.activityTime),
-            waterToDrink: Number(values.desiredVolume) * 1000
+            waterToDrink: Number(values.desiredVolume) * 1000,
+            avatar: values.avatar,
         }
         try {
-            await dispatch(updateUserData(filteredValues))
+            await dispatch(updateUserData(filteredValues));
 
             if (filteredValues.waterToDrink !== user.waterRate) {
-                await dispatch(getTodayProgress())
+                await dispatch(getTodayProgress());
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-        onClose()
-    }
+        onClose();
+    };
 
     return (
         <Formik
@@ -102,7 +101,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 weight: user.weight,
                 activityTime: user.sportTime,
                 desiredVolume: user.waterRate / 1000,
-                // avatar: null,
+                avatar: user.avatar,
             }}
             onSubmit={handleSubmit}
             validationSchema={schema}
@@ -110,7 +109,11 @@ export const UserSettingsForm = ({ onClose }) => {
             {({ setFieldValue, values, errors }) => (
                 <Form className={css.wrapper}>
                     <div className={css.avatarWrapper}>
-                        <img className={css.avatar} src={user.avatarURL} alt="Avatar" />
+                        <img 
+                            className={css.avatar} 
+                            src={values.avatar ? values.avatar : "src/img/avatar.png"} 
+                            alt="Avatar" 
+                        />
 
                         {!values.avatar ? (
                             <>
@@ -119,13 +122,13 @@ export const UserSettingsForm = ({ onClose }) => {
                                     type="file"
                                     name="avatar"
                                     id="avatar"
-                                    placeholder="Загрузить фото"
+                                    placeholder="Upload Photo"
                                     onChange={(event) => {
                                         setFieldValue("avatar", event.currentTarget.files[0]);
                                     }}
                                 />
                                 <label htmlFor="avatar" className={css.fileLabel}>
-                                    Загрузить фото
+                                    Upload Photo
                                 </label>
                             </>
                         ) : (
@@ -191,15 +194,15 @@ export const UserSettingsForm = ({ onClose }) => {
                                     <div className={css.formulaSubwrapper}>
                                         <p className={css.text}>For woman:</p>
                                         <span className={`${css.text} ${css.normaFormula}`}>
-                      V=(M*0,03) + (T*0,4)
-                    </span>
+                                            V=(M*0,03) + (T*0,4)
+                                        </span>
                                     </div>
 
                                     <div className={css.formulaSubwrapper}>
                                         <p className={css.text}>For man:</p>
                                         <span className={`${css.text} ${css.normaFormula}`}>
-                      V=(M*0,04) + (T*0,6)
-                    </span>
+                                            V=(M*0,04) + (T*0,6)
+                                        </span>
                                     </div>
                                 </div>
 
@@ -212,8 +215,8 @@ export const UserSettingsForm = ({ onClose }) => {
                                 </p>
 
                                 <span className={`${css.text} ${css.footnote}`}>
-                  Active time in hours
-                </span>
+                                    Active time in hours
+                                </span>
                             </div>
                         </div>
 
@@ -241,10 +244,10 @@ export const UserSettingsForm = ({ onClose }) => {
                                     </p>
 
                                     <span className={css.amount}>
-                    {!user.gender || !user.weight
-                        ? "Waiting for your metrics"
-                        : requiredWater + " L"}
-                  </span>
+                                        {!user.gender || !user.weight
+                                            ? "Waiting for your metrics"
+                                            : requiredWater + " L"}
+                                    </span>
                                 </div>
 
                                 <label className={css.subtitle} htmlFor={waterRateId}>
@@ -263,9 +266,7 @@ export const UserSettingsForm = ({ onClose }) => {
                         Save
                     </Button>
                 </Form>
-
             )}
-            ;
         </Formik>
     );
 };

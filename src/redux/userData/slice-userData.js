@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getUserData, updateUserData} from "./ops-userData.js";
+import { createSlice } from "@reduxjs/toolkit";
+import { getUserData, updateUserData } from "./ops-userData.js";
 
 const userDataSlice = createSlice({
     name: 'userData',
@@ -11,8 +11,8 @@ const userDataSlice = createSlice({
             weight: 0,
             waterRate: 1500,
             sportTime: 0,
+            avatar: '',  // Добавлено поле для аватара
         }
-
     },
     extraReducers: (builder) => {
         builder
@@ -23,6 +23,7 @@ const userDataSlice = createSlice({
                 state.user.waterRate = action.payload.waterToDrink;
                 state.user.sportTime = action.payload.timeOfSportActivities;
                 state.user.email = action.payload.email;
+                state.user.avatar = action.payload.avatar || '';  // Добавляем аватар из payload
             })
             .addCase(updateUserData.fulfilled, (state, action) => {
                 state.user.name = action.payload.name;
@@ -31,9 +32,10 @@ const userDataSlice = createSlice({
                 state.user.waterRate = action.payload.waterToDrink;
                 state.user.sportTime = action.payload.timeOfSportActivities;
                 state.user.email = action.payload.email;
-            })
+                state.user.avatar = action.payload.avatar || '';  // Обновляем аватар при успешном обновлении данных
+            });
     }
-})
+});
 
-const userDataReducer = userDataSlice.reducer
-export default userDataReducer
+const userDataReducer = userDataSlice.reducer;
+export default userDataReducer;
