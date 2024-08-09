@@ -53,13 +53,23 @@
   width: 100%;
 }
 
-.errorMessage {
+.error {
+  position: absolute;
   color: #ef5050;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 8px;
 }
+
+.errorEmail {
+  top: 445px;
+}
+
+.errorPassword {
+  top: 548px;
+}
+
 
 .input::placeholder {
   font-family: inherit;
