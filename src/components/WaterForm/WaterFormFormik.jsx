@@ -27,6 +27,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
 
   const handleChange = (e, setFieldValue) => {
     const value = Number(e.target.value);
+
     setWaterAmountState(value);
     setFieldValue('waterAmount', value);
   };
@@ -44,7 +45,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
       <Formik
           initialValues={{
             waterAmount: waterAmountState,
-            date: type === 'edit' ? getCurerntTime() : date ? date.slice(-5) : getCurerntTime()
+            date: type === 'edit' && date ? date.slice(-5) : getCurerntTime()
           }}
           validationSchema={waterValidSchema}
           onSubmit={handleSubmit}
@@ -118,9 +119,6 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
                 />
                 <ErrorMessage className={clsx(css.formValid, css.formNum)} name="waterAmount" component="span" />
               </div>
-
-              {/* Display the current waterAmountState */}
-              <p>Current Water Amount: {waterAmountState}ml</p>
 
               <Button styleType="green" className={css.myButton} type="submit">
                 Save

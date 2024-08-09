@@ -3,15 +3,15 @@ import { WelcomeSection } from "../../components/WelcomeSection/WelcomeSection";
 import { AdvantagesSection } from "../../components/AdvantagesSection/AdvantagesSection";
 import { Helmet } from "react-helmet-async";
 import Page from "../../components/Page/Page";
-import WaterForm from "../../components/WaterForm/WaterFormFormik";
 import WaterModal from "../../components/WaterModal/WaterModal.jsx";
+import Modal from "../../components/Modal/Modal.jsx";
 
 function HomePage() {
   return (
     <>
-        <WaterModal type='add'>
-            <WaterForm/>
-        </WaterModal>
+        <Modal isOpen={true}>
+            <WaterModal type='edit' waterId={'id'} waterAmount={700} date={'2022-06-23T23:27'} />
+        </Modal>
       <Helmet>
         <title>AquaTracker</title>
       </Helmet>
