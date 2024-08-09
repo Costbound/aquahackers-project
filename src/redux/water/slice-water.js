@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchMonth, addWater, editWater, getTodayProgress} from "./ops-water";
+import { fetchMonth, addWater, editWater, getTodayProgress } from "./ops-water";
 import { deleteWater, fetchWater } from "./ops-water";
 import getTodayDate from "../../helpers/getTodayDate.js";
 
@@ -19,7 +19,7 @@ const waterSlice = createSlice({
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
     // todayDate: getTodayDate(),
-    todayDate: '2024-04-13',
+    todayDate: "2024-04-13",
     todayProgress: 0,
     isLoading: false,
     selectedDay: {
@@ -58,11 +58,7 @@ const waterSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchMonth.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(fetchMonth.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.selectedMonthWater = action.payload.data.monthlyWater;
       })
       .addCase(addWater.pending, (state) => {
@@ -93,7 +89,7 @@ const waterSlice = createSlice({
         state.selectedDay.error = null;
         state.selectedDay.items = action.payload.waters;
         if (state.todayDate !== getTodayDate()) {
-          state.todayDate = getTodayDate()
+          state.todayDate = getTodayDate();
           state.todayProgress = action.payload.dailyProgress;
         }
       })
@@ -113,7 +109,7 @@ const waterSlice = createSlice({
       .addCase(deleteWater.rejected, handleRejected)
       .addCase(getTodayProgress.fulfilled, (state, action) => {
         state.todayProgress = action.payload;
-      })
+      }),
 });
 
 export const {
