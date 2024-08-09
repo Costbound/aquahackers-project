@@ -9,7 +9,7 @@ import icon from "../../img/icons.svg";
 // import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const WaterValidSchema = Yup.object().shape({
-  waterAmount: Yup.number()
+  waterAmount: Yup.string()
     .min(50, "Мінімальна кількість 50ml")
     .max(2000, "Максимальна кількість 2000ml")
     .required("Кількість води обовʼязкова"),

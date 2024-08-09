@@ -27,9 +27,10 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
 
   const handleChange = (e, setFieldValue) => {
     const value = Number(e.target.value);
-
+    if (value < 20000) { 
     setWaterAmountState(value);
-    setFieldValue('waterAmount', value);
+    setFieldValue('waterAmount', value); 
+    }
   };
 
   const handleSubmit = (values) => {
@@ -52,7 +53,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
           enableReinitialize={true}
       >
         {({ setFieldValue }) => (
-            <Form>
+            <Form className="formWaterForm">
               <h4 className={css.title}>
                 {type === "edit" ? "Correct entered data" : "Choose a value"}
               </h4>
@@ -68,6 +69,8 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
                         if (waterAmountState > 50) {
                           setWaterAmountState(waterAmountState - 50);
                           setFieldValue('waterAmount', waterAmountState - 50);
+                        } else if (waterAmountState <= 50) {
+                          setWaterAmountState(50)
                         }
                       }}
                   >
@@ -75,8 +78,8 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
                       <use href={`${icon}#icon-minus-for-modal-add-edit-water`} />
                     </svg>
                   </button>
-                  <div className={css.inputAutomatic}>
-                    {generateWaterString(waterAmountState)}
+                  <div className={css.inputAutomatic} >
+                    {generateWaterString(waterAmountState) } 
                   </div>
                   <button
                       className={css.btnAmountChange}

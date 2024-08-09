@@ -116,15 +116,20 @@
   }
 }
 
+.formWaterForm {
+  position: relative;
+}
+
 .formValid {
   color: crimson;
   position: absolute;
+  font-size: 14px;
 }
 
 .formNum {
-  bottom: 60px;
+  top: 417px;
 }
 
 .formName {
-  bottom: 155px;
+  top: 312px;
 }
