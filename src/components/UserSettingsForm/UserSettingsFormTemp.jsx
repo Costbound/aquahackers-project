@@ -149,33 +149,35 @@ export const UserSettingsForm = ({ onClose }) => {
                         <div className={css.leftDesktopWrapper}>
                             <div className={css.genderWrapper}>
                                 <p className={css.subtitle}>Your gender identity</p>
-                                <Field
-                                    className={css.hiddenRadioInput}
-                                    type="radio"
-                                    name="gender"
-                                    id={femaleId}
-                                    value="woman"
-                                />
-                                <label
-                                    className={`${css.text} ${css.genderLabel}`}
-                                    htmlFor={femaleId}
-                                >
-                                    Woman
-                                </label>
+                                <div className={css.radiobuttonWrapper}>
+                                    <Field
+                                        className={css.hiddenRadioInput}
+                                        type="radio"
+                                        name="gender"
+                                        id={femaleId}
+                                        value="woman"
+                                    />
+                                    <label
+                                        className={`${css.text} ${css.genderLabel}`}
+                                        htmlFor={femaleId}
+                                    >
+                                        Woman
+                                    </label>
 
-                                <Field
-                                    className={css.hiddenRadioInput}
-                                    type="radio"
-                                    name="gender"
-                                    id={maleId}
-                                    value="man"
-                                />
-                                <label
-                                    className={`${css.text} ${css.genderLabel}`}
-                                    htmlFor={maleId}
-                                >
-                                    Man
-                                </label>
+                                    <Field
+                                        className={css.hiddenRadioInput}
+                                        type="radio"
+                                        name="gender"
+                                        id={maleId}
+                                        value="man"
+                                    />
+                                    <label
+                                        className={`${css.text} ${css.genderLabel}`}
+                                        htmlFor={maleId}
+                                    >
+                                        Man
+                                    </label>
+                                </div>
                             </div>
 
                             <div className={css.infoWrapper}>
