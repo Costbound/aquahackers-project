@@ -11,7 +11,7 @@
     gap: 8px;
     position: absolute;
     transform: translateY(4px);
-    padding: 14px 20px 14px 20px;
+    padding: 14px 41px 14px 20px;
 }
 
 .popoverButtonSetting {
@@ -21,7 +21,7 @@
     cursor: pointer;
     font-size: 14px;
     text-align: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .popoverButtonLogout {
@@ -31,7 +31,8 @@
     cursor: pointer;
     font-size: 14px;
     text-align: center;
-    gap: 5px;
+    gap: 8px;
+    white-space: nowrap;
 }
 
 .svgIconLogout {
@@ -53,6 +54,8 @@
         width: 157px;
         height: 82px;
         padding: 14px 57px 14px 20px;
+        gap: 12px;
+        transform: translateY(8px);
     }
 
     .popoverButtonSetting {
