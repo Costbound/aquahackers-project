@@ -21,7 +21,7 @@ export default function WaterProgressBar() {
                             <span>50%</span>
                             <span>100%</span>
                         </div>
-                        <div className={css.elipce} style={{ left: `calc(${Math.min(Math.max(progress, 0), 100)}% - 6px)` }}>{progress !== 0 && progress !== 50 && progress !== 100 && progress <100 ? (<span className={css.interest}>{`${progress}%`}</span>) : null}</div>
+                        <div className={css.elipce} style={{ left: `calc(${Math.min(Math.max(progress, 0), 100)}% - 6px)` }}>{(progress > 8 && progress < 38) || (progress > 54 && progress < 84) ? (<span className={css.interest}>{`${progress}%`}</span>) : null}</div>
                     </div>
                 </div>
             </div>
