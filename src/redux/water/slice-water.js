@@ -24,7 +24,7 @@ const waterSlice = createSlice({
     isLoading: false,
     selectedDay: {
       items: [],
-      progress: 70,
+      progress: 0,
       loading: false,
       error: null,
     },
@@ -101,7 +101,7 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWater.rejected, handleRejected)
       .addCase(getTodayProgress.fulfilled, (state, action) => {
-        state.todayProgress = action.payload;
+          state.todayProgress = action.payload;
       })
 });
 
