@@ -18,17 +18,10 @@ const AquaTrackerPage = () => {
   }, [dispatch])
 
   return (
-    <div>
       <Page>
-        <div className={css.waterMainInfoContainer}>
           <WaterMainInfo />
-        </div>
-
-        <div className={css.waterDetailedInfoContainer}>
           <WaterDetailedInfo />
-        </div>
       </Page>
-    </div>
   );
 };
 
