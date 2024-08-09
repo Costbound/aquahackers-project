@@ -8,6 +8,8 @@ import { useId } from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
+import defaultAvatar from '../../img/avatar.png'
+import checkPhotoExtention from "../../helpers/checkPhotoExtention.js";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -49,15 +51,16 @@ const schema = yup.object().shape({
         return parseFloat(value) >= 0.1;
       }
     )
-    .test("max-value", "Value must be less than or equal to 31.2", (value) => {
+    .test("max-value", "Value must be less than or equal to 99", (value) => {
       if (value === undefined || value === null || value === "") return true;
-      return parseFloat(value) <= 31.2;
+      return parseFloat(value) <= 99;
     }),
 });
 
 export const UserSettingsForm = ({ onClose }) => {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
+    const avatarId = useId()
     const nameId = useId();
     const emailId = useId();
     const weightId = useId();
@@ -71,19 +74,35 @@ export const UserSettingsForm = ({ onClose }) => {
         user.activityTime
     );
 
+    const handleUploadPhoto = async (e) => {
+        const avatar = e.target.files[0];
+        if (checkPhotoExtention(avatar)) {
+            const formData = new FormData();
+            formData.append("avatar", avatar);
+            dispatch(updateUserData(formData))
+        } else {
+            console.log('This photo format is not supported')
+        }
+    }
+
     const handleSubmit = async (values) => {
         const filteredValues = {
             name: values.name,
             weight: Number(values.weight),
             gender: values.gender,
-            timeOfSportActivities: Number(values.activityTime),
-            waterToDrink: Number(values.desiredVolume) * 1000,
-            avatar: values.avatar,
+            sportTime: Number(values.activityTime),
+            waterRate: Number(values.desiredVolume) * 1000,
         }
         try {
-            await dispatch(updateUserData(filteredValues));
+            const formData = new FormData();
+            formData.append("name", values.name);
+            formData.append("weight", Number(values.weight));
+            formData.append('gender', values.gender);
+            formData.append("sportTime", Number(values.activityTime));
+            formData.append("waterRate", Number(values.desiredVolume) * 1000);
+            await dispatch(updateUserData(formData));
 
-            if (filteredValues.waterToDrink !== user.waterRate) {
+            if (filteredValues.waterRate !== user.waterRate) {
                 await dispatch(getTodayProgress());
             }
         } catch (error) {
@@ -106,35 +125,24 @@ export const UserSettingsForm = ({ onClose }) => {
             onSubmit={handleSubmit}
             validationSchema={schema}
         >
-            {({ setFieldValue, values, errors }) => (
                 <Form className={css.wrapper}>
                     <div className={css.avatarWrapper}>
-                        <img 
-                            className={css.avatar} 
-                            src={values.avatar ? values.avatar : "src/img/avatar.png"} 
-                            alt="Avatar" 
+                        <img
+                            className={css.avatar}
+                            src={user.avatar || defaultAvatar}
+                            alt="Avatar"
                         />
-
-                        {!values.avatar ? (
-                            <>
-                                <input
-                                    className={css.hiddenFileInput}
-                                    type="file"
-                                    name="avatar"
-                                    id="avatar"
-                                    placeholder="Upload Photo"
-                                    onChange={(event) => {
-                                        setFieldValue("avatar", event.currentTarget.files[0]);
-                                    }}
-                                />
-                                <label htmlFor="avatar" className={css.fileLabel}>
-                                    Upload Photo
-                                </label>
-                            </>
-                        ) : (
-                            <strong className={css.avatarName}>{values.avatar.name}</strong>
-                        )}
-                        {errors.avatar && <div className={css.error}>{errors.avatar}</div>}
+                        <input
+                            className={css.hiddenFileInput}
+                            type="file"
+                            name="avatar"
+                            id={avatarId}
+                            placeholder="Upload Photo"
+                            onChange={handleUploadPhoto}
+                        />
+                        <label htmlFor={avatarId} className={css.fileLabel}>
+                            Upload Photo
+                        </label>
                     </div>
 
                     <div className={css.settingsWrapper}>
@@ -266,7 +274,6 @@ export const UserSettingsForm = ({ onClose }) => {
                         Save
                     </Button>
                 </Form>
-            )}
         </Formik>
     );
 };

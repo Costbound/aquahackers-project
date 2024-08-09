@@ -20,19 +20,19 @@ const userDataSlice = createSlice({
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
+                state.user.waterRate = action.payload.waterRate;
+                state.user.sportTime = action.payload.sportTime;
                 state.user.email = action.payload.email;
-                state.user.avatar = action.payload.avatar || '';  // Добавляем аватар из payload
+                state.user.avatar = action.payload.avatar;
             })
             .addCase(updateUserData.fulfilled, (state, action) => {
                 state.user.name = action.payload.name;
                 state.user.gender = action.payload.gender;
                 state.user.weight = action.payload.weight;
-                state.user.waterRate = action.payload.waterToDrink;
-                state.user.sportTime = action.payload.timeOfSportActivities;
+                state.user.waterRate = action.payload.waterRate;
+                state.user.sportTime = action.payload.sportTime;
                 state.user.email = action.payload.email;
-                state.user.avatar = action.payload.avatar || '';  // Обновляем аватар при успешном обновлении данных
+                state.user.avatar = action.payload.avatar;
             });
     }
 });
