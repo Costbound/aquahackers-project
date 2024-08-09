@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserName } from '../../redux/userData/selectors-userData';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
-
+import { selectUserAvatar } from '../../redux/userData/selectors-userData';
 import css from './UserBar.module.css';
-import userAvatar from '../../img/tracker-page/user.jpg';
+import miniAvatar from '../../img/mini-avatar.jpg';
 import icon from '../../img/icons.svg';
 
 const UserBar = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
+  const user = useSelector(selectUserAvatar);
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
   const userName = useSelector(selectUserName);
@@ -45,7 +46,7 @@ const UserBar = () => {
     <div className={css.userBarContainer}>
       <button onClick={togglePopover} className={css.userBar} ref={buttonRef}>
         <span className={css.barUsername}>{username}</span>
-        <img src={userAvatar} className={css.avatar} alt="User Avatar" />
+        <img className={css.avatar} src={user || miniAvatar} alt="Avatar" />
         <span className={css.userChevron}>
           <svg className={css.svgIconChevron}>
             <use href={`${icon}#icon-${isPopoverOpen ? 'chevron-up' : 'chevron-down'}`} />
