@@ -60,32 +60,41 @@ const WaterList = () => {
     (screenWidth >= 768 && screenWidth < 1440 && data.length > 3) || 
     (screenWidth >= 1440 && data.length > 3);
 
-  return (
+ return (
     <div className={css.waterListContainer}>
-      <div className={css.waterList} ref={containerRef}>
-        {data.map((item) => (
-          <WaterItem
-            key={item._id}
-            id={item._id}
-            amount={item.waterAmount}
-            date={item.date}
-            onEdit={() => console.log("Edit item")}
-            onDelete={() => console.log("Delete item")}
-            handleOpenModal={handleOpenModal}
-          />
-        ))}
-      </div>
-      {showSlider && (
-        <div className={css.sliderContainer}>
-          <input
-            type="range"
-            min="0"
-            max={maxScroll || 100}
-            value={scrollPosition}
-            className={css.slider}
-            onChange={handleSliderChange}
-          />
+      {data.length === 0 ? (
+        <div className={css.emptyMessage}>
+          <div className={css.waterTitle}>No water item available!</div>
+          <div className={css.waterDescription}>You can add a new entry using the &quot;Add water&quot; button.</div>
         </div>
+      ) : (
+        <>
+          <div className={css.waterList} ref={containerRef}>
+            {data.map((item) => (
+              <WaterItem
+                key={item._id}
+                id={item._id}
+                amount={item.waterAmount}
+                date={item.date}
+                onEdit={() => console.log("Edit item")}
+                onDelete={() => console.log("Delete item")}
+                handleOpenModal={handleOpenModal}
+              />
+            ))}
+          </div>
+          {showSlider && (
+            <div className={css.sliderContainer}>
+              <input
+                type="range"
+                min="0"
+                max={maxScroll || 100}
+                value={scrollPosition}
+                className={css.slider}
+                onChange={handleSliderChange}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );
