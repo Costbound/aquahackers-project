@@ -7,14 +7,16 @@ import WaterModal from "../WaterModal/WaterModal.jsx";
 import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal.jsx";
 import generateWaterString from "../../helpers/generateWaterString.js";
 
-const WaterItem = ({ id, amount, date }) => {
+const WaterItem = ({ id, amount, dateTime }) => {
   const { openModal } = useContext(ModalContext);
 
   const handleEditModalOpen = () => {
+    const [date, time] = dateTime.split("T");
     openModal(
       <WaterModal
         waterAmount={amount}
         date={date}
+        time={time}
         type="edit"
         waterId={id}
       />
@@ -25,7 +27,7 @@ const WaterItem = ({ id, amount, date }) => {
     openModal(<DeleteWaterModal waterId={id} />);
   };
 
-  const dateObject = new Date(date);
+  const dateObject = new Date(dateTime);
   const hours = dateObject.getHours().toString().padStart(2, "0");
   const minutes = dateObject.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
@@ -64,7 +66,7 @@ const WaterItem = ({ id, amount, date }) => {
 WaterItem.propTypes = {
   id: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
-  date: PropTypes.string.isRequired,
+  dateTime: PropTypes.string.isRequired,
 };
 
 export default WaterItem;

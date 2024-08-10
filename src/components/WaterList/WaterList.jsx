@@ -79,7 +79,7 @@ const WaterList = () => {
                 key={item._id}
                 id={item._id}
                 amount={item.waterAmount}
-                date={item.date}
+                dateTime={item.date}
                 handleOpenModal={handleOpenModal}
               />
             ))}

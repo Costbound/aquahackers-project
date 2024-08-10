@@ -5,21 +5,23 @@ import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import clsx from "clsx";
-import getCurerntTime from "../../helpers/getCurerntTime.js";
+import getCurrentTime from "../../helpers/getCurrentTime.js";
 import generateWaterString from "../../helpers/generateWaterString.js";
-import getTodayDate from "../../helpers/getTodayDate.js";
 import { ModalContext } from "../Modal/ModalProvider.jsx";
+import {useDispatch} from "react-redux";
+import {addWater, editWater} from "../../redux/water/ops-water.js";
 
 
 
-const WaterForm = ({ date, time = getCurerntTime(), type, waterAmount, waterId }) => {
+const WaterForm = ({ date, time = getCurrentTime(), type, waterAmount, waterId }) => {
   const { closeModal } = useContext(ModalContext);
+  const dispatch = useDispatch();
   const waterValidSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(50, "The minimum amount is 50 ml")
       .max(2000, "The maximum amount is 2000 ml")
       .required("Amount of water is required"),
-    date: Yup.string()
+    time: Yup.string()
       .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format")
       .required("Time is required"),
   });
@@ -40,13 +42,22 @@ const WaterForm = ({ date, time = getCurerntTime(), type, waterAmount, waterId }
   };
 
   const handleSubmit = (values) => {
-    console.log(123)
     const filteredValues = {
-      waterId,
       waterAmount: Number(values.waterAmount),
       date: `${date}T${values.time}`
     };
-    console.log(filteredValues);
+    if (type === "add") {
+      dispatch(addWater(filteredValues));
+    } else if (type === "edit") {
+      if (values.time !== time || filteredValues.waterAmount !== waterAmount) {
+        filteredValues.waterId = waterId
+        dispatch(editWater(filteredValues))
+      }
+    } else {
+      console.log('Wrong prop "type"')
+    }
+
+
     closeModal();
   };
 
@@ -54,7 +65,7 @@ const WaterForm = ({ date, time = getCurerntTime(), type, waterAmount, waterId }
     <Formik
       initialValues={{
         waterAmount: waterAmountState,
-        time: time
+        time
       }}
       validationSchema={waterValidSchema}
       onSubmit={handleSubmit}

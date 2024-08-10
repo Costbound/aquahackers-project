@@ -3,12 +3,15 @@ import icon from "../../img/icons.svg";
 import { useContext } from 'react';
 import { ModalContext } from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
+import {useSelector} from "react-redux";
+import {selectSelectedDate} from "../../redux/water/selectors-water.js";
 
 const AddWaterButton = () => {
   const { openModal } = useContext(ModalContext);
+  const selectedDate = useSelector(selectSelectedDate);
 
   const handleModalOpen = () => {
-    openModal(<WaterModal type='add' />);
+    openModal(<WaterModal type='add' date={selectedDate} />);
   };
 
   return (

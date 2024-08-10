@@ -9,7 +9,7 @@ import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
 import defaultAvatar from "../../img/avatar.png";
-import checkPhotoExtention from "../../helpers/checkPhotoExtention.js";
+import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
 import Loader from "../Loader/Loader";
 import icon from "../../img/icons.svg";
 import {ModalContext} from "../Modal/ModalProvider.jsx";
@@ -92,7 +92,7 @@ export const UserSettingsForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleUploadPhoto = async (e) => {
     const avatar = e.target.files[0];
-    if (checkPhotoExtention(avatar)) {
+    if (checkPhotoExtension(avatar)) {
       const formData = new FormData();
       formData.append("avatar", avatar);
       setIsUploading(true); // Показать лоудер
