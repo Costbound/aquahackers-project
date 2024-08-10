@@ -4,12 +4,13 @@ import * as yup from "yup";
 import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
 import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
 import defaultAvatar from "../../img/avatar.png";
 import checkPhotoExtention from "../../helpers/checkPhotoExtention.js";
+import Loader from "../Loader/Loader";
 import icon from "../../img/icons.svg";
 
 const schema = yup.object().shape({
@@ -85,12 +86,16 @@ export const UserSettingsForm = ({ onClose }) => {
     user.activityTime
   );
 
+  const [isUploading, setIsUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleUploadPhoto = async (e) => {
     const avatar = e.target.files[0];
     if (checkPhotoExtention(avatar)) {
       const formData = new FormData();
       formData.append("avatar", avatar);
-      dispatch(updateUserData(formData));
+      setIsUploading(true); // Показать лоудер
+      await dispatch(updateUserData(formData));
+      setIsUploading(false); // Скрыть лоудер
     } else {
       console.log("This photo format is not supported");
     }
@@ -111,13 +116,17 @@ export const UserSettingsForm = ({ onClose }) => {
       formData.append("gender", values.gender);
       formData.append("sportTime", Number(values.activityTime));
       formData.append("waterRate", Number(values.desiredVolume) * 1000);
+
+      setIsSubmitting(true); // Показать лоудер
       await dispatch(updateUserData(formData));
 
       if (filteredValues.waterRate !== user.waterRate) {
         await dispatch(getTodayProgress());
       }
+      setIsSubmitting(false); // Скрыть лоудер
     } catch (error) {
       console.log(error);
+      setIsSubmitting(false); // Скрыть лоудер в случае ошибки
     }
     onClose();
   };
@@ -138,25 +147,28 @@ export const UserSettingsForm = ({ onClose }) => {
     >
       <Form className={css.wrapper}>
         <div className={css.avatarWrapper}>
-          <img
-            className={css.avatar}
-            src={user.avatar || defaultAvatar}
-            alt="Avatar"
-          />
-          <input
-            className={css.hiddenFileInput}
-            type="file"
-            name="avatar"
-            id={avatarId}
-            placeholder="Upload Photo"
-            onChange={handleUploadPhoto}
-          />
-          <label htmlFor={avatarId} className={css.fileLabel}>
-            <svg className={css.svgIconUpload}>
-              <use href={`${icon}#icon-upload-photo`} />
-            </svg>
-            Upload Photo
-          </label>
+          {isUploading ?
+              <Loader type='avatar' /> :
+              <img
+                  className={css.avatar}
+                  src={user.avatar || defaultAvatar}
+                  alt="Avatar"
+              />}
+              <input
+                className={css.hiddenFileInput}
+                type="file"
+                name="avatar"
+                id={avatarId}
+                placeholder="Upload Photo"
+                onChange={handleUploadPhoto}
+                disabled={isUploading}
+              />
+              <label htmlFor={avatarId} className={css.fileLabel}>
+                <svg className={css.svgIconUpload}>
+                  <use href={`${icon}#icon-upload-photo`} />
+                </svg>
+                Upload Photo
+              </label>
         </div>
 
         <div className={css.settingsWrapper}>
@@ -306,7 +318,11 @@ export const UserSettingsForm = ({ onClose }) => {
         </div>
 
         <Button styleType="green" className={css.submitButton} type="submit">
-          Save
+          {isSubmitting ? (
+            <Loader type="button" width="20" height="20" color="#fff" />
+          ) : (
+            "Save"
+          )}
         </Button>
       </Form>
     </Formik>
