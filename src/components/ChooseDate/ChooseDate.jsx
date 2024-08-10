@@ -10,7 +10,7 @@ const ChooseDate = () => {
     
     const today = new Date().toISOString().split('T')[0];
     const day = new Date(date).getDate();
-    const month = new Date(date).getMonth() + 1; //делает +1 для месяца
+    const month = new Date(date).getMonth();
     const formattedDate = `${day}, ${namingMonth(month)}`;
 
     const displayDate = date === today ? "Today" : formattedDate; // Проверка, если выбранная дата совпадает с сегодняшней

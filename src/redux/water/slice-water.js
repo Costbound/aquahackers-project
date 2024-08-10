@@ -28,26 +28,8 @@ const waterSlice = createSlice({
       loading: false,
       error: null,
     },
-    modalFlags: {
-      isDeleteWaterModalOpen: false,
-      isLogoutModalOpen: false,
-      isSettingsModalOpen: false,
-    },
-    selectedWaterId: null,
   },
   reducers: {
-    changeDeleteWaterModalOpen(state, action) {
-      state.modalFlags.isDeleteWaterModalOpen = action.payload;
-    },
-    setSelectedWaterId(state, action) {
-      state.selectedWaterId = action.payload;
-    },
-    changeLogoutModalOpen(state, action) {
-      state.modalFlags.isLogoutModalOpen = action.payload;
-    },
-    changeSettingsModalOpen(state, action) {
-      state.modalFlags.isSettingsModalOpen = action.payload;
-    },
     setSelectedDate(state, action) {
       state.selectedDay.date = action.payload;
     },

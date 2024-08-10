@@ -76,8 +76,6 @@ const WaterList = () => {
                 id={item._id}
                 amount={item.waterAmount}
                 date={item.date}
-                onEdit={() => console.log("Edit item")}
-                onDelete={() => console.log("Delete item")}
                 handleOpenModal={handleOpenModal}
               />
             ))}
