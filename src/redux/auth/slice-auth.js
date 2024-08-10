@@ -76,7 +76,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, login, refresh, apiLogout } from "./ops-auth.js";
 
-
 // Создание authSlice с использованием createSlice
 const authSlice = createSlice({
   name: "auth",
