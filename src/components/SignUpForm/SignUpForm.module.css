@@ -42,6 +42,11 @@
   border: 1px solid #ef5050;
 }
 
+.inputError:focus,
+.inputError:active {
+  border-color: #ef5050;
+}
+
 .inputWrapper {
   position: relative;
   display: flex;
