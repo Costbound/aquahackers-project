@@ -10,3 +10,13 @@
     width: 100vw;
     height: 100vh;
 }
+.avatar {
+    width: 75px;
+    height: 75px;
+}
+@media screen and (min-width: 768px) {
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+}

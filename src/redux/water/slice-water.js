@@ -18,19 +18,20 @@ const waterSlice = createSlice({
     selectedMonthWater: [],
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
-    // todayDate: getTodayDate(),
-    todayDate: "2024-04-13",
+    todayDate: getTodayDate(),
     todayProgress: 0,
     isLoading: false,
     selectedDay: {
       items: [],
       progress: 0,
+      date: getTodayDate(),
       loading: false,
       error: null,
     },
     modalFlags: {
       isDeleteWaterModalOpen: false,
       isLogoutModalOpen: false,
+      isSettingsModalOpen: false,
     },
     selectedWaterId: null,
   },
@@ -43,6 +44,12 @@ const waterSlice = createSlice({
     },
     changeLogoutModalOpen(state, action) {
       state.modalFlags.isLogoutModalOpen = action.payload;
+    },
+    changeSettingsModalOpen(state, action) {
+      state.modalFlags.isSettingsModalOpen = action.payload;
+    },
+    setSelectedDate(state, action) {
+      state.selectedDay.date = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -103,8 +110,10 @@ const waterSlice = createSlice({
 
 export const {
   changeDeleteWaterModalOpen,
-  setSelectedWaterId,
+  changeSettingsModalOpen,
   changeLogoutModalOpen,
+  setSelectedWaterId,
+  setSelectedDate,
 } = waterSlice.actions;
 
 const waterReducer = waterSlice.reducer;
