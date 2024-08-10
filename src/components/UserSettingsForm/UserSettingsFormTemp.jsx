@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
 import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
-import { useId, useState } from "react";
+import {useContext, useId, useState} from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
@@ -12,6 +12,7 @@ import defaultAvatar from "../../img/avatar.png";
 import checkPhotoExtention from "../../helpers/checkPhotoExtention.js";
 import Loader from "../Loader/Loader";
 import icon from "../../img/icons.svg";
+import {ModalContext} from "../Modal/ModalProvider.jsx";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -69,7 +70,8 @@ const CustomRadioButton = ({ field, label }) => {
   );
 };
 
-export const UserSettingsForm = ({ onClose }) => {
+export const UserSettingsForm = () => {
+  const {closeModal} = useContext(ModalContext)
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const avatarId = useId();
@@ -128,7 +130,7 @@ export const UserSettingsForm = ({ onClose }) => {
       console.log(error);
       setIsSubmitting(false); // Скрыть лоудер в случае ошибки
     }
-    onClose();
+    closeModal();
   };
 
   return (

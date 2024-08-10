@@ -8,6 +8,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
+import {ModalProvider} from "../Modal/ModalProvider.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));

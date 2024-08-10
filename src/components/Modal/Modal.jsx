@@ -1,20 +1,22 @@
 import css from "./Modal.module.css";
 import icon from "../../img/icons.svg";
-import { useEffect, useRef } from "react";
+import {useContext, useEffect, useRef} from "react";
+import {ModalContext} from "./ModalProvider.jsx";
 
-const Modal = ({ children, isOpen, onClose }) => {
+const Modal = ({ children }) => {
   const modalRef = useRef(null);
+  const {closeModal} = useContext(ModalContext)
 
   const handleContainerClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
-      onClose();
+      closeModal();
     }
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        onClose();
+        closeModal();
       }
     };
 
@@ -22,14 +24,12 @@ const Modal = ({ children, isOpen, onClose }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onClose]);
-
-  if (!isOpen) return null;
+  }, [closeModal]);
 
   return (
     <div className={css.modalContainer} onClick={handleContainerClick}>
       <div className={css.modal} ref={modalRef}>
-        <button className={css.button} onClick={onClose}>
+        <button className={css.button} onClick={closeModal}>
           <svg className={css.svgIcon}>
             <use href={`${icon}#icon-close`} />
           </svg>
