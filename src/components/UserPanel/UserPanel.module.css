@@ -27,8 +27,7 @@
 
 @media screen and (min-width: 1440px) {
     .userPanel {
-        justify-content: flex-start;
-        gap: 257px;
+        white-space: nowrap;
     }
     
 }

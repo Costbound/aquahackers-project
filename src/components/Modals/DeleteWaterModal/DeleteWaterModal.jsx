@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteWater, fetchWater } from "../../../redux/water/ops-water";
+import { deleteWater } from "../../../redux/water/ops-water";
 import css from "./DeleteWaterModal.module.css";
 import toast from "react-hot-toast";
 
@@ -9,20 +9,13 @@ import toast from "react-hot-toast";
 const DeleteWaterModal = ({ waterId, onClose }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
+const handleDelete = () => {
     dispatch(deleteWater(waterId))
       .unwrap()
       .then(() => {
-        dispatch(fetchWater())
-          .unwrap()
-          .then(() => {
-            toast.success("Delete successfull!", {
+          toast.success("Delete successfull!", {
               duration: 5000,
-            });
           })
-          .catch(() => {
-            toast.error("Failed to refresh data after deletion!");
-          });
       })
       .catch(() => {
         toast.error("Oops, delete went wrong, please try again!");

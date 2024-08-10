@@ -14,6 +14,7 @@
     gap: 8px;
     padding: 6px 12px 6px 12px;
     background-color: #323F47;
+    border-style: none;
 }
 
 .avatar {
@@ -40,13 +41,12 @@
     fill: none;
 }
 
-.userButton {
+.userChevron {
     width: 16px;
     height: 16px;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    padding-top: 5px;
 }
 
 @media screen and (min-width: 768px) {
@@ -57,6 +57,11 @@
         gap: 10px;
     }
 
+    .userChevron {
+        width: 20px;
+        height: 20px;
+    }
+    
     .svgIconChevron {
         width: 20px;
         height: 20px;

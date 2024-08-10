@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { date } from "yup";
 
 axios.defaults.baseURL = "https://final-team-pr-backend.onrender.com";
 
@@ -25,7 +26,7 @@ export const fetchWater = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(
-        `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
+        `https://final-team-pr-backend.onrender.com/water/day?date=${date}`
       );
       return response.data.data;
     } catch (e) {
