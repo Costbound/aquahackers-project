@@ -244,7 +244,27 @@
   height: 46px;
 }
 @media screen and (max-width: 374px) {
-  .form {
+  .wrapper {
+    width: auto;
+  }
+
+  .input {
+    width: auto;
+    height: auto;
+  }
+
+  .normaFormula {
+    width: auto;
+  }
+  .normaTextArea {
+    width: auto;
+    height: auto;
+  }
+  .amountField {
+    width: auto;
+  }
+
+  .volumeWrapper {
     width: auto;
   }
 }
