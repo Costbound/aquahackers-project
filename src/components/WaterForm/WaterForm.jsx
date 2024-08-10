@@ -1,15 +1,15 @@
 import Button from "../Button/Button";
-import { useState, useId } from "react";
+// import { useState, useId } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const WaterValidSchema = Yup.object().shape({
-  waterAmount: Yup.number()
+  waterAmount: Yup.string()
     .min(50, "Мінімальна кількість 50ml")
     .max(2000, "Максимальна кількість 2000ml")
     .required("Кількість води обовʼязкова"),

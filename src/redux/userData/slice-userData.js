@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserData, updateUserData } from "./ops-userData.js";
+import {totalUsers} from "./ops-userData.js";
+
+const handlePending = (state) => {
+    state.error = null;
+};
+
+const handleRejected = (state, action) => {
+    state.error = action.payload;
+};
 
 const userDataSlice = createSlice({
     name: 'userData',
@@ -12,7 +21,9 @@ const userDataSlice = createSlice({
             waterRate: 1500,
             sportTime: 0,
             avatar: '',  
-        }
+        },
+        totalUsers: 0,
+        error: null,
     },
     extraReducers: (builder) => {
         builder
@@ -33,7 +44,12 @@ const userDataSlice = createSlice({
                 state.user.sportTime = action.payload.sportTime;
                 state.user.email = action.payload.email;
                 state.user.avatar = action.payload.avatar;
-            });
+            })
+            .addCase(totalUsers.pending, handlePending)
+            .addCase(totalUsers.fulfilled, (state, action) => {
+                state.totalUsers = action.payload;
+            })
+            .addCase(totalUsers.rejected, handleRejected);
     }
 });
 
