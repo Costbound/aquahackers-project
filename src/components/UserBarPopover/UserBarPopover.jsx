@@ -1,55 +1,36 @@
-import { useState } from "react";
 import css from "./UserBarPopover.module.css";
 import icon from "../../img/icons.svg";
-import Modal from "../Modal/Modal";
-import UserSettingsModal from "../UserSettingsModal/UserSettingsModal";
-import LogOutModal from "../Modals/LogOutModal/LogOutModal";
+import { useContext } from 'react';
+import { ModalContext } from "../Modal/ModalProvider.jsx";
+import UserSettingsModal from "../UserSettingsModal/UserSettingsModal.jsx";
+import LogOutModal from "../Modals/LogOutModal/LogOutModal.jsx";
 
 const UserBarPopover = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const { openModal } = useContext(ModalContext);
+  
+  const handleModalSettingOpen = () => {
+    openModal(< UserSettingsModal />);
+  };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setModalType("");
-  }
-
-  const handleOpenSettingsModal = () => {
-    setIsModalOpen(true);
-    setModalType('settings');
-  }
-
-  const handleOpenLogOutModal = () => {
-    setIsModalOpen(true);
-    setModalType('logOut');
-  }
+  const handleModalLogoutOpen = () => {
+    openModal(<LogOutModal />);
+  };
 
   return (
-    <div>
       <div className={css.popover}>
-        <button className={css.popoverButtonSetting} onClick={handleOpenSettingsModal}>
+        <button className={css.popoverButtonSetting} onClick={handleModalSettingOpen}>
           <svg className={css.svgIconSetting}>
             <use href={`${icon}#icon-settings`} />
           </svg>
           Setting
         </button>
-        <button className={css.popoverButtonLogout} onClick={handleOpenLogOutModal}>
+        <button className={css.popoverButtonLogout} onClick={handleModalLogoutOpen}>
           <svg className={css.svgIconLogout}>
             <use href={`${icon}#icon-log-out`} />
           </svg>
           Log out
         </button>
       </div>
-
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-          {
-            modalType === 'logOut' ? <LogOutModal onClose={handleModalClose} /> :
-            modalType === 'settings' ? <UserSettingsModal onClose={handleModalClose}/> : null
-          }
-        </Modal>
-      )}
-    </div>
   );
 }
 
