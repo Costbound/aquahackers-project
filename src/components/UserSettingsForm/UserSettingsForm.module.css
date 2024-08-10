@@ -10,7 +10,12 @@
   align-items: center;
   gap: 10px;
 }
-
+.svgIconUpload {
+  stroke: #2f2f2f;
+  fill: none;
+  width: 18px;
+  height: 18px;
+}
 .avatar {
   border-radius: 100%;
   width: 75px;
@@ -35,6 +40,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
 }
 
 .genderWrapper {
@@ -71,12 +81,40 @@
   display: flex;
   gap: 10px;
 }
+.customRadio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.customRadio input {
+  display: none; /* Скрываем стандартную радиокнопку */
+}
 
-.hiddenRadioInput {
+.checkmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20px;
   height: 20px;
-  outline: none;
-  accent-color: var(--green);
+  border: 1.5px solid var(--green);
+  border-radius: 100%;
+}
+
+.customRadio input:checked + .checkmark {
+  background-color: var(--white); /* Цвет фона при выборе */
+}
+
+.checkmark::after {
+  content: "";
+  display: none;
+}
+
+.customRadio input:checked + .checkmark::after {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: var(--green); /* Цвет внутреннего круга */
 }
 
 .infoWrapper {
@@ -176,6 +214,16 @@
   gap: 5px;
   width: 303px;
 }
+.textContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.svgExclamation {
+  fill: var(--green);
+  width: 18px;
+  height: 18px;
+}
 .volumeWrapper {
   display: flex;
   justify-content: center;
@@ -187,7 +235,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
   padding: 14px 40px;
   width: 116px;
   height: 46px;
@@ -199,12 +246,16 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1439px) {
-  .form {
+  .wrapper {
     width: 568px;
   }
   .avatar {
     width: 100px;
     height: 100px;
+  }
+  .fileLabel {
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .subtitle {
@@ -242,13 +293,44 @@
   .amountField {
     width: 568px;
   }
+
+  .svgExclamation {
+    width: 22px;
+    height: 22px;
+  }
+
   .volumeWrapper {
     width: 568px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .form {
-    width: 920px;
+  .wrapper {
+    width: 840px;
+  }
+  .settingsWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+  .input {
+    width: 400px;
+    height: 56px;
+  }
+
+  .normaTextArea {
+    width: 400px;
+    height: 152px;
+  }
+  .amountField {
+    width: 400px;
+  }
+  .volumeWrapper {
+    width: 400px;
   }
 }
