@@ -4,7 +4,6 @@ import css from "./WaterItem.module.css";
 import icon from "../../img/icons.svg";
 import Modal from "../Modal/Modal";
 import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectChosenWaterCardId,
@@ -28,7 +27,6 @@ const WaterItem = ({ id, handleOpenModal, amount, date, onEdit }) => {
   };
 
   const isDeleteWaterModalOpen = useSelector(selectIsDeleteWaterModalOpen);
-  const selectedWaterId = useSelector(selectChosenWaterCardId);
 
   const dateObject = new Date(date);
   const hours = dateObject.getHours().toString().padStart(2, "0");
@@ -73,7 +71,7 @@ const WaterItem = ({ id, handleOpenModal, amount, date, onEdit }) => {
       <Modal isOpen={isDeleteWaterModalOpen} onClose={handleCloseModal}>
         {isDeleteWaterModalOpen && (
           <DeleteWaterModal
-            waterId={selectedWaterId}
+            waterId={id}
             onClose={handleCloseModal}
           />
         )}

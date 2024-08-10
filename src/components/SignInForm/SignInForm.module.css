@@ -1,4 +1,3 @@
-
 .form {
   max-width: 311px;
   margin-bottom: 16px;
@@ -56,20 +55,19 @@
 .error {
   position: absolute;
   color: #ef5050;
-  font-size: 14px;
+  font-size: 9px;
   line-height: 18px;
   letter-spacing: -0.14px;
   margin-bottom: 8px;
 }
 
 .errorEmail {
-  top: 445px;
+  top: 360px;
 }
 
 .errorPassword {
-  top: 548px;
+  top: 458px;
 }
-
 
 .input::placeholder {
   font-family: inherit;
@@ -185,5 +183,30 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.16px;
+  }
+
+  .error {
+    font-size: 12px;
+  }
+
+  .errorEmail {
+    top: 443px;
+  }
+
+  .errorPassword {
+    top: 548px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .error {
+    font-size: 14px;
+  }
+  .errorEmail {
+    top: 333px;
+  }
+
+  .errorPassword {
+    top: 437px;
   }
 }
