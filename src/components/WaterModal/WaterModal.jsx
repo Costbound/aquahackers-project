@@ -1,51 +1,11 @@
-import React, { useEffect } from "react";
 import css from "./WaterModal.module.css";
-// import { useDispatch, useSelector } from "react-redux";
-// // import {
-//   setWaterAmount,
-//   setDate,
-//   resetWater,
-// } from "../../redux/water/slice-waterForm";
-// import { saveWaterData } from "../../redux/water/ops-water";
-
 import WaterFormFormik from "../WaterForm/WaterFormFormik";
-import WaterForm from "../WaterForm/WaterForm";
+import { Toaster } from "react-hot-toast";
 
-// import { selectWaterStatus, selectWaterError } from "./selectors";
-import toast, { Toaster } from "react-hot-toast";
-
-const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
-  // const dispatch = useDispatch();
-  // // const waterAmount = useSelector(selectWaterAmount);
-  // // const date = useSelector(selectDate);
-  // const status = useSelector(selectWaterStatus);
-  // const error = useSelector(selectWaterError);
-
-  // useEffect(() => {
-  //   if (type === "edit" && waterId) {
-  //     // Оновлюємо дані з props
-
-  //     const formattedDate = date.slice(-5);
-  //     dispatch(setWaterAmount(waterAmount));
-  //     dispatch(setDate(formattedDate));
-  //     //   dispatch(setWaterAmount(initialWaterAmount));
-  //     //   dispatch(setDate(initialDate));
-  //   } else {
-  //     dispatch(resetWater());
-  //   }
-  // }, [type, waterId, dispatch, initialWaterAmount, initialDate]);
-
-  // const handleSubmit = async (data) => {
-  //   try {
-  //     await dispatch(saveWaterData({ type, waterId, data })).unwrap();
-  //     onClose();
-  //   } catch (error) {
-  //     toast.error("Error saving water data");
-  //   }
-  // };
-
-
-
+const WaterModal = ({ waterAmount, date, type, waterId }) => {
+    // type can be 'add' or 'edit'
+    // For add required props type, date by default current
+  //   For edit required all props
   return (
     <div className={css.divModal}>
       <Toaster />
@@ -58,10 +18,7 @@ const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
         date={date}
         type={type}
         waterId={waterId}
-        onClose={onClose}
       />
-      {status === "loading" && <p>Loading...</p>}
-      {/* {error && <p>Error: {error}</p>} */}
     </div>
   );
 };

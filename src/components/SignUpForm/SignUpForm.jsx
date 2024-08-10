@@ -9,13 +9,15 @@ import { signup } from "../../redux/auth/ops-auth";
 import { toast, Toaster } from "react-hot-toast";
 import screenWidth from "../../helpers/screenWidth.js";
 import ShowPwdButton from "../ShowPwdButton/ShowPwdButton.jsx";
+import Loader from "../Loader/Loader"; // Импортируем ваш компонент Loader
 
-// Определение схемы валидации с использованием yup
 const schema = yup.object().shape({
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup.string().email("Email must contain an '@' symbol").required("Email is required"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
     .required("Password is required"),
   repeatPassword: yup
     .string()
@@ -24,91 +26,96 @@ const schema = yup.object().shape({
 });
 
 const SignUpForm = () => {
-  const dispatch = useDispatch(); // Инициализация функции dispatch из Redux
-  const [inputTypePassword, setTypePassword] = useState("password"); // Состояние для типа поля ввода пароля
-  const [inputTypeRePassword, setTypeRePassword] = useState("password"); // Состояние для типа поля ввода повторного пароля
-  const [isPwdVisible, setIsPwdVisible] = useState(false); // Состояние для иконки пароля(в процессе)
-  const [isRePwdVisible, setIsRePwdVisible] = useState(false) // Состояние для иконки повторного пароля(в процессе)
+  const dispatch = useDispatch();
+  const [inputTypePassword, setTypePassword] = useState("password");
+  const [inputTypeRePassword, setTypeRePassword] = useState("password");
+  const [isPwdVisible, setIsPwdVisible] = useState(false);
+  const [isRePwdVisible, setIsRePwdVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Состояние для загрузки
 
-  const navigate = useNavigate(); // Инициализация функции navigate из react-router-dom
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema), // Резолвер для схемы валидации
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (formData) => {
+    setIsLoading(true); // Включаем лоадер
     const reqData = {
       email: formData.email,
       password: formData.password,
     };
     try {
-      await dispatch(signup(reqData)).unwrap(); // Вызов операции signup с передачей данных формы
-      toast.success("Successfully registered!"); // Уведомление об успешной регистрации
+      await dispatch(signup(reqData)).unwrap();
+      toast.success("Successfully registered!");
       reset();
-      navigate("/signin"); // Перенаправление на страницу входа
+      navigate("/signin");
     } catch (error) {
-      toast.error(error || "Failed to sign up"); // Уведомление об ошибке регистрации
+      toast.error(error || "Failed to sign up");
+    } finally {
+      setIsLoading(false); // Отключаем лоадер
     }
   };
 
   const toggleShowPassword = () => {
-    setTypePassword((prevType) => (prevType === "password" ? "text" : "password")); // Переключение типа поля ввода пароля
-    setIsPwdVisible(!isPwdVisible) // Переключение иконки пароля
+    setTypePassword((prevType) => (prevType === "password" ? "text" : "password"));
+    setIsPwdVisible(!isPwdVisible);
   };
 
   const toggleShowRePassword = () => {
-    setTypeRePassword((prevType) => (prevType === "password" ? "text" : "password")); // Переключение типа поля ввода повторного пароля
-    setIsRePwdVisible(!isRePwdVisible); // Переключение иконки повторного пароля
+    setTypeRePassword((prevType) => (prevType === "password" ? "text" : "password"));
+    setIsRePwdVisible(!isRePwdVisible);
   };
 
   return (
     <div>
-      {/* Контейнер для формы регистрации */}
-      <Toaster position="top-center" /> {/* Компонент для отображения уведомлений */}
+      <Toaster position="top-center" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-        {/* Форма для регистрации */}
         <h2 className={css.formTitle}>Sign Up</h2>
         <label className={css.label}>Email</label>
         <input
-          className={`${css.input} ${errors.email ? css.inputError : ""} ${css.emailInput}`} // Класс для поля ввода с проверкой ошибок
+          className={`${css.input} ${errors.email ? css.inputError : ""} ${css.emailInput}`}
           {...register("email")}
           placeholder="Enter your email"
         />
-        {errors.email && (
-          <p className={css.error + ' ' + css.errorEmail}>{errors.email.message}</p> // Сообщение об ошибке
-        )}
+        {errors.email && <p className={css.error + " " + css.errorEmail}>{errors.email.message}</p>}
         <label className={css.label}>Password</label>
         <div className={css.inputWrapper}>
           <input
-            className={`${css.input} ${errors.password ? css.inputError : ""}`} // Класс для поля ввода с проверкой ошибок
+            className={`${css.input} ${errors.password ? css.inputError : ""}`}
             {...register("password")}
             type={inputTypePassword}
             placeholder="Enter your password"
           />
-          {screenWidth > 767 && <ShowPwdButton onClick={toggleShowPassword} isPwdVisible={isPwdVisible}/>}
+          {screenWidth > 767 && (
+            <ShowPwdButton onClick={toggleShowPassword} isPwdVisible={isPwdVisible} />
+          )}
         </div>
         {errors.password && (
-          <p className={css.error + ' ' + css.errorPassword}>{errors.password.message}</p> // Сообщение об ошибке
+          <p className={css.error + " " + css.errorPassword}>{errors.password.message}</p>
         )}
         <label className={css.label}>Repeat password</label>
         <div className={`${css.inputWrapper} ${css.lastInputWrapper}`}>
           <input
-            className={`${css.input} ${errors.repeatPassword ? css.inputError : ""}`} // Класс для поля ввода с проверкой ошибок
+            className={`${css.input} ${errors.repeatPassword ? css.inputError : ""}`}
             {...register("repeatPassword")}
             type={inputTypeRePassword}
             placeholder="Repeat password"
           />
-          {screenWidth > 767 && <ShowPwdButton onClick={toggleShowRePassword} isPwdVisible={isRePwdVisible}/>}
+          {screenWidth > 767 && (
+            <ShowPwdButton onClick={toggleShowRePassword} isPwdVisible={isRePwdVisible} />
+          )}
         </div>
         {errors.repeatPassword && (
-            <p className={css.error + ' ' + css.errorRepeat}>{errors.repeatPassword.message}</p> // Сообщение об ошибке
+          <p className={css.error + " " + css.errorRepeat}>{errors.repeatPassword.message}</p>
         )}
-        <button className={css.signUpButton} type="submit">
-          Sign Up
+        <button className={css.signUpButton} type="submit" disabled={isLoading}>
+          {isLoading ? <Loader type="local" width="30" height="30" color="#ffffff" /> : "Sign Up"}{" "}
+          {/* Замена текста кнопки на Loader */}
         </button>
       </form>
       <p className={css.text}>

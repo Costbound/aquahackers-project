@@ -19,6 +19,7 @@
   flex-direction: column;
   padding: 40px 20px 40px 20px;
   width: auto;
+  max-height: 95vh;
   border-radius: 15px;
   overflow-y: auto;
 

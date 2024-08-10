@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { useState, useId } from "react";
+import {useState, useId, useContext} from "react";
 import * as Yup from "yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
@@ -8,8 +8,10 @@ import clsx from "clsx";
 import getCurerntTime from "../../helpers/getCurerntTime.js";
 import generateWaterString from "../../helpers/generateWaterString.js";
 import getTodayDate from "../../helpers/getTodayDate.js";
+import {ModalContext} from "../Modal/ModalProvider.jsx";
 
 const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
+  const {closeModal} = useContext(ModalContext);
   const waterValidSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(50, "The minimum amount is 50 ml")
@@ -45,6 +47,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
       }T${values.date}`,
     };
     console.log(filteredValues);
+    closeModal()
   };
 
   return (

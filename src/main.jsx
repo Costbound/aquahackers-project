@@ -8,7 +8,8 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 import axios from "axios";
-import { HelmetProvider } from "react-helmet-async"; // Добавил для улучшения в поисковых системах, по заголовкам/мета тегам
+import { HelmetProvider } from "react-helmet-async";
+import {ModalProvider} from "./components/Modal/ModalProvider.jsx"; // Добавил для улучшения в поисковых системах, по заголовкам/мета тегам
 
 axios.defaults.baseURL = "https://final-team-pr-backend.onrender.com/";
 
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Provider store={store}>
         <HelmetProvider>
-          <App />
+            <ModalProvider>
+              <App />
+            </ModalProvider>
         </HelmetProvider>
       </Provider>
     </BrowserRouter>
