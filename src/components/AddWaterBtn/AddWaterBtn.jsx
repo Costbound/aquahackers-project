@@ -7,18 +7,12 @@ import {ModalContext} from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
 
 export default function AddWaterBtn() {
-    // const [isModalOpen, settIsModalOpen] = useState(false);
     const {openModal} = useContext(ModalContext)
 
     const handleModalOpen = () => {
-        const content = (
-            <WaterModal type='add' />
-        )
-        openModal('asfasfasfasfasfasfasfasfasfasfasfas')
+        openModal(<WaterModal type='add' />)
     }
 
-    // const openModal = () => settIsModalOpen(true);
-    // const closeModal = () => settIsModalOpen(false);
     return (
        < >
        <Button

@@ -2,12 +2,13 @@ import { useDispatch } from "react-redux";
 import { deleteWater } from "../../../redux/water/ops-water";
 import css from "./DeleteWaterModal.module.css";
 import toast from "react-hot-toast";
+import {useContext} from "react";
+import {ModalContext} from "../../Modal/ModalProvider.jsx";
 
-// const DeleteWaterModal = ({ onClose }) => {
-//   const handleSubmit = () => {
-//     onClose();
-const DeleteWaterModal = ({ waterId, onClose }) => {
+
+const DeleteWaterModal = ({ waterId }) => {
   const dispatch = useDispatch();
+  const {closeModal} = useContext(ModalContext)
 
 const handleDelete = () => {
     dispatch(deleteWater(waterId))
@@ -21,7 +22,7 @@ const handleDelete = () => {
         toast.error("Oops, delete went wrong, please try again!");
       })
       .finally(() => {
-        onClose();
+        closeModal();
       });
   };
 
@@ -37,7 +38,7 @@ const handleDelete = () => {
         <button className={css.deleteModalBtn} onClick={handleDelete}>
           Delete
         </button>
-        <button className={css.deleteModalCancelBtn} onClick={onClose}>
+        <button className={css.deleteModalCancelBtn} onClick={closeModal}>
           Cancel
         </button>
       </div>

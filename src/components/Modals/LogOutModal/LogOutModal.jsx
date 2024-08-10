@@ -3,10 +3,12 @@ import { apiLogout } from "../../../redux/auth/ops-auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { clearState } from "../../../redux/auth/slice-auth";
+import {useContext} from "react";
 
-const LogOutModal = ({ onClose }) => {
+const LogOutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {closeModal} = useContext(ModalContext);
 
   const handleClick = async () => {
     try {
@@ -17,7 +19,7 @@ const LogOutModal = ({ onClose }) => {
       dispatch(clearState());
       localStorage.clear();
       navigate("/");
-      onClose();
+      closeModal();
     }
   };
 
@@ -31,7 +33,7 @@ const LogOutModal = ({ onClose }) => {
         <button className={css.logoutModalBtn} onClick={handleClick}>
           Log out
         </button>
-        <button className={css.logoutModalCancelBtn} onClick={onClose}>
+        <button className={css.logoutModalCancelBtn} onClick={closeModal}>
           Cancel
         </button>
       </div>
