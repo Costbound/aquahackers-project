@@ -29,9 +29,11 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
 
   const handleChange = (e, setFieldValue) => {
     const value = Number(e.target.value);
-
+    if (value < 2001) {
     setWaterAmountState(value);
     setFieldValue("waterAmount", value);
+}
+    
   };
 
   const handleSubmit = (values) => {
@@ -56,7 +58,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
       enableReinitialize={true}
     >
       {({ setFieldValue }) => (
-        <Form>
+        <Form className="formWaterForm">
           <h4 className={css.title}>
             {type === "edit" ? "Correct entered data" : "Choose a value"}
           </h4>
