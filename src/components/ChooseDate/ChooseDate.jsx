@@ -8,19 +8,16 @@ const ChooseDate = () => {
     // const dispatch = useDispatch();
     const date = useSelector(selectSelectedDate); // Получение данных о выбранной дате из состояния Redux
     
-    const today = new Date().toISOString().split('T')[0]; // Получение сегодняшней даты в формате "YYYY-MM-DD"
+    const today = new Date().toISOString().split('T')[0];
     const day = new Date(date).getDate();
-    const month = new Date(date).getMonth(); 
+    const month = new Date(date).getMonth() + 1; //делает +1 для месяца
     const formattedDate = `${day}, ${namingMonth(month)}`;
 
     const displayDate = date === today ? "Today" : formattedDate; // Проверка, если выбранная дата совпадает с сегодняшней
 
-    const handleClick = () => {
-        // Можно добавить дополнительную логику здесь
-    };
 
     return (
-        <div className={css.dateDisplay} onClick={handleClick}>
+        <div className={css.dateDisplay}>
             <span>{displayDate}</span>
         </div>
     );
