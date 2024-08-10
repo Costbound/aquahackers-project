@@ -45,6 +45,7 @@ const WaterModal = ({ waterAmount, date, type, waterId, onClose }) => {
   // };
 
 
+
   return (
     <div className={css.divModal}>
       <Toaster />

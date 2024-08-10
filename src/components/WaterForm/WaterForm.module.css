@@ -14,6 +14,7 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 24px;
+  position: relative;
 }
 
 .inputAutomaticDiv {
@@ -61,6 +62,18 @@
   border: 1px solid rgba(47, 47, 47, 0.15);
 }
 
+.formName {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.formNum {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
 .svgIcon {
   stroke: #323f47;
   fill: none;
@@ -76,6 +89,11 @@
 .myButton {
   width: 116px;
   height: 46px;
+}
+
+.formValid {
+  color: red;
+  font-size: 12px;
 }
 
 @media screen and (min-width: 768px) {
