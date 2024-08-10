@@ -147,15 +147,13 @@ export const UserSettingsForm = ({ onClose }) => {
     >
       <Form className={css.wrapper}>
         <div className={css.avatarWrapper}>
-          {isUploading ? (
-            <Loader type="local" width="40" height="40" color="#9BE1A0" />
-          ) : (
-            <>
+          {isUploading ?
+              <Loader type='avatar' /> :
               <img
-                className={css.avatar}
-                src={user.avatar || defaultAvatar}
-                alt="Avatar"
-              />
+                  className={css.avatar}
+                  src={user.avatar || defaultAvatar}
+                  alt="Avatar"
+              />}
               <input
                 className={css.hiddenFileInput}
                 type="file"
@@ -163,6 +161,7 @@ export const UserSettingsForm = ({ onClose }) => {
                 id={avatarId}
                 placeholder="Upload Photo"
                 onChange={handleUploadPhoto}
+                disabled={isUploading}
               />
               <label htmlFor={avatarId} className={css.fileLabel}>
                 <svg className={css.svgIconUpload}>
@@ -170,8 +169,6 @@ export const UserSettingsForm = ({ onClose }) => {
                 </svg>
                 Upload Photo
               </label>
-            </>
-          )}
         </div>
 
         <div className={css.settingsWrapper}>
