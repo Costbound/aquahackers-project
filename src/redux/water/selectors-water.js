@@ -21,3 +21,5 @@ export const selectProgress = (state) => state.water.selectedDay.progress;
 export const selectTodayProgress = (state) => state.water.todayProgress;
 
 export const selectTodayDate = (state) => state.water.todayDate;
+
+export const selectSelectedDate = (state) => state.water.selectedDay.date;

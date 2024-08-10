@@ -9,7 +9,10 @@ import {
 } from "../../redux/water/selectors-water";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
+import { fetchWater } from "../../redux/water/ops-water";
 import Loader from "../Loader/Loader";
+
+import { setSelectedDate } from "../../redux/water/slice-water"; // Импортируем action
 
 export default function MonthInfo() {
   const [month, setMonth] = useState(useSelector(selectedMonth));
@@ -83,6 +86,8 @@ export default function MonthInfo() {
   const onItemClick = async (data) => {
     setActiveItem(data.date);
     date.current = data.date.slice(-2);
+    dispatch(setSelectedDate(data.date)); // Обновляем дату в redux
+    dispatch(fetchWater(data.date));
   };
 
   return (
