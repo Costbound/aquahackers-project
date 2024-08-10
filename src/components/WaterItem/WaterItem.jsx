@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ModalContext } from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
 import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal.jsx";
+import generateWaterString from "../../helpers/generateWaterString.js";
 
 const WaterItem = ({ id, amount, date }) => {
   const { openModal } = useContext(ModalContext);
@@ -35,7 +36,7 @@ const WaterItem = ({ id, amount, date }) => {
         <use href={`${icon}#icon-glass-of-water`} />
       </svg>
       <div className={css.waterInfo}>
-        <span className={css.amount}>{amount} ml</span>
+        <span className={css.amount}>{generateWaterString (amount)}</span>
         <span className={css.time}>{time}</span>
       </div>
       <div className={css.actionButtons}>
