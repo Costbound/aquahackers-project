@@ -134,20 +134,3 @@
   }
 }
 
-.formWaterForm {
-  position: relative;
-}
-
-.formValid {
-  color: crimson;
-  position: absolute;
-  font-size: 14px;
-}
-
-.formNum {
-  top: 417px;
-}
-
-.formName {
-  top: 312px;
-}
