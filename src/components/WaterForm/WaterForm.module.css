@@ -63,7 +63,6 @@
   outline: none;
 }
 
-.inputSize:hover,
 .inputSize:focus {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
@@ -107,7 +106,10 @@
   font-size: 12px;
 }
 
-.error {
+.error,
+.error:hover,
+.error:focus ,
+.error:active{
   border-color: #ef5050;
 }
 
