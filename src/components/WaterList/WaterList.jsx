@@ -3,22 +3,25 @@ import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import WaterItem from "../WaterItem/WaterItem";
 import css from "./WaterList.module.css";
 import { useSelector } from "react-redux";
-import { selectWaters } from "../../redux/water/selectors-water";
+import {selectIsWatersLoading, selectSelectedDate, selectWaters} from "../../redux/water/selectors-water";
 import { useDispatch } from "react-redux";
 import { fetchWater } from "../../redux/water/ops-water.js";
 import {
   changeDeleteWaterModalOpen,
   setSelectedWaterId,
 } from "../../redux/water/slice-water.js";
-import useScreenWidth from "../../helpers/useScreenWidth"; // Импортируем хелпер
+import useScreenWidth from "../../helpers/useScreenWidth";
+import Loader from "../Loader/Loader.jsx"; // Импортируем хелпер
 
 const WaterList = () => {
   const data = useSelector(selectWaters);
   const dispatch = useDispatch();
+  const selectedDate = useSelector(selectSelectedDate);
+  const isLoading = useSelector(selectIsWatersLoading)
 
   useEffect(() => {
-    dispatch(fetchWater());
-  }, []);
+    dispatch(fetchWater(selectedDate));
+  }, [dispatch]);
 
   const handleOpenModal = (id) => {
     dispatch(setSelectedWaterId(id));
@@ -60,32 +63,41 @@ const WaterList = () => {
     (screenWidth >= 768 && screenWidth < 1440 && data.length > 3) || 
     (screenWidth >= 1440 && data.length > 3);
 
-  return (
+ return (
     <div className={css.waterListContainer}>
-      <div className={css.waterList} ref={containerRef}>
-        {data.map((item) => (
-          <WaterItem
-            key={item._id}
-            id={item._id}
-            amount={item.waterAmount}
-            date={item.date}
-            onEdit={() => console.log("Edit item")}
-            onDelete={() => console.log("Delete item")}
-            handleOpenModal={handleOpenModal}
-          />
-        ))}
-      </div>
-      {showSlider && (
-        <div className={css.sliderContainer}>
-          <input
-            type="range"
-            min="0"
-            max={maxScroll || 100}
-            value={scrollPosition}
-            className={css.slider}
-            onChange={handleSliderChange}
-          />
+      {data.length === 0 ? (
+        <div className={css.emptyMessage}>
+          <div className={css.waterTitle}>No water item available!</div>
+          <div className={css.waterDescription}>You can add a new entry using the &quot;Add water&quot; button.</div>
         </div>
+      ) : (
+        <>
+          { isLoading ? <Loader /> : (
+          <div className={css.waterList} ref={containerRef}>
+            {data.map((item) => (
+              <WaterItem
+                key={item._id}
+                id={item._id}
+                amount={item.waterAmount}
+                date={item.date}
+                handleOpenModal={handleOpenModal}
+              />
+            ))}
+          </div>
+          )}
+          {showSlider && (
+            <div className={css.sliderContainer}>
+              <input
+                type="range"
+                min="0"
+                max={maxScroll || 100}
+                value={scrollPosition}
+                className={css.slider}
+                onChange={handleSliderChange}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

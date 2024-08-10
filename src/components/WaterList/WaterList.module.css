@@ -1,5 +1,6 @@
 .waterListContainer {
     width: 303px;
+    height: 106px;
     overflow: hidden;
 }
 
@@ -10,6 +11,27 @@
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 10px;
+}
+
+.emptyMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.waterTitle {
+    font-weight: 700;    
+    font-size: 24px;
+    line-height: 24px;
+    color: #323F47;
+}
+
+.waterDescription {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #323F47;
 }
 
 .sliderContainer {
@@ -45,6 +67,7 @@
 
     .waterListContainer {
         width: 640px;
+        height: 118px;
     }
 
     .waterList {

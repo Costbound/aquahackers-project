@@ -23,7 +23,7 @@ export const fetchMonth = createAsyncThunk(
 
 export const fetchWater = createAsyncThunk(
   "water/fetchWater",
-  async (_, thunkAPI) => {
+  async (date, thunkAPI) => {
     try {
       const response = await axios.get(
         `https://final-team-pr-backend.onrender.com/water/day?date=${date}`

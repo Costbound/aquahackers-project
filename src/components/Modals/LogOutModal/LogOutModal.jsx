@@ -3,7 +3,8 @@ import { apiLogout } from "../../../redux/auth/ops-auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { clearState } from "../../../redux/auth/slice-auth";
-import {useContext} from "react";
+import { useContext } from "react";
+import { ModalContext } from "../../Modal/ModalProvider.jsx";
 
 const LogOutModal = () => {
   const dispatch = useDispatch();
