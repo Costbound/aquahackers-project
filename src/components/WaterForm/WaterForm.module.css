@@ -60,6 +60,12 @@
   border-radius: 15px;
   padding: 14px 16px 14px 16px;
   border: 1px solid rgba(47, 47, 47, 0.15);
+  outline: none;
+}
+
+.inputSize:hover,
+.inputSize:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
 }
 
 .formName {
@@ -91,9 +97,18 @@
   height: 46px;
 }
 
+.myButton:hover,
+.myButton:focus {
+  background-color: #87d28d;
+}
+
 .formValid {
-  color: red;
+  color: #ef5050;
   font-size: 12px;
+}
+
+.error {
+  border-color: #ef5050;
 }
 
 @media screen and (min-width: 768px) {
@@ -133,4 +148,3 @@
     height: 43px;
   }
 }
-

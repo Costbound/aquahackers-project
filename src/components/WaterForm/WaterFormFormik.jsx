@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import {useState, useId, useContext} from "react";
+import { useState, useId, useContext } from "react";
 import * as Yup from "yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
@@ -8,10 +8,10 @@ import clsx from "clsx";
 import getCurerntTime from "../../helpers/getCurerntTime.js";
 import generateWaterString from "../../helpers/generateWaterString.js";
 import getTodayDate from "../../helpers/getTodayDate.js";
-import {ModalContext} from "../Modal/ModalProvider.jsx";
+import { ModalContext } from "../Modal/ModalProvider.jsx";
 
 const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
-  const {closeModal} = useContext(ModalContext);
+  const { closeModal } = useContext(ModalContext);
   const waterValidSchema = Yup.object().shape({
     waterAmount: Yup.number()
       .min(50, "The minimum amount is 50 ml")
@@ -32,10 +32,9 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
   const handleChange = (e, setFieldValue) => {
     const value = Number(e.target.value);
     if (value < 2001) {
-    setWaterAmountState(value);
-    setFieldValue("waterAmount", value);
-}
-    
+      setWaterAmountState(value);
+      setFieldValue("waterAmount", value);
+    }
   };
 
   const handleSubmit = (values) => {
@@ -47,7 +46,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
       }T${values.date}`,
     };
     console.log(filteredValues);
-    closeModal()
+    closeModal();
   };
 
   return (
@@ -60,7 +59,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
       onSubmit={handleSubmit}
       enableReinitialize={true}
     >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, errors }) => (
         <Form className="formWaterForm">
           <h4 className={css.title}>
             {type === "edit" ? "Correct entered data" : "Choose a value"}
@@ -106,7 +105,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
               Recording time
             </label>
             <Field
-              className={css.inputSize}
+              className={clsx(css.inputSize, errors.date && css.error)}
               type="text"
               name="date"
               id={timeId}
@@ -122,7 +121,7 @@ const WaterFormFormik = ({ date, type, waterAmount, waterId }) => {
               Enter the value of the water used
             </label>
             <Field
-              className={css.inputSize}
+              className={clsx(css.inputSize, errors.waterAmount && css.error)}
               type="text"
               name="waterAmount"
               id={waterFieldId}
