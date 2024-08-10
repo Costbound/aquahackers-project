@@ -3,22 +3,25 @@ import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import WaterItem from "../WaterItem/WaterItem";
 import css from "./WaterList.module.css";
 import { useSelector } from "react-redux";
-import { selectWaters } from "../../redux/water/selectors-water";
+import {selectIsWatersLoading, selectSelectedDate, selectWaters} from "../../redux/water/selectors-water";
 import { useDispatch } from "react-redux";
 import { fetchWater } from "../../redux/water/ops-water.js";
 import {
   changeDeleteWaterModalOpen,
   setSelectedWaterId,
 } from "../../redux/water/slice-water.js";
-import useScreenWidth from "../../helpers/useScreenWidth"; // Импортируем хелпер
+import useScreenWidth from "../../helpers/useScreenWidth";
+import Loader from "../Loader/Loader.jsx"; // Импортируем хелпер
 
 const WaterList = () => {
   const data = useSelector(selectWaters);
   const dispatch = useDispatch();
+  const selectedDate = useSelector(selectSelectedDate);
+  const isLoading = useSelector(selectIsWatersLoading)
 
   useEffect(() => {
-    dispatch(fetchWater());
-  }, []);
+    dispatch(fetchWater(selectedDate));
+  }, [dispatch]);
 
   const handleOpenModal = (id) => {
     dispatch(setSelectedWaterId(id));
@@ -69,6 +72,7 @@ const WaterList = () => {
         </div>
       ) : (
         <>
+          { isLoading ? <Loader /> : (
           <div className={css.waterList} ref={containerRef}>
             {data.map((item) => (
               <WaterItem
@@ -80,6 +84,7 @@ const WaterList = () => {
               />
             ))}
           </div>
+          )}
           {showSlider && (
             <div className={css.sliderContainer}>
               <input
