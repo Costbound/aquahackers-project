@@ -9,9 +9,6 @@ import Modal from "../../components/Modal/Modal.jsx";
 function HomePage() {
   return (
     <>
-        <Modal isOpen={true}>
-            <WaterModal type='add' waterId={'id'} waterAmount={700} date={'2022-06-23T23:27'} />
-        </Modal>
       <Helmet>
         <title>AquaTracker</title>
       </Helmet>
