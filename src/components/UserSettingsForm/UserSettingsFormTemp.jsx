@@ -197,15 +197,24 @@ export const UserSettingsForm = ({ onClose }) => {
             </div>
 
             <div className={css.infoWrapper}>
-              <label className={css.subtitle} htmlFor={nameId}>
-                Your name
-              </label>
-              <Field className={css.input} name="name" id={nameId} />
+              <div className={css.subInfoWrapper}>
+                <label className={css.subtitle} htmlFor={nameId}>
+                  Your name
+                </label>
+                <Field className={css.input} name="name" id={nameId} />
+              </div>
 
-              <label className={css.subtitle} htmlFor={emailId}>
-                Email
-              </label>
-              <Field className={css.input} name="email" id={emailId} disabled />
+              <div className={css.subInfoWrapper}>
+                <label className={css.subtitle} htmlFor={emailId}>
+                  Email
+                </label>
+                <Field
+                  className={css.input}
+                  name="email"
+                  id={emailId}
+                  disabled
+                />
+              </div>
             </div>
 
             <div className={css.normaWrapper}>
@@ -272,9 +281,13 @@ export const UserSettingsForm = ({ onClose }) => {
                 </p>
 
                 <span className={css.amount}>
-                  {!user.gender || !user.weight
-                    ? "Waiting for your metrics"
-                    : requiredWater + " L"}
+                  {!user.gender || !user.weight ? (
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      1.8 L
+                    </span>
+                  ) : (
+                    requiredWater + " L"
+                  )}
                 </span>
               </div>
 
