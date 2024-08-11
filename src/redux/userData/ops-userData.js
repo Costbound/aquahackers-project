@@ -27,7 +27,9 @@ export const updateUserData = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await axios.patch("/users/current", payload);
-      toast.success('Your data updated successfully.');
+      if (!payload.has('avatar')) {
+        toast.success('Your data updated successfully.');
+      }
       return res.data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({
