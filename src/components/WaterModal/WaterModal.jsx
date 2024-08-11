@@ -1,8 +1,8 @@
 import css from "./WaterModal.module.css";
-import WaterFormFormik from "../WaterForm/WaterFormFormik";
+import WaterForm from "../WaterForm/WaterForm.jsx";
 import { Toaster } from "react-hot-toast";
 
-const WaterModal = ({ waterAmount, date, type, waterId }) => {
+const WaterModal = ({ waterAmount, date, time, type, waterId }) => {
     // type can be 'add' or 'edit'
     // For add required props type, date by default current
   //   For edit required all props
@@ -13,9 +13,10 @@ const WaterModal = ({ waterAmount, date, type, waterId }) => {
         {type === "edit" ? "Edit the entered amount of water" : "Add water"}
       </h2>
 
-      <WaterFormFormik
+      <WaterForm
         waterAmount={waterAmount}
         date={date}
+        time={time}
         type={type}
         waterId={waterId}
       />

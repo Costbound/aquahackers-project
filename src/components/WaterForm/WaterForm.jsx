@@ -1,106 +1,157 @@
 import Button from "../Button/Button";
-// import { useState, useId } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useId, useContext } from "react";
 import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./WaterForm.module.css";
 import icon from "../../img/icons.svg";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import clsx from "clsx";
+import getCurrentTime from "../../helpers/getCurrentTime.js";
+import generateWaterString from "../../helpers/generateWaterString.js";
+import { ModalContext } from "../Modal/ModalProvider.jsx";
+import {useDispatch} from "react-redux";
+import {addWater, editWater} from "../../redux/water/ops-water.js";
 
-// import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const WaterValidSchema = Yup.object().shape({
-  waterAmount: Yup.string()
-    .min(50, "Мінімальна кількість 50ml")
-    .max(2000, "Максимальна кількість 2000ml")
-    .required("Кількість води обовʼязкова"),
-  date: Yup.string()
-    .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Невірний формат часу")
-    .required("Час обовʼязковий"),
-});
 
-const WaterForm = ({
-  date,
-  type,
-  waterAmount,
-  onWaterAmountChange,
-  onSubmit,
-  onDateChange,
-}) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(WaterValidSchema),
-    defaultValues: {
-      waterAmount,
-      date,
-    },
+const WaterForm = ({ date, time = getCurrentTime(), type, waterAmount, waterId }) => {
+  const { closeModal } = useContext(ModalContext);
+  const dispatch = useDispatch();
+  const waterValidSchema = Yup.object().shape({
+    waterAmount: Yup.number()
+      .min(50, "The minimum amount is 50 ml")
+      .max(2000, "The maximum amount is 2000 ml")
+      .required("Amount of water is required"),
+    time: Yup.string()
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format")
+      .required("Time is required"),
   });
 
-  const handleIncrement = () => onWaterAmountChange(waterAmount + 50);
-  const handleDecrement = () => onWaterAmountChange(waterAmount - 50);
+  const timeId = useId();
+  const waterFieldId = useId();
+
+  const [waterAmountState, setWaterAmountState] = useState(
+    type === "edit" ? waterAmount || 50 : 50
+  );
+
+  const handleChange = (e, setFieldValue) => {
+    const value = Number(e.target.value);
+    if (value < 2001) {
+      setWaterAmountState(value);
+      setFieldValue("waterAmount", value);
+    }
+  };
+
+  const handleSubmit = (values) => {
+    const filteredValues = {
+      waterAmount: Number(values.waterAmount),
+      date: `${date}T${values.time}`
+    };
+    if (type === "add") {
+      dispatch(addWater(filteredValues));
+    } else if (type === "edit") {
+      if (values.time !== time || filteredValues.waterAmount !== waterAmount) {
+        filteredValues.waterId = waterId
+        dispatch(editWater(filteredValues))
+      }
+    } else {
+      console.log('Wrong prop "type"')
+    }
+
+
+    closeModal();
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={css.title}>
-        {type === "edit" ? "Correct entered data" : "Choose a value"}
-      </h4>
-      <div className={css.inputAutomaticDiv}>
-        <h5 className={css.label}>Amount of water</h5>
-        <div className={css.btnAmount}>
-          <button
-            className={css.btnAmountChange}
-            type="button"
-            onClick={handleDecrement}
-          >
-            <svg className={css.svgIcon}>
-              <use href={`${icon}#icon-minus-for-modal-add-edit-water`} />
-            </svg>
-          </button>
-          <div className={css.inputAutomatic}>{waterAmount} ml</div>
-          <button
-            className={css.btnAmountChange}
-            type="button"
-            onClick={handleIncrement}
-          >
-            <svg className={css.svgIcon}>
-              <use href={`${icon}#icon-plus-for-modal-add-edit-water`} />
-            </svg>
-          </button>
-          {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
-        </div>
-      </div>
-      <div className={css.input}>
-        <label className={css.label} htmlFor="time">
-          Recording time
-        </label>
-        <input
-          className={css.inputSize}
-          id="time"
-          type="time"
-          {...register("date")}
-          value={date}
-          onChange={(e) => onDateChange(e.target.value)}
-        />
-        {errors.date && <p>{errors.date.message}</p>}
-      </div>
-      <div className={css.input}>
-        <label className={css.labelManual} htmlFor="waterManual">
-          Enter the value of the water used
-        </label>
-        <input
-          className={css.inputSize}
-          id="waterManual"
-          type="number"
-          {...register("waterAmount")}
-        />
-        {errors.waterAmount && <p>{errors.waterAmount.message}</p>}
-      </div>
-      <Button styleType="green" className={css.myButton}>
-        Save
-      </Button>
-    </form>
+    <Formik
+      initialValues={{
+        waterAmount: waterAmountState,
+        time
+      }}
+      validationSchema={waterValidSchema}
+      onSubmit={handleSubmit}
+      enableReinitialize={true}
+    >
+      {({ setFieldValue, errors }) => (
+        <Form className="formWaterForm">
+          <h4 className={css.title}>
+            {type === "edit" ? "Correct entered data" : "Choose a value"}
+          </h4>
+          <div className={css.inputAutomaticDiv}>
+            <h5 className={css.label}>Amount of water</h5>
+            <div className={css.btnAmount}>
+              <button
+                className={css.btnAmountChange}
+                type="button"
+                onClick={() => {
+                  if (waterAmountState > 50) {
+                    setWaterAmountState(waterAmountState - 50);
+                    setFieldValue("waterAmount", waterAmountState - 50);
+                  }
+                }}
+              >
+                <svg className={css.svgIcon}>
+                  <use href={`${icon}#icon-minus-for-modal-add-edit-water`} />
+                </svg>
+              </button>
+              <div className={css.inputAutomatic}>
+                {generateWaterString(waterAmountState)}
+              </div>
+              <button
+                className={css.btnAmountChange}
+                type="button"
+                onClick={() => {
+                  if (waterAmountState < 2000) {
+                    setWaterAmountState(waterAmountState + 50);
+                    setFieldValue("waterAmount", waterAmountState + 50);
+                  }
+                }}
+              >
+                <svg className={css.svgIcon}>
+                  <use href={`${icon}#icon-plus-for-modal-add-edit-water`} />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className={css.input}>
+            <label className={css.label} htmlFor={timeId}>
+              Recording time
+            </label>
+            <Field
+              className={clsx(css.inputSize, errors.time && css.error)}
+              type="text"
+              name="time"
+              id={timeId}
+            />
+            <ErrorMessage
+              className={clsx(css.formValid, css.formName)}
+              name="time"
+              component="span"
+            />
+          </div>
+          <div className={css.input}>
+            <label className={css.labelManual} htmlFor={waterFieldId}>
+              Enter the value of the water used
+            </label>
+            <Field
+              className={clsx(css.inputSize, errors.waterAmount && css.error)}
+              type="text"
+              name="waterAmount"
+              id={waterFieldId}
+              onChange={(e) => handleChange(e, setFieldValue)}
+            />
+            <ErrorMessage
+              className={clsx(css.formValid, css.formNum)}
+              name="waterAmount"
+              component="span"
+            />
+          </div>
+
+          <Button styleType="green" className={css.myButton} type="submit">
+            Save
+          </Button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

@@ -1,16 +1,18 @@
 import css from './AddWaterBtn.module.css';
 import icon from '../../img/icons.svg';
 import Button from '../../components/Button/Button.jsx'
-import Modal from '../Modal/Modal.jsx';
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import {ModalContext} from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
+import {useSelector} from "react-redux";
+import {selectTodayDate} from "../../redux/water/selectors-water.js";
 
 export default function AddWaterBtn() {
     const {openModal} = useContext(ModalContext)
+    const todayDate = useSelector(selectTodayDate)
 
     const handleModalOpen = () => {
-        openModal(<WaterModal type='add' />)
+        openModal(<WaterModal type='add' date={todayDate}/>)
     }
 
     return (

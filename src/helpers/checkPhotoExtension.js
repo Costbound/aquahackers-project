@@ -1,4 +1,4 @@
-const checkPhotoExtention = (photo) => {
+const checkPhotoExtension = (photo) => {
     const allowedMimeTypes = [
         'image/jpeg', // JPEG
         'image/png',  // PNG
@@ -10,4 +10,4 @@ const checkPhotoExtention = (photo) => {
     return allowedMimeTypes.includes(photo.type);
 }
 
-export default checkPhotoExtention;
+export default checkPhotoExtension;

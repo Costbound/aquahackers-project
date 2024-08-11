@@ -56,10 +56,11 @@ const waterSlice = createSlice({
       .addCase(editWater.fulfilled, (state, action) => {
         state.isLoading = false;
         const index = state.selectedDay.items.findIndex(
-          (item) => item.id === action.payload.id
+          (item) => item._id === action.payload._id
         );
-        // state.selectedDay.items ?????!!
-        state.selectedDay.items[index] = action.payload;
+        state.selectedDay.items[index].waterAmount = action.payload.waterAmount;
+        state.selectedDay.items[index].date = action.payload.date;
+        state.selectedDay.items[index].updatedAt = action.payload.updatedAt;
       })
       .addCase(fetchWater.pending, handlePending)
       .addCase(fetchWater.fulfilled, (state, action) => {
