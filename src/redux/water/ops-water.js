@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { date } from "yup";
+import { toast } from "react-hot-toast";
 
 export const fetchMonth = createAsyncThunk(
   "fetchMonth",
@@ -14,7 +14,10 @@ export const fetchMonth = createAsyncThunk(
       );
       return responce.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
   }
 );
@@ -23,80 +26,92 @@ export const fetchWater = createAsyncThunk(
   "water/fetchWater",
   async (date, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `/water/day?date=${date}`
-      );
+      const response = await axios.get(`/water/day?date=${date}`);
       return response.data.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(true);
+    } catch (error) {
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
   }
 );
 
 export const addWater = createAsyncThunk(
   "addWater",
-  async (newWater, thunkApi) => {
+  async (newWater, thunkAPI) => {
     try {
       const response = await axios.post("/water", newWater);
+      toast.success("Water added successfully");
       return response.data.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
   }
 );
 
 export const editWater = createAsyncThunk(
   "editWater",
-  async (data, thunkApi) => {
+  async (data, thunkAPI) => {
     try {
       const response = await axios.patch(`/water/${data.waterId}`, {
-          waterAmount: data.waterAmount,
-          date: data.date,
+        waterAmount: data.waterAmount,
+        date: data.date,
       });
+      toast.success("Water updated successfully");
       return response.data.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
   }
 );
 
 export const deleteWater = createAsyncThunk(
   "water/deleteWater",
-  async (waterId, { rejectWithValue }) => {
+  async (waterId, thunkAPI) => {
     try {
-      const response = await axios.delete(
-        `/water/${waterId}`
-      );
-
+      const response = await axios.delete(`/water/${waterId}`);
+      toast.success("Water deleted successfully");
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
   }
 );
 
 export const updateProgress = createAsyncThunk(
-    'water/getTodayProgress',
-    async (_, thunkApi) => {
-        try {
-            const state = thunkApi.getState()
-            const dispatch = thunkApi.dispatch
-            const today = state.water.todayDate
+  "water/getTodayProgress",
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const dispatch = thunkAPI.dispatch;
+      const today = state.water.todayDate;
 
-            // Update todayProgress
-            const response = await axios.get(
-                `/water/day?date=${today}`
-            );
+      // Update todayProgress
+      const response = await axios.get(`/water/day?date=${today}`);
 
-            dispatch(fetchMonth({
-                year: state.water.year,
-                month: state.water.month,
-            }))
+      dispatch(
+        fetchMonth({
+          year: state.water.year,
+          month: state.water.month,
+        })
+      );
 
-            return response.data.data.dailyProgress;
-        } catch (err) {
-            thunkApi.rejectWithValue(err.response?.data )
-        }
+      return response.data.data.dailyProgress;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.message,
+      });
     }
-)
-
+  }
+);

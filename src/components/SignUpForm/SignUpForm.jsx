@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { signup } from "../../redux/auth/ops-auth";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import screenWidth from "../../helpers/screenWidth.js";
 import ShowPwdButton from "../ShowPwdButton/ShowPwdButton.jsx";
 import Loader from "../Loader/Loader"; // Импортируем ваш компонент Loader
@@ -79,7 +79,6 @@ const SignUpForm = () => {
 
   return (
     <div>
-      <Toaster position="top-center" />
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <h2 className={css.formTitle}>Sign Up</h2>
         <label className={css.label}>Email</label>
