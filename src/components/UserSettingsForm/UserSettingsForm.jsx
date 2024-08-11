@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
 import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
-import {useContext, useId, useState} from "react";
+import { useContext, useId, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { getTodayProgress } from "../../redux/water/ops-water.js";
@@ -12,7 +12,7 @@ import defaultAvatar from "../../img/avatar.png";
 import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
 import Loader from "../Loader/Loader";
 import icon from "../../img/icons.svg";
-import {ModalContext} from "../Modal/ModalProvider.jsx";
+import { ModalContext } from "../Modal/ModalProvider.jsx";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -30,8 +30,8 @@ const schema = yup.object().shape({
   weight: yup
     .number()
     .nullable()
-    .min(20, "Weight must be greater than or equal to 20")
-    .max(600, "Weight must be less than or equal to 600"),
+    .min(0, "Weight must be greater than or equal to 0")
+    .max(250, "Weight must be less than or equal to 250"),
 
   activityTime: yup
     .number()
@@ -71,7 +71,7 @@ const CustomRadioButton = ({ field, label }) => {
 };
 
 export const UserSettingsForm = () => {
-  const {closeModal} = useContext(ModalContext)
+  const { closeModal } = useContext(ModalContext);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const avatarId = useId();
@@ -95,9 +95,9 @@ export const UserSettingsForm = () => {
     if (checkPhotoExtension(avatar)) {
       const formData = new FormData();
       formData.append("avatar", avatar);
-      setIsUploading(true); // Показать лоудер
+      setIsUploading(true);
       await dispatch(updateUserData(formData));
-      setIsUploading(false); // Скрыть лоудер
+      setIsUploading(false);
     } else {
       console.log("This photo format is not supported");
     }
@@ -119,16 +119,16 @@ export const UserSettingsForm = () => {
       formData.append("sportTime", Number(values.activityTime));
       formData.append("waterRate", Number(values.desiredVolume) * 1000);
 
-      setIsSubmitting(true); // Показать лоудер
+      setIsSubmitting(true);
       await dispatch(updateUserData(formData));
 
       if (filteredValues.waterRate !== user.waterRate) {
         await dispatch(getTodayProgress());
       }
-      setIsSubmitting(false); // Скрыть лоудер
+      setIsSubmitting(false);
     } catch (error) {
       console.log(error);
-      setIsSubmitting(false); // Скрыть лоудер в случае ошибки
+      setIsSubmitting(false);
     }
     closeModal();
   };
@@ -139,7 +139,7 @@ export const UserSettingsForm = () => {
         name: user.name,
         email: user.email,
         gender: user.gender,
-        weight: user.weight,
+        weight: user.weight || 0,
         activityTime: user.sportTime,
         desiredVolume: user.waterRate / 1000,
         avatar: user.avatar,
@@ -149,28 +149,30 @@ export const UserSettingsForm = () => {
     >
       <Form className={css.wrapper}>
         <div className={css.avatarWrapper}>
-          {isUploading ?
-              <Loader type='avatar' /> :
-              <img
-                  className={css.avatar}
-                  src={user.avatar || defaultAvatar}
-                  alt="Avatar"
-              />}
-              <input
-                className={css.hiddenFileInput}
-                type="file"
-                name="avatar"
-                id={avatarId}
-                placeholder="Upload Photo"
-                onChange={handleUploadPhoto}
-                disabled={isUploading}
-              />
-              <label htmlFor={avatarId} className={css.fileLabel}>
-                <svg className={css.svgIconUpload}>
-                  <use href={`${icon}#icon-upload-photo`} />
-                </svg>
-                Upload Photo
-              </label>
+          {isUploading ? (
+            <Loader type="avatar" />
+          ) : (
+            <img
+              className={css.avatar}
+              src={user.avatar || defaultAvatar}
+              alt="Avatar"
+            />
+          )}
+          <input
+            className={css.hiddenFileInput}
+            type="file"
+            name="avatar"
+            id={avatarId}
+            placeholder="Upload Photo"
+            onChange={handleUploadPhoto}
+            disabled={isUploading}
+          />
+          <label htmlFor={avatarId} className={css.fileLabel}>
+            <svg className={css.svgIconUpload}>
+              <use href={`${icon}#icon-upload-photo`} />
+            </svg>
+            Upload Photo
+          </label>
         </div>
 
         <div className={css.settingsWrapper}>
@@ -273,7 +275,13 @@ export const UserSettingsForm = () => {
                 <label className={css.text} htmlFor={weightId}>
                   Your weight in kilograms:
                 </label>
-                <Field className={css.input} name="weight" id={weightId} />
+                <Field
+                  className={css.input}
+                  name="weight"
+                  id={weightId}
+                  type="number"
+                  min="0"
+                />
               </div>
 
               <div className={css.metricsSubWrapper}>
