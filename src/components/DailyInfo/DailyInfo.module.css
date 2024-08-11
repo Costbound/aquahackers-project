@@ -1,11 +1,21 @@
+.dailyInfo {
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+}
+
+
 .dailyInfoContainer {
     display: flex;
     align-items: center;
-    gap:80px;
+    justify-content: space-between;
     margin-bottom: 24px;
 }
 
 @media screen and (min-width: 768px) {
+    .dailyInfo {
+        height: 174px;
+    }
     .dailyInfoContainer {
         gap: 53px;
     }

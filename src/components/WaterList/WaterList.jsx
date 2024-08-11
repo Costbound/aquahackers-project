@@ -81,7 +81,6 @@ const WaterList = () => {
             ))}
           </div>
           {showSlider && (
-            <div className={css.sliderContainer}>
               <input
                 type="range"
                 min="0"
@@ -90,7 +89,6 @@ const WaterList = () => {
                 className={css.slider}
                 onChange={handleSliderChange}
               />
-            </div>
           )}
         </>
       )}
