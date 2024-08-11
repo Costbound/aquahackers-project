@@ -10,7 +10,7 @@
 .emptyMessage {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: 25px;
     height: 100%;
 }
 
@@ -19,6 +19,7 @@
     font-size: 24px;
     line-height: 24px;
     color: #323F47;
+    margin-top: 10px;
 }
 
 .waterDescription {
@@ -70,6 +71,10 @@
 
     .slider::-webkit-slider-thumb {
         width: 235px;
+    }
+
+    .emptyMessage {
+        gap: 40px;
     }
 }
 
