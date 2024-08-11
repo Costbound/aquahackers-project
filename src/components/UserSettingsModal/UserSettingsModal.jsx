@@ -1,4 +1,4 @@
-import { UserSettingsForm } from "../UserSettingsForm/UserSettingsFormTemp.jsx";
+import { UserSettingsForm } from "../UserSettingsForm/UserSettingsForm.jsx";
 import css from "./UserSettingsModal.module.css";
 
 const UserSettingsModal = ({onClose}) => {

@@ -1,14 +1,18 @@
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.css';
-import { FormValidateError } from '../FormValidateError/FormValidateError';
-import { calcRequiredWater } from '../../helpers/calcRequiredWater.js';
-import { selectUser } from '../../redux/userData/selectors-userData.js';
-// import { Modal } from '../Modal/Modal.jsx';
-import { useState } from 'react';
-// import { PasswordChangeModal } from '../PasswordChangeModal/PasswordChangeModal.jsx';
+import css from "./UserSettingsForm.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
+import { selectUser } from "../../redux/userData/selectors-userData.js";
+import Button from "../Button/Button.jsx";
+import { useContext, useId, useState } from "react";
+import { Formik, Form, Field } from "formik";
+import { updateUserData } from "../../redux/userData/ops-userData.js";
+import { getTodayProgress } from "../../redux/water/ops-water.js";
+import defaultAvatar from "../../img/avatar.png";
+import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
+import Loader from "../Loader/Loader";
+import icon from "../../img/icons.svg";
+import { ModalContext } from "../Modal/ModalProvider.jsx";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -16,221 +20,217 @@ const schema = yup.object().shape({
   gender: yup
     .string()
     .nullable()
-    .oneOf(['Woman', 'Man'], 'Please select your gender'),
+    .oneOf(["woman", "man"], "Please select your gender"),
 
   name: yup
     .string()
-    .min(2, 'Name must be greater than or equal to 2 characters long')
-    .max(40, 'Name must be less than or equal to 40 characters long'),
-
-  email: yup.string().email('Please enter a valid email address'),
+    .min(2, "Name must be greater than or equal to 2 characters long")
+    .max(40, "Name must be less than or equal to 40 characters long"),
 
   weight: yup
     .number()
     .nullable()
-    .min(20, 'Weight must be greater than or equal to 20')
-    .max(600, 'Weight must be less than or equal to 600')
-    .transform((value, originalValue) => {
-      if (originalValue === '') return null;
-      return value;
-    }),
+    .min(0, "Weight must be greater than or equal to 0")
+    .max(250, "Weight must be less than or equal to 250"),
 
   activityTime: yup
     .number()
     .nullable()
     .min(0)
-    .max(12, 'Time must be less than or equal to 12')
-    .transform((value, originalValue) => {
-      if (originalValue === '') return null;
-      return value;
-    }),
+    .max(12, "Time must be less than or equal to 12"),
 
   desiredVolume: yup
-    .string()
+    .number()
     .nullable()
-    .transform((value, originalValue) => {
-      if (originalValue === '') return null;
-      return value;
-    })
-    .test('is-decimal', 'Please enter a valid number', (value) => {
-      if (value === undefined || value === null || value === '') return true;
+    .test("is-decimal", "Please enter a valid number", (value) => {
+      if (value === undefined || value === null || value === "") return true;
       return !isNaN(parseFloat(value)) && isFinite(value);
     })
     .test(
-      'min-value',
-      'Value must be greater than or equal to 0.1',
+      "min-value",
+      "Value must be greater than or equal to 0.1",
       (value) => {
-        if (value === undefined || value === null || value === '') return true;
+        if (value === undefined || value === null || value === "") return true;
         return parseFloat(value) >= 0.1;
       }
     )
-    .test('max-value', 'Value must be less than or equal to 31.2', (value) => {
-      if (value === undefined || value === null || value === '') return true;
-      return parseFloat(value) <= 31.2;
+    .test("max-value", "Value must be less than or equal to 99", (value) => {
+      if (value === undefined || value === null || value === "") return true;
+      return parseFloat(value) <= 99;
     }),
 });
 
-export const UserSettingsForm = ({ onClose }) => {
-  const [isPassModalOpen, setIsPassModalOpen] = useState(false);
+const CustomRadioButton = ({ field, label }) => {
+  return (
+    <label className={css.customRadio}>
+      <input type="radio" {...field} />
+      <span className={css.checkmark}></span>
+      {label}
+    </label>
+  );
+};
 
-  const openModal = () => setIsPassModalOpen(true);
-
-  const closeModal = () => setIsPassModalOpen(false);
-
+export const UserSettingsForm = () => {
+  const { closeModal } = useContext(ModalContext);
   const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
+  const avatarId = useId();
+  const nameId = useId();
+  const emailId = useId();
+  const weightId = useId();
+  const waterRateId = useId();
+  const maleId = useId();
+  const femaleId = useId();
+  const sportsId = useId();
+  const requiredWater = calcRequiredWater(
+    user.gender,
+    user.weight,
+    user.activityTime
+  );
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      gender: user.gender,
-      name: user.name,
-      email: user.email,
-      weight: user.weight,
-      activityTime: user.activityTime,
-      desiredVolume: user.desiredVolume / 1000,
-    },
-  });
-
-  const onSubmit = async (data) => {
-    if (Object.keys(errors).length > 0) {
-      return;
+  const [isUploading, setIsUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleUploadPhoto = async (e) => {
+    const avatar = e.target.files[0];
+    if (checkPhotoExtension(avatar)) {
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+      setIsUploading(true);
+      await dispatch(updateUserData(formData));
+      setIsUploading(false);
+    } else {
+      console.log("This photo format is not supported");
     }
-
-    data.desiredVolume = data.desiredVolume * 1000;
-
-    const formData = new FormData();
-
-    for (const key in data) {
-      if (key === 'avatar') {
-        if (data[key][0] !== undefined) {
-          formData.append(key, data[key][0]);
-        }
-        continue;
-      }
-
-      if (data[key] === '' || data[key] === undefined || data[key] === null) {
-        continue;
-      }
-      formData.append(key, data[key]);
-    }
-
-    const response = await dispatch(currentEdit(formData));
-    response.meta.requestStatus === 'fulfilled' && onClose();
   };
 
-  const { avatar, gender, name, email, weight, activityTime, desiredVolume } =
-    watch();
+  const handleSubmit = async (values) => {
+    const filteredValues = {
+      name: values.name,
+      weight: Number(values.weight),
+      gender: values.gender,
+      sportTime: Number(values.activityTime),
+      waterRate: Number(values.desiredVolume) * 1000,
+    };
+    try {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("weight", Number(values.weight));
+      formData.append("gender", values.gender);
+      formData.append("sportTime", Number(values.activityTime));
+      formData.append("waterRate", Number(values.desiredVolume) * 1000);
 
-  const isAnyFieldFilled =
-    avatar ||
-    gender ||
-    name ||
-    email ||
-    weight ||
-    activityTime ||
-    desiredVolume;
+      setIsSubmitting(true);
+      await dispatch(updateUserData(formData));
 
-  const requiredWater = calcRequiredWater(gender, weight, activityTime);
+      if (filteredValues.waterRate !== user.waterRate) {
+        await dispatch(getTodayProgress());
+      }
+      setIsSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      setIsSubmitting(false);
+    }
+    closeModal();
+  };
 
   return (
-    <>
-      <form className={css.wrapper} onSubmit={handleSubmit(onSubmit)}>
+    <Formik
+      initialValues={{
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+        weight: user.weight || 0,
+        activityTime: user.sportTime,
+        desiredVolume: user.waterRate / 1000,
+        avatar: user.avatar,
+      }}
+      onSubmit={handleSubmit}
+      validationSchema={schema}
+    >
+      <Form className={css.wrapper}>
         <div className={css.avatarWrapper}>
-          <img className={css.avatar} src={user.avatarURL} alt="Avatar" />
-
-          {!avatar || avatar.length === 0 ? (
-            <>
-              <input
-                {...register('avatar')}
-                className={css.hiddenFileInput}
-                type="file"
-                name="avatar"
-                id="avatar"
-                placeholder={'Upload a photo'}
-              />
-              <label htmlFor="avatar" className={css.fileLabel}>
-                Upload a photo
-              </label>
-            </>
+          {isUploading ? (
+            <Loader type="avatar" />
           ) : (
-            <strong className={css.avatarName}>{avatar[0].name}</strong>
+            <img
+              className={css.avatar}
+              src={user.avatar || defaultAvatar}
+              alt="Avatar"
+            />
           )}
-          {errors.avatar && (
-            <FormValidateError message={errors.avatar.message} />
-          )}
+          <input
+            className={css.hiddenFileInput}
+            type="file"
+            name="avatar"
+            id={avatarId}
+            placeholder="Upload Photo"
+            onChange={handleUploadPhoto}
+            disabled={isUploading}
+          />
+          <label htmlFor={avatarId} className={css.fileLabel}>
+            <svg className={css.svgIconUpload}>
+              <use href={`${icon}#icon-upload-photo`} />
+            </svg>
+            Upload Photo
+          </label>
         </div>
 
         <div className={css.settingsWrapper}>
           <div className={css.leftDesktopWrapper}>
             <div className={css.genderWrapper}>
               <p className={css.subtitle}>Your gender identity</p>
-              <input
-                {...register('gender')}
-                className={css.hiddenRadioInput}
-                type="radio"
-                name="gender"
-                id="woman"
-                value="Woman"
-              />
-              <label
-                className={`${css.text} ${css.genderLabel}`}
-                htmlFor="woman"
-              >
-                Woman
-              </label>
+              <div className={css.radiobuttonWrapper}>
+                <Field
+                  className={css.hiddenRadioInput}
+                  type="radio"
+                  name="gender"
+                  id={femaleId}
+                  value="woman"
+                  component={CustomRadioButton}
+                />
+                <label
+                  className={`${css.text} ${css.genderLabel}`}
+                  htmlFor={femaleId}
+                >
+                  Woman
+                </label>
 
-              <input
-                {...register('gender')}
-                className={css.hiddenRadioInput}
-                type="radio"
-                name="gender"
-                id="man"
-                value="Man"
-              />
-              <label className={`${css.text} ${css.genderLabel}`} htmlFor="man">
-                Man
-              </label>
-
-              {errors.gender && (
-                <FormValidateError message={errors.gender.message} />
-              )}
+                <Field
+                  className={css.hiddenRadioInput}
+                  type="radio"
+                  name="gender"
+                  id={maleId}
+                  value="man"
+                  component={CustomRadioButton}
+                />
+                <label
+                  className={`${css.text} ${css.genderLabel}`}
+                  htmlFor={maleId}
+                >
+                  Man
+                </label>
+              </div>
             </div>
 
             <div className={css.infoWrapper}>
-              <label className={css.subtitle} htmlFor="name">
-                Your name
-              </label>
-              <input
-                {...register('name')}
-                className={css.input}
-                type="text"
-                name="name"
-                id="name"
-              />
-              {errors.name && (
-                <FormValidateError message={errors.name.message} />
-              )}
+              <div className={css.subInfoWrapper}>
+                <label className={css.subtitle} htmlFor={nameId}>
+                  Your name
+                </label>
+                <Field className={css.input} name="name" id={nameId} />
+              </div>
 
-              <label className={css.subtitle} htmlFor="email">
-                Email
-              </label>
-              <input
-                {...register('email')}
-                className={css.input}
-                type="text"
-                name="email"
-                id="email"
-              />
-              {errors.email && (
-                <FormValidateError message={errors.email.message} />
-              )}
+              <div className={css.subInfoWrapper}>
+                <label className={css.subtitle} htmlFor={emailId}>
+                  Email
+                </label>
+                <Field
+                  className={css.input}
+                  name="email"
+                  id={emailId}
+                  disabled
+                />
+              </div>
             </div>
 
             <div className={css.normaWrapper}>
@@ -260,41 +260,40 @@ export const UserSettingsForm = ({ onClose }) => {
                 must set 0)
               </p>
 
-              <span className={`${css.text} ${css.footnote}`}>
-                Active time in hours
-              </span>
+              <div className={css.textContainer}>
+                <svg className={css.svgExclamation}>
+                  <use href={`${icon}#icon-exclamation-for-settings`} />
+                </svg>
+                <p className={css.text}>Active time in hours</p>
+              </div>
             </div>
           </div>
 
           <div className={css.rightDesktopWrapper}>
             <div className={css.metricsWrapper}>
-              <label className={css.text} htmlFor="weight">
-                Your weight in kilograms:
-              </label>
-              <input
-                {...register('weight')}
-                className={css.input}
-                type="number"
-                name="weight"
-                id="weight"
-              />
-              {errors.weight && (
-                <FormValidateError message={errors.weight.message} />
-              )}
+              <div className={css.metricsSubWrapper}>
+                <label className={css.text} htmlFor={weightId}>
+                  Your weight in kilograms:
+                </label>
+                <Field
+                  className={css.input}
+                  name="weight"
+                  id={weightId}
+                  type="number"
+                  min="0"
+                />
+              </div>
 
-              <label className={css.text} htmlFor="activityTime">
-                The time of active participation in sports:
-              </label>
-              <input
-                {...register('activityTime')}
-                className={css.input}
-                type="number"
-                name="activityTime"
-                id="activityTime"
-              />
-              {errors.activityTime && (
-                <FormValidateError message={errors.activityTime.message} />
-              )}
+              <div className={css.metricsSubWrapper}>
+                <label className={css.text} htmlFor={sportsId}>
+                  The time of active participation in sports:
+                </label>
+                <Field
+                  className={css.input}
+                  name="activityTime"
+                  id={sportsId}
+                />
+              </div>
             </div>
 
             <div className={css.waterAmountWrapper}>
@@ -304,52 +303,38 @@ export const UserSettingsForm = ({ onClose }) => {
                 </p>
 
                 <span className={css.amount}>
-                  {!gender || !weight
-                    ? 'Waiting for your metrics'
-                    : requiredWater + ' L'}
+                  {!user.gender || !user.weight ? (
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      1.8 L
+                    </span>
+                  ) : (
+                    requiredWater + " L"
+                  )}
                 </span>
               </div>
 
-              <label className={css.subtitle} htmlFor="desiredVolume">
-                Write down how much water you will drink:
-              </label>
-              <input
-                {...register('desiredVolume')}
-                className={css.input}
-                type="text"
-                name="desiredVolume"
-                id="desiredVolume"
-              />
-              {errors.desiredVolume && (
-                <FormValidateError message={errors.desiredVolume.message} />
-              )}
-
-              <button
-                type="button"
-                className={css.changePassword}
-                onClick={openModal}
-              >
-                Change password
-              </button>
+              <div className={css.volumeWrapper}>
+                <label className={css.subtitle} htmlFor={waterRateId}>
+                  Write down how much water you will drink:
+                </label>
+                <Field
+                  className={css.input}
+                  name="desiredVolume"
+                  id={waterRateId}
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <button
-          className={css.submitButton}
-          type="submit"
-          disabled={!isAnyFieldFilled}
-        >
-          Save
-        </button>
-      </form>
-
-      {/*<Modal isOpen={isPassModalOpen} onClose={closeModal}>*/}
-      {/*  <PasswordChangeModal closeModal={closeModal} />*/}
-      {/*</Modal>*/}
-    </>
+        <Button styleType="green" className={css.submitButton} type="submit">
+          {isSubmitting ? (
+            <Loader type="button" width="20" height="20" color="#fff" />
+          ) : (
+            "Save"
+          )}
+        </Button>
+      </Form>
+    </Formik>
   );
 };
-
-
- 
