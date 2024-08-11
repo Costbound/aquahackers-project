@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://final-team-pr-backend.onrender.com";
+const URL = "http://localhost:3000";
 
 // Настройки заголовков по умолчанию
 const headerConfig = {

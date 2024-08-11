@@ -16,11 +16,10 @@ const waterSlice = createSlice({
   name: "water",
   initialState: {
     selectedMonthWater: [],
-    month: new Date().getMonth(),
+    month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
     todayDate: getTodayDate(),
     todayProgress: 0,
-    isLoading: false,
     selectedDay: {
       items: [],
       progress: 0,
@@ -39,22 +38,14 @@ const waterSlice = createSlice({
       .addCase(fetchMonth.fulfilled, (state, action) => {
         state.selectedMonthWater = action.payload.data.monthlyWater;
       })
-      .addCase(addWater.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(addWater.fulfilled, (state, action) => {
-        state.isLoading = false;
+        const payloadDate = action.payload.date.slice(0, action.payload.date.indexOf("T"))
+        if (payloadDate === state.todayDate && state.selectedDay.date !== state.todayDate) {
+          return
+        }
         state.selectedDay.items.push(action.payload);
       })
-      // .addCase(addWater.rejected, (state) => {
-      //   state.isLoading = false;
-      //   state.error = true;
-      // })
-      .addCase(editWater.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(editWater.fulfilled, (state, action) => {
-        state.isLoading = false;
         const index = state.selectedDay.items.findIndex(
           (item) => item._id === action.payload._id
         );

@@ -11,7 +11,7 @@ import axios from "axios";
 import { HelmetProvider } from "react-helmet-async";
 import {ModalProvider} from "./components/Modal/ModalProvider.jsx"; // Добавил для улучшения в поисковых системах, по заголовкам/мета тегам
 
-axios.defaults.baseURL = "https://final-team-pr-backend.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3000";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
