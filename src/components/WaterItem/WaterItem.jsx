@@ -34,9 +34,11 @@ const WaterItem = ({ id, amount, dateTime }) => {
 
   return (
     <div className={css.waterItemContainer}>
-      <svg className={css.svgIconWater}>
-        <use href={`${icon}#icon-glass-of-water`} />
-      </svg>
+      <div className={css.svgIconWaterContainer}>
+        <svg className={css.svgIconWater}>
+          <use  href={`${icon}#icon-glass-of-water`} />
+        </svg>
+      </div>
       <div className={css.waterInfo}>
         <span className={css.amount}>{generateWaterString (amount)}</span>
         <span className={css.time}>{time}</span>
