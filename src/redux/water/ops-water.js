@@ -2,8 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { date } from "yup";
 
-axios.defaults.baseURL = "https://final-team-pr-backend.onrender.com";
-
 export const fetchMonth = createAsyncThunk(
   "fetchMonth",
   async (payload, thunkAPI) => {
@@ -25,9 +23,7 @@ export const fetchWater = createAsyncThunk(
   "water/fetchWater",
   async (date, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `https://final-team-pr-backend.onrender.com/water/day?date=${date}`
-      );
+      const response = await axios.get(`/water/day?date=${date}`);
       return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(true);
@@ -66,14 +62,9 @@ export const deleteWater = createAsyncThunk(
   "water/deleteWater",
   async (waterId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(
-        `https://final-team-pr-backend.onrender.com/water/${waterId}`
-      );
-      if (response.status === 204) {
-        console.log("success");
-        return waterId; // Возвращаем waterId для удаления из состояния
-      }
-      return rejectWithValue(response.data);
+      const response = await axios.delete(`/water/${waterId}`);
+
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -84,9 +75,7 @@ export const getTodayProgress = createAsyncThunk(
   "water/getTodayProgress",
   async (_, thunkApi) => {
     try {
-      const response = await axios.get(
-        `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
-      );
+      const response = await axios.get(`/water/day?date=2024-04-13`);
       return response.data.data.dailyProgress;
     } catch (err) {
       thunkApi.rejectWithValue(err.response?.data);
