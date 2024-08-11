@@ -8,7 +8,8 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
-import {ModalProvider} from "../Modal/ModalProvider.jsx";
+import { ModalProvider } from "../Modal/ModalProvider.jsx";
+import ChartComponent from "../Statistics/ChartComponent.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));
@@ -54,7 +55,9 @@ export default function App() {
               redirectTo="/signin"
             />
           }
-        />
+        >
+          <Route path="statistics" element={<ChartComponent />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

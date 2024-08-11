@@ -9,7 +9,7 @@ export const fetchMonth = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responce = await axios.get(
-        `/water/month?date=${payload.year}-${String(payload.month).padStart(
+        `/water/month?date=${payload.year}-${String(payload.month + 1).padStart(
           2,
           "0"
         )}`
@@ -52,8 +52,8 @@ export const editWater = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       const response = await axios.patch(`/water/${data.waterId}`, {
-          waterAmount: data.waterAmount,
-          date: data.date,
+        waterAmount: data.waterAmount,
+        date: data.date,
       });
       return response.data.data;
     } catch (error) {
@@ -81,16 +81,15 @@ export const deleteWater = createAsyncThunk(
 );
 
 export const getTodayProgress = createAsyncThunk(
-    'water/getTodayProgress',
-    async (_, thunkApi) => {
-        try {
-            const response = await axios.get(
-                `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
-            );
-            return response.data.data.dailyProgress;
-        } catch (err) {
-            thunkApi.rejectWithValue(err.response?.data )
-        }
+  "water/getTodayProgress",
+  async (_, thunkApi) => {
+    try {
+      const response = await axios.get(
+        `https://final-team-pr-backend.onrender.com/water/day?date=2024-04-13`
+      );
+      return response.data.data.dailyProgress;
+    } catch (err) {
+      thunkApi.rejectWithValue(err.response?.data);
     }
-)
-
+  }
+);

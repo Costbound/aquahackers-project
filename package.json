@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
+    "@mui/material": "^5.16.7",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.3",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "formik": "^2.4.6",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
@@ -27,6 +30,7 @@
     "react-redux": "^9.1.2",
     "react-router": "^6.25.1",
     "react-router-dom": "^6.26.0",
+    "recharts": "^2.12.7",
     "redux": "^5.0.1",
     "reset-css": "^5.0.2",
     "yup": "^1.4.0"
