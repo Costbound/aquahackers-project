@@ -7,7 +7,7 @@ import Button from "../Button/Button.jsx";
 import { useContext, useId, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
-import { getTodayProgress } from "../../redux/water/ops-water.js";
+import { updateProgress} from "../../redux/water/ops-water.js";
 import defaultAvatar from "../../img/avatar.png";
 import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
 import Loader from "../Loader/Loader";
@@ -123,7 +123,7 @@ export const UserSettingsForm = () => {
       await dispatch(updateUserData(formData));
 
       if (filteredValues.waterRate !== user.waterRate) {
-        await dispatch(getTodayProgress());
+        await dispatch(updateProgress());
       }
       setIsSubmitting(false);
     } catch (error) {
