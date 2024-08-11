@@ -39,29 +39,46 @@ const waterSlice = createSlice({
         state.selectedMonthWater = action.payload.data.monthlyWater;
       })
       .addCase(addWater.fulfilled, (state, action) => {
-        const payloadDate = action.payload.date.slice(0, action.payload.date.indexOf("T"))
-        if (payloadDate === state.todayDate && state.selectedDay.date !== state.todayDate) {
+        const {date, updatedDailyProgress, water} = action.payload
+
+        // Update today progress if selected day is today
+        if (date === state.todayDate) {
+          state.todayProgress = updatedDailyProgress;
+        }
+
+        // Return to avoid push when add triggered from page with progressbar for today and selected date is not today
+        if (date === state.todayDate && state.selectedDay.date !== state.todayDate) {
           return
         }
-        state.selectedDay.items.push(action.payload);
+        state.selectedDay.items.push(water);
       })
       .addCase(editWater.fulfilled, (state, action) => {
+        const {date, updatedDailyProgress, water} = action.payload
+
+        // Update today progress if selected day is today
+        if (date === state.todayDate) {
+          state.todayProgress = updatedDailyProgress
+        }
+
         const index = state.selectedDay.items.findIndex(
-          (item) => item._id === action.payload._id
+          (item) => item._id === water._id
         );
-        state.selectedDay.items[index].waterAmount = action.payload.waterAmount;
-        state.selectedDay.items[index].date = action.payload.date;
-        state.selectedDay.items[index].updatedAt = action.payload.updatedAt;
+        state.selectedDay.items[index].waterAmount = water.waterAmount
+        state.selectedDay.items[index].date = water.date
+        state.selectedDay.items[index].updatedAt = water.updatedAt
       })
       .addCase(fetchWater.pending, handlePending)
       .addCase(fetchWater.fulfilled, (state, action) => {
+        const {date, dailyProgress, waters} = action.payload
         state.selectedDay.loading = false;
         state.selectedDay.error = null;
-        state.selectedDay.items = action.payload.waters;
-        if (state.todayDate !== getTodayDate()) {
-          state.todayDate = getTodayDate();
-          state.todayProgress = action.payload.dailyProgress;
+
+        // Update today progress if selected day is today
+        if (date === state.todayDate) {
+          state.todayProgress = dailyProgress
         }
+
+        state.selectedDay.items = waters
       })
       .addCase(fetchWater.rejected, (state, action) => {
         console.log("Failed to fetch water data:", action.payload);
@@ -70,10 +87,17 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWater.pending, handlePending)
       .addCase(deleteWater.fulfilled, (state, action) => {
+        const {date, updatedDailyProgress, water: payloadWater} = action.payload
         state.selectedDay.loading = false;
         state.selectedDay.error = null;
+
+        // Update today progress if selected day is today
+        if (date === state.todayDate) {
+          state.todayProgress = updatedDailyProgress
+        }
+
         state.selectedDay.items = state.selectedDay.items.filter(
-          (water) => water._id !== action.payload
+          (water) => water._id !== payloadWater._id
         );
       })
       .addCase(deleteWater.rejected, handleRejected)

@@ -67,11 +67,8 @@ export const deleteWater = createAsyncThunk(
       const response = await axios.delete(
         `/water/${waterId}`
       );
-      if (response.status === 204) {
-        console.log("success");
-        return waterId; // Возвращаем waterId для удаления из состояния
-      }
-      return rejectWithValue(response.data);
+
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
