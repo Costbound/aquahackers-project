@@ -85,7 +85,7 @@ export const UserSettingsForm = () => {
   const requiredWater = calcRequiredWater(
     user.gender,
     user.weight,
-    user.activityTime
+    user.sportTime
   );
 
   const [isUploading, setIsUploading] = useState(false);
@@ -303,13 +303,13 @@ export const UserSettingsForm = () => {
                 </p>
 
                 <span className={css.amount}>
-                  {!user.gender || !user.weight ? (
-                    <span className={`${css.text} ${css.normaFormula}`}>
-                      1.8 L
-                    </span>
-                  ) : (
-                    requiredWater + " L"
-                  )}
+                  <span className={`${css.text} ${css.normaFormula}`}>
+                    {!user.gender || !user.weight ? (
+                        '1.8 L'
+                    ) : (
+                      requiredWater + " L"
+                    )}
+                  < /span>
                 </span>
               </div>
 

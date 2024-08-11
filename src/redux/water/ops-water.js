@@ -79,8 +79,11 @@ export const getTodayProgress = createAsyncThunk(
     'water/getTodayProgress',
     async (_, thunkApi) => {
         try {
+            const state = thunkApi.getState()
+            const today = state.water.todayDate
+
             const response = await axios.get(
-                `/water/day?date=2024-04-13`
+                `/water/day?date=${today}`
             );
             return response.data.data.dailyProgress;
         } catch (err) {
