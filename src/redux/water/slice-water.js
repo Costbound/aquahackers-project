@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchMonth, addWater, editWater, getTodayProgress } from "./ops-water";
 import { deleteWater, fetchWater } from "./ops-water";
 import getTodayDate from "../../helpers/getTodayDate.js";
+import {toast} from "react-hot-toast";
 
 const handlePending = (state) => {
   state.selectedDay.loading = true;

@@ -1,14 +1,12 @@
 import "./App.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing } from "../../redux/auth/selectors-auth.js";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router";
-import { Suspense, lazy } from "react";
+import {Suspense, lazy, useState} from "react";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
-import {ModalProvider} from "../Modal/ModalProvider.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));
@@ -22,10 +20,18 @@ const NotFoundPage = lazy(() =>
 
 export default function App() {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
+
+  // Is refreshing is a local state to avoid Loader during auto refresh
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
-    dispatch(refresh());
+      const refreshUser = async () => {
+          setIsRefreshing(true)
+          await dispatch(refresh());
+          setIsRefreshing(false)
+      }
+
+      refreshUser()
   }, [dispatch]);
 
   return isRefreshing ? (
