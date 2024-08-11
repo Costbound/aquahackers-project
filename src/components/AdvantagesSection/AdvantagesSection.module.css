@@ -88,7 +88,7 @@
 .customersBox {
   display: inline-flex;
   position: absolute;
-  width: 168px;
+  width: 174px;
   padding: 10px;
   align-items: center;
   justify-content: center;
@@ -215,7 +215,6 @@
     font-size: 15px;
     line-height: 1.49;
     margin-left: -34px;
-
   }
 
   .span {
@@ -261,4 +260,3 @@
     background-image: url(../../img/home-page/lady-desk@2x.png);
   }
 }
-
