@@ -8,12 +8,15 @@ import clsx from "clsx";
 import getCurrentTime from "../../helpers/getCurrentTime.js";
 import generateWaterString from "../../helpers/generateWaterString.js";
 import { ModalContext } from "../Modal/ModalProvider.jsx";
-import {useDispatch} from "react-redux";
-import {addWater, editWater} from "../../redux/water/ops-water.js";
+import {useDispatch, useSelector} from "react-redux";
+import { addWater, editWater } from "../../redux/water/ops-water.js";
+import { selectorIsLoading } from '../../redux/water/selectors-water.js';
+import Loader from "../Loader/Loader.jsx";
 
 
 
 const WaterForm = ({ date, time = getCurrentTime(), type, waterAmount, waterId }) => {
+  const isLoading = useSelector(selectorIsLoading);
   const { closeModal } = useContext(ModalContext);
   const dispatch = useDispatch();
   const waterValidSchema = Yup.object().shape({
@@ -147,7 +150,7 @@ const WaterForm = ({ date, time = getCurrentTime(), type, waterAmount, waterId }
           </div>
 
           <Button styleType="green" className={css.myButton} type="submit">
-            Save
+            {isLoading ? <Loader type="local" width="20" height="20" color="#fff" /> : "Save"}
           </Button>
         </Form>
       )}
