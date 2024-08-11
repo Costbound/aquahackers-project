@@ -11,8 +11,14 @@ import screenWidth from "../../helpers/screenWidth.js";
 import ShowPwdButton from "../ShowPwdButton/ShowPwdButton.jsx";
 import Loader from "../Loader/Loader"; // Импортируем ваш компонент Loader
 
+// Определение пользовательского шаблона для email
+const emailPattern = /^[a-zA-Z0-9_.+]+(?<!^[0-9]*)@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
 const schema = yup.object().shape({
-  email: yup.string().email("Email must contain an '@' symbol").required("Email is required"),
+  email: yup
+    .string()
+    .matches(emailPattern, "Invalid email! Example: user@example.com")
+    .required("Email is required"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
