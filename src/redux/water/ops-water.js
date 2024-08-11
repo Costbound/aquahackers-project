@@ -75,16 +75,24 @@ export const deleteWater = createAsyncThunk(
   }
 );
 
-export const getTodayProgress = createAsyncThunk(
+export const updateProgress = createAsyncThunk(
     'water/getTodayProgress',
     async (_, thunkApi) => {
         try {
             const state = thunkApi.getState()
+            const dispatch = thunkApi.dispatch
             const today = state.water.todayDate
 
+            // Update todayProgress
             const response = await axios.get(
                 `/water/day?date=${today}`
             );
+
+            dispatch(fetchMonth({
+                year: state.water.year,
+                month: state.water.month,
+            }))
+
             return response.data.data.dailyProgress;
         } catch (err) {
             thunkApi.rejectWithValue(err.response?.data )
