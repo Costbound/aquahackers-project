@@ -86,7 +86,6 @@ export default function MonthInfo() {
   const onItemClick = async (data) => {
     setActiveItem(data.date);
     date.current = data.date.slice(-2);
-    console.log(data.date)
     dispatch(setSelectedDate(data.date)); // Обновляем дату в redux
     dispatch(fetchWater(data.date));
   };
