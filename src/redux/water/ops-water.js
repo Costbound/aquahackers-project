@@ -7,7 +7,7 @@ export const fetchMonth = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const responce = await axios.get(
-        `/water/month?date=${payload.year}-${String(payload.month + 1).padStart(
+        `/water/month?date=${payload.year}-${String(payload.month).padStart(
           2,
           "0"
         )}`

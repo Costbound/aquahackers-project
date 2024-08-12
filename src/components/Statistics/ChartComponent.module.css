@@ -1,5 +1,7 @@
 .chartContainer {
-  margin-top: 47px;
+  margin-top: 23px;
+  /* margin-left: 10px;
+  margin-right: 23px; */
 }
 
 .tooltipIcon {
@@ -11,7 +13,8 @@
 }
 
 .label {
-  font-family: 'Poppins', sans-serif;
+  padding: 10px 17px;
+  font-family: "Poppins", sans-serif;
   fill: var(--basic-dark-blue);
   font-weight: 700;
   font-size: 10px;
@@ -22,12 +25,12 @@
 
 @media screen and (min-width: 375px) {
   .chartContainer {
-    margin-left: -25px;
+    margin-left: -10px;
   }
 }
 @media screen and (min-width: 768px) {
   .chartContainer {
-    margin-top: 62px;
+    margin-top: 38px;
     padding-right: 23px;
   }
 

@@ -24,7 +24,7 @@ const CustomTooltip = ({ active = false, payload = [], coordinate }) => {
         height="48"
         style={{ left: x, top: y }}
       >
-        <use href={`${sprite}#icon-Combined-Shape`}></use>
+        <use href={`${sprite}#icon-Tooltip`}></use>
         <text className={css.label}>{`${payload[0].value} ml`}</text>
       </svg>
     );
@@ -34,7 +34,6 @@ const CustomTooltip = ({ active = false, payload = [], coordinate }) => {
 
 const ChartComponent = () => {
   const monthlyWaterItems = useSelector(selectedMonthDays);
-  console.log(monthlyWaterItems);
   const today = new Date();
   const sevenDaysAgo = subDays(today, 7);
 
@@ -47,7 +46,7 @@ const ChartComponent = () => {
   const dataMap = monthlyWaterItems.reduce((acc, item) => {
     const itemDate = format(new Date(item.date), "yyyy-MM-dd");
     if (new Date(item.date) >= sevenDaysAgo) {
-      acc[itemDate] = (acc[itemDate] || 0) + item.volume;
+      acc[itemDate] = item.sumWaterAmount || 0;
     }
     return acc;
   }, {});
@@ -56,6 +55,8 @@ const ChartComponent = () => {
     date: format(new Date(date), "d"),
     volume: dataMap[date] || 0,
   }));
+
+  const maxVolume = Math.max(...chartData.map((item) => item.volume));
 
   const formatYAxis = (tickItem) => {
     if (tickItem === 0) {
@@ -91,6 +92,7 @@ const ChartComponent = () => {
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#9be1a0" stopOpacity={0} />
+              <stop stopColor="#9be1a0" stopOpacity={0} />
               <stop offset="1" stopColor="#9be1a0" />
             </linearGradient>
           </defs>
@@ -103,6 +105,7 @@ const ChartComponent = () => {
               fontSize: 15,
               ...tickStyle,
             }}
+            style={{ transform: "translateX(20px)" }}
           />
           <YAxis
             axisLine={false}
@@ -114,8 +117,12 @@ const ChartComponent = () => {
               ...tickStyle,
             }}
             padding={{ bottom: yAxisPadding }}
+            ticks={[...Array(6).keys()].map((i) => (i / 5) * maxVolume)}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip />}
+            style={{ transform: "translateX(20px)" }}
+          />
           <Area
             dataKey="volume"
             stroke="#87d28d"
@@ -128,6 +135,7 @@ const ChartComponent = () => {
               fillOpacity: 1,
               strokeWidth: isSmallScreen ? 2 : 3,
             }}
+            style={{ transform: "translateX(20px)" }}
           />
         </AreaChart>
       </ResponsiveContainer>
