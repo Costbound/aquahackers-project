@@ -10,20 +10,9 @@ const DeleteWaterModal = ({ waterId }) => {
   const dispatch = useDispatch();
   const {closeModal} = useContext(ModalContext)
 
-const handleDelete = () => {
-    dispatch(deleteWater(waterId))
-      .unwrap()
-      .then(() => {
-          toast.success("Delete successfull!", {
-              duration: 5000,
-          })
-      })
-      .catch(() => {
-        toast.error("Oops, delete went wrong, please try again!");
-      })
-      .finally(() => {
-        closeModal();
-      });
+const handleDelete = async () => {
+    await dispatch(deleteWater(waterId))
+    closeModal();
   };
 
   return (
