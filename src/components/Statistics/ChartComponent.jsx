@@ -62,7 +62,7 @@ const ChartComponent = () => {
     if (tickItem === 0) {
       return "0%";
     }
-    const yTicks = tickItem / 1000;
+    const yTicks = (tickItem / 1000).toFixed(1);
     return `${yTicks} L`;
   };
 
@@ -81,7 +81,10 @@ const ChartComponent = () => {
   return (
     <div className={css.chartContainer}>
       <ResponsiveContainer width="100%" height={isSmallScreen ? 256 : 273}>
-        <AreaChart data={chartData}>
+        <AreaChart
+          data={chartData}
+          margin={{ top: 9, right: 0, left: 0, bottom: 0 }}
+        >
           <defs>
             <linearGradient
               id="colorValue"
@@ -105,7 +108,6 @@ const ChartComponent = () => {
               fontSize: 15,
               ...tickStyle,
             }}
-            style={{ transform: "translateX(20px)" }}
           />
           <YAxis
             axisLine={false}
@@ -115,14 +117,17 @@ const ChartComponent = () => {
               fill: "#323f47",
               fontSize: isSmallScreen ? 14 : 15,
               ...tickStyle,
+              textAnchor: "start",
+              dx: -45,
             }}
             padding={{ bottom: yAxisPadding }}
             ticks={[...Array(6).keys()].map((i) => (i / 5) * maxVolume)}
+            domain={[0, maxVolume]}
+            type="number"
+            scale="linear"
+            interval="preserveEnd"
           />
-          <Tooltip
-            content={<CustomTooltip />}
-            style={{ transform: "translateX(20px)" }}
-          />
+          <Tooltip content={<CustomTooltip />} />
           <Area
             dataKey="volume"
             stroke="#87d28d"
@@ -135,7 +140,6 @@ const ChartComponent = () => {
               fillOpacity: 1,
               strokeWidth: isSmallScreen ? 2 : 3,
             }}
-            style={{ transform: "translateX(20px)" }}
           />
         </AreaChart>
       </ResponsiveContainer>
