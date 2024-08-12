@@ -91,6 +91,7 @@ export const UserSettingsForm = () => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleUploadPhoto = async (e) => {
     const avatar = e.target.files[0];
     if (checkPhotoExtension(avatar)) {

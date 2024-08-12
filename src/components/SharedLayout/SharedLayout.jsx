@@ -1,9 +1,9 @@
-import css from './Page.module.css';
+import css from './SharedLayout.module.css';
 import PropTypes from 'prop-types';
 import {Toaster} from "react-hot-toast";
 
 
-const Page = ({ children }) => {
+const SharedLayout = ({ children }) => {
 
   return (
     <div className={css.page}>
@@ -12,8 +12,8 @@ const Page = ({ children }) => {
     </div>
   );
 };
-Page.propTypes = {
+SharedLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Page;
+export default SharedLayout;
