@@ -7,6 +7,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useEffect } from "react";
 import { refresh } from "../../redux/auth/ops-auth.js";
+import SharedLayout from "../SharedLayout/SharedLayout.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));
@@ -38,6 +39,7 @@ export default function App() {
     <Loader type="global" width="100" height="100" />
   ) : (
     <Suspense fallback={<Loader type="global" width="100" height="100" />}>
+        <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -63,6 +65,7 @@ export default function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+        </SharedLayout>
     </Suspense>
   );
 }
