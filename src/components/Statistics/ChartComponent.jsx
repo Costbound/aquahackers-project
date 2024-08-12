@@ -80,21 +80,24 @@ const ChartComponent = () => {
 
   return (
     <div className={css.chartContainer}>
-      <ResponsiveContainer width="100%" height={isSmallScreen ? 256 : 273}>
+      <ResponsiveContainer
+        width="100%"
+        height={isSmallScreen ? 256 : 260}
+        style={{ paddingBottom: 0 }}
+      >
         <AreaChart
           data={chartData}
-          margin={{ top: 9, right: 0, left: 0, bottom: 0 }}
+          margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
         >
           <defs>
             <linearGradient
               id="colorValue"
               x1="189.618"
-              y1="207"
+              y1="257"
               x2="193.11"
               y2="7.79258"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#9be1a0" stopOpacity={0} />
               <stop stopColor="#9be1a0" stopOpacity={0} />
               <stop offset="1" stopColor="#9be1a0" />
             </linearGradient>
@@ -108,6 +111,7 @@ const ChartComponent = () => {
               fontSize: 15,
               ...tickStyle,
             }}
+            padding={{ top: 0, bottom: 0 }}
           />
           <YAxis
             axisLine={false}
@@ -118,7 +122,7 @@ const ChartComponent = () => {
               fontSize: isSmallScreen ? 14 : 15,
               ...tickStyle,
               textAnchor: "start",
-              dx: -45,
+              dx: -40,
             }}
             padding={{ bottom: yAxisPadding }}
             ticks={[...Array(6).keys()].map((i) => (i / 5) * maxVolume)}
