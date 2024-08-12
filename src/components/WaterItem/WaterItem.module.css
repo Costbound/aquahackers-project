@@ -5,18 +5,17 @@
     border-radius: 15px;
     background-color: #f9f9f9;
     gap: 10px;
-    width: 149px;
+    width: 148px;
     height: 74px;
     padding: 18px 14px 18px 14px;
 }
 
 .waterInfo {
     display: flex;
+    width: 50px;
+    height: 32px;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
 }
 
 .amount {
@@ -33,7 +32,10 @@
 .actionButtons {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    width: 14px;
+    height: 36px;
 }
 
 .editButton, .deleteButton {
@@ -42,10 +44,18 @@
     cursor: pointer;
 }
 
-.svgIconWater {
+.svgIconWaterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 38px;
     height: 38px;
     fill: #9BE1A0;
+}
+
+.svgIconWater {
+    width: 28px;
+    height: 30px;
 }
 
 .svgIconPencil {
@@ -69,32 +79,40 @@
     }
 
     .waterInfo {
-        gap: 4px;
+        justify-content: space-evenly;
+        width: 52px;
+        height: 46px;
     }
 
     .amount {
         font-size: 15px;
     }
-
+    
     .time {
         font-size: 12px;
     }
     
-    .actionButtons {
-        gap: 12px;
+    .svgIconWaterContainer {
+        width: 44px;
+        height: 45px;
     }
-
+    
     .svgIconWater {
         width: 32px;
         height: 36px;
+    }
+
+    .actionButtons {
+        width: 16px;
+        height: 46px;
     }
 
     .svgIconPencil {
         width: 16px;
         height: 16px;
     }
-
-    .svgIconBin {   
+    
+    .svgIconBin {
         width: 16px;
         height: 16px;
     }
