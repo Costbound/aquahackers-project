@@ -45,6 +45,9 @@ const waterSlice = createSlice({
     setSelectedDate(state, action) {
       state.selectedDay.date = action.payload;
     },
+    updateTodayDate(state) {
+      state.todayDate = getTodayDate()
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -124,10 +127,9 @@ const waterSlice = createSlice({
 
 export const {
   changeDeleteWaterModalOpen,
-  changeSettingsModalOpen,
-  changeLogoutModalOpen,
   setSelectedWaterId,
   setSelectedDate,
+    updateTodayDate
 } = waterSlice.actions;
 
 const waterReducer = waterSlice.reducer;

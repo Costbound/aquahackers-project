@@ -3,6 +3,8 @@ import { refreshToken, requestLogin, requestRegister } from "../services/aquatra
 import axios from "axios";
 import { instance } from "../services/instance.js";
 import { clearState } from "./slice-auth.js";
+import getTodayDate from "../../helpers/getTodayDate.js";
+import {setSelectedDate, updateTodayDate} from "../water/slice-water.js";
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -51,6 +53,8 @@ export const apiLogout = createAsyncThunk("auth/logout", async (_, thunkApi) => 
     await instance.post("/auth/logout");
     clearAuthHeader();
     thunkApi.dispatch(clearState());
+    thunkApi.dispatch(setSelectedDate(getTodayDate()))
+    thunkApi.dispatch(updateTodayDate())
   } catch (e) {
     return thunkApi.rejectWithValue(e.message);
   }
