@@ -1,6 +1,5 @@
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm.jsx";
-import { Toaster } from "react-hot-toast";
 
 const WaterModal = ({ waterAmount, date, time, type, waterId }) => {
     // type can be 'add' or 'edit'
@@ -8,7 +7,6 @@ const WaterModal = ({ waterAmount, date, time, type, waterId }) => {
   //   For edit required all props
   return (
     <div className={css.divModal}>
-      <Toaster />
       <h2 className={css.title}>
         {type === "edit" ? "Edit the entered amount of water" : "Add water"}
       </h2>

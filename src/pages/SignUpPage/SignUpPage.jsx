@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import css from "./SignUpPage.module.css";
 import { AdvantagesSection } from "../../components/AdvantagesSection/AdvantagesSection";
-import Page from "../../components/Page/Page";
-import { Helmet } from "react-helmet-async";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import { Helmet } from "react-helmet-async";
+import Page from "../../components/Page/Page";
 import SectionWithLogo from "../../components/SectionWithLogo/SectionWithLogo.jsx";
 
 function SignUpPage() {
@@ -13,6 +13,7 @@ function SignUpPage() {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 1439);
     };
+
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -35,3 +36,4 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
+

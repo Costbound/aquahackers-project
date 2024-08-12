@@ -5,7 +5,7 @@ import { calcRequiredWater } from "../../helpers/calcRequiredWater.js";
 import { selectUser } from "../../redux/userData/selectors-userData.js";
 import Button from "../Button/Button.jsx";
 import { useContext, useId, useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
 import { updateProgress} from "../../redux/water/ops-water.js";
 import defaultAvatar from "../../img/avatar.png";
@@ -13,6 +13,7 @@ import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
 import Loader from "../Loader/Loader";
 import icon from "../../img/icons.svg";
 import { ModalContext } from "../Modal/ModalProvider.jsx";
+import clsx from "clsx";
 
 const schema = yup.object().shape({
   avatar: yup.mixed(),
@@ -90,6 +91,7 @@ export const UserSettingsForm = () => {
 
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleUploadPhoto = async (e) => {
     const avatar = e.target.files[0];
     if (checkPhotoExtension(avatar)) {
@@ -147,194 +149,225 @@ export const UserSettingsForm = () => {
       onSubmit={handleSubmit}
       validationSchema={schema}
     >
-      <Form className={css.wrapper}>
-        <div className={css.avatarWrapper}>
-          {isUploading ? (
-            <Loader type="avatar" />
-          ) : (
-            <img
-              className={css.avatar}
-              src={user.avatar || defaultAvatar}
-              alt="Avatar"
+      {({ errors }) => (
+        <Form className={css.wrapper}>
+          <div className={css.avatarWrapper}>
+            {isUploading ? (
+              <Loader type="avatar" />
+            ) : (
+              <img
+                className={css.avatar}
+                src={user.avatar || defaultAvatar}
+                alt="Avatar"
+              />
+            )}
+            <input
+              className={css.hiddenFileInput}
+              type="file"
+              name="avatar"
+              id={avatarId}
+              placeholder="Upload Photo"
+              onChange={handleUploadPhoto}
+              disabled={isUploading}
             />
-          )}
-          <input
-            className={css.hiddenFileInput}
-            type="file"
-            name="avatar"
-            id={avatarId}
-            placeholder="Upload Photo"
-            onChange={handleUploadPhoto}
-            disabled={isUploading}
-          />
-          <label htmlFor={avatarId} className={css.fileLabel}>
-            <svg className={css.svgIconUpload}>
-              <use href={`${icon}#icon-upload-photo`} />
-            </svg>
-            Upload Photo
-          </label>
-        </div>
-
-        <div className={css.settingsWrapper}>
-          <div className={css.leftDesktopWrapper}>
-            <div className={css.genderWrapper}>
-              <p className={css.subtitle}>Your gender identity</p>
-              <div className={css.radiobuttonWrapper}>
-                <Field
-                  className={css.hiddenRadioInput}
-                  type="radio"
-                  name="gender"
-                  id={femaleId}
-                  value="woman"
-                  component={CustomRadioButton}
-                />
-                <label
-                  className={`${css.text} ${css.genderLabel}`}
-                  htmlFor={femaleId}
-                >
-                  Woman
-                </label>
-
-                <Field
-                  className={css.hiddenRadioInput}
-                  type="radio"
-                  name="gender"
-                  id={maleId}
-                  value="man"
-                  component={CustomRadioButton}
-                />
-                <label
-                  className={`${css.text} ${css.genderLabel}`}
-                  htmlFor={maleId}
-                >
-                  Man
-                </label>
-              </div>
-            </div>
-
-            <div className={css.infoWrapper}>
-              <div className={css.subInfoWrapper}>
-                <label className={css.subtitle} htmlFor={nameId}>
-                  Your name
-                </label>
-                <Field className={css.input} name="name" id={nameId} />
-              </div>
-
-              <div className={css.subInfoWrapper}>
-                <label className={css.subtitle} htmlFor={emailId}>
-                  Email
-                </label>
-                <Field
-                  className={css.input}
-                  name="email"
-                  id={emailId}
-                  disabled
-                />
-              </div>
-            </div>
-
-            <div className={css.normaWrapper}>
-              <p className={css.subtitle}>My daily norma</p>
-
-              <div className={css.formulaWrapper}>
-                <div className={css.formulaSubwrapper}>
-                  <p className={css.text}>For woman:</p>
-                  <span className={`${css.text} ${css.normaFormula}`}>
-                    V=(M*0,03) + (T*0,4)
-                  </span>
-                </div>
-
-                <div className={css.formulaSubwrapper}>
-                  <p className={css.text}>For man:</p>
-                  <span className={`${css.text} ${css.normaFormula}`}>
-                    V=(M*0,04) + (T*0,6)
-                  </span>
-                </div>
-              </div>
-
-              <p className={css.normaTextArea}>
-                <span className={css.normaAsterisk}>*</span> V is the volume of
-                the water norm in liters per day, M is your body weight, T is
-                the time of active sports, or another type of activity
-                commensurate in terms of loads (in the absence of these, you
-                must set 0)
-              </p>
-
-              <div className={css.textContainer}>
-                <svg className={css.svgExclamation}>
-                  <use href={`${icon}#icon-exclamation-for-settings`} />
-                </svg>
-                <p className={css.text}>Active time in hours</p>
-              </div>
-            </div>
+            <label htmlFor={avatarId} className={css.fileLabel}>
+              <svg className={css.svgIconUpload}>
+                <use href={`${icon}#icon-upload-photo`} />
+              </svg>
+              Upload Photo
+            </label>
           </div>
 
-          <div className={css.rightDesktopWrapper}>
-            <div className={css.metricsWrapper}>
-              <div className={css.metricsSubWrapper}>
-                <label className={css.text} htmlFor={weightId}>
-                  Your weight in kilograms:
-                </label>
-                <Field
-                  className={css.input}
-                  name="weight"
-                  id={weightId}
-                  type="number"
-                  min="0"
-                />
+          <div className={css.settingsWrapper}>
+            <div className={css.leftDesktopWrapper}>
+              <div className={css.genderWrapper}>
+                <p className={css.subtitle}>Your gender identity</p>
+                <div className={css.radiobuttonWrapper}>
+                  <Field
+                    className={css.hiddenRadioInput}
+                    type="radio"
+                    name="gender"
+                    id={femaleId}
+                    value="woman"
+                    component={CustomRadioButton}
+                  />
+                  <label
+                    className={`${css.text} ${css.genderLabel}`}
+                    htmlFor={femaleId}
+                  >
+                    Woman
+                  </label>
+
+                  <Field
+                    className={css.hiddenRadioInput}
+                    type="radio"
+                    name="gender"
+                    id={maleId}
+                    value="man"
+                    component={CustomRadioButton}
+                  />
+
+                  <label
+                    className={`${css.text} ${css.genderLabel}`}
+                    htmlFor={maleId}
+                  >
+                    Man
+                  </label>
+                </div>
               </div>
 
-              <div className={css.metricsSubWrapper}>
-                <label className={css.text} htmlFor={sportsId}>
-                  The time of active participation in sports:
-                </label>
-                <Field
-                  className={css.input}
-                  name="activityTime"
-                  id={sportsId}
-                />
-              </div>
-            </div>
+              <div className={css.infoWrapper}>
+                <div className={css.subInfoWrapper}>
+                  <label className={css.subtitle} htmlFor={nameId}>
+                    Your name
+                  </label>
+                  <Field
+                    className={clsx(css.input, errors.name && css.error)}
+                    name="name"
+                    id={nameId}
+                  />
+                  <ErrorMessage
+                    className={clsx(css.formValidName, css.alertPosition)}
+                    name="name"
+                    component="span"
+                  />
+                </div>
 
-            <div className={css.waterAmountWrapper}>
-              <div className={css.amountField}>
-                <p className={css.text}>
-                  The required amount of water in liters per day:
+                <div className={css.subInfoWrapper}>
+                  <label className={css.subtitle} htmlFor={emailId}>
+                    Email
+                  </label>
+                  <Field
+                    className={css.input}
+                    name="email"
+                    id={emailId}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className={css.normaWrapper}>
+                <p className={css.subtitle}>My daily norma</p>
+
+                <div className={css.formulaWrapper}>
+                  <div className={css.formulaSubwrapper}>
+                    <p className={css.text}>For woman:</p>
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      V=(M*0,03) + (T*0,4)
+                    </span>
+                  </div>
+
+                  <div className={css.formulaSubwrapper}>
+                    <p className={css.text}>For man:</p>
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      V=(M*0,04) + (T*0,6)
+                    </span>
+                  </div>
+                </div>
+
+                <p className={css.normaTextArea}>
+                  <span className={css.normaAsterisk}>*</span> V is the volume
+                  of the water norm in liters per day, M is your body weight, T
+                  is the time of active sports, or another type of activity
+                  commensurate in terms of loads (in the absence of these, you
+                  must set 0)
                 </p>
 
-                <span className={css.amount}>
-                  <span className={`${css.text} ${css.normaFormula}`}>
-                    {!user.gender || !user.weight ? (
-                        '1.8 L'
-                    ) : (
-                      requiredWater + " L"
+                <div className={css.textContainer}>
+                  <svg className={css.svgExclamation}>
+                    <use href={`${icon}#icon-exclamation-for-settings`} />
+                  </svg>
+                  <p className={css.text}>Active time in hours</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={css.rightDesktopWrapper}>
+              <div className={css.metricsWrapper}>
+                <div className={css.metricsSubWrapper}>
+                  <label className={css.text} htmlFor={weightId}>
+                    Your weight in kilograms:
+                  </label>
+                  <Field
+                    className={clsx(css.input, errors.weight && css.error)}
+                    name="weight"
+                    id={weightId}
+                    type="number"
+                    min="0"
+                  />
+                  <ErrorMessage
+                    className={clsx(css.formValid, css.alertPosition)}
+                    name="weight"
+                    component="span"
+                  />
+                </div>
+
+                <div className={css.metricsSubWrapper}>
+                  <label className={css.text} htmlFor={sportsId}>
+                    The time of active participation in sports:
+                  </label>
+                  <Field
+                    className={clsx(
+                      css.input,
+                      errors.activityTime && css.error
                     )}
-                  < /span>
-                </span>
+                    name="activityTime"
+                    id={sportsId}
+                  />
+                  <ErrorMessage
+                    className={clsx(css.formValid, css.alertPosition)}
+                    name="activityTime"
+                    component="span"
+                  />
+                </div>
               </div>
 
-              <div className={css.volumeWrapper}>
-                <label className={css.subtitle} htmlFor={waterRateId}>
-                  Write down how much water you will drink:
-                </label>
-                <Field
-                  className={css.input}
-                  name="desiredVolume"
-                  id={waterRateId}
-                />
+              <div className={css.waterAmountWrapper}>
+                <div className={css.amountField}>
+                  <p className={css.text}>
+                    The required amount of water in liters per day:
+                  </p>
+
+                  <span className={css.amount}>
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      {!user.gender || !user.weight
+                        ? "1.8 L"
+                        : requiredWater + " L"}
+                    </span>
+                  </span>
+                </div>
+
+                <div className={css.volumeWrapper}>
+                  <label className={css.subtitle} htmlFor={waterRateId}>
+                    Write down how much water you will drink:
+                  </label>
+                  <Field
+                    className={clsx(
+                      css.input,
+                      errors.desiredVolume && css.error
+                    )}
+                    name="desiredVolume"
+                    id={waterRateId}
+                  />
+                  <ErrorMessage
+                    className={clsx(css.formValid, css.alertPosition)}
+                    name="desiredVolume"
+                    component="span"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <Button styleType="green" className={css.submitButton} type="submit">
-          {isSubmitting ? (
-            <Loader type="button" width="20" height="20" color="#fff" />
-          ) : (
-            "Save"
-          )}
-        </Button>
-      </Form>
+          <Button styleType="green" className={css.submitButton} type="submit">
+            {isSubmitting ? (
+              <Loader type="button" width="20" height="20" color="#fff" />
+            ) : (
+              "Save"
+            )}
+          </Button>
+        </Form>
+      )}
     </Formik>
   );
 };

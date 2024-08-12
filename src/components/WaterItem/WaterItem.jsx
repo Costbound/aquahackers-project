@@ -6,6 +6,7 @@ import { ModalContext } from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
 import DeleteWaterModal from "../Modals/DeleteWaterModal/DeleteWaterModal.jsx";
 import generateWaterString from "../../helpers/generateWaterString.js";
+import Button from '../../components/Button/Button.jsx'
 
 const WaterItem = ({ id, amount, dateTime }) => {
   const { openModal } = useContext(ModalContext);
@@ -44,22 +45,24 @@ const WaterItem = ({ id, amount, dateTime }) => {
         <span className={css.time}>{time}</span>
       </div>
       <div className={css.actionButtons}>
-        <button
+        <Button
           className={css.editButton}
+          type="button"
           onClick={handleEditModalOpen}
         >
           <svg className={css.svgIconPencil}>
             <use href={`${icon}#icon-pencil`} />
           </svg>
-        </button>
-        <button
+        </Button>
+        <Button
           className={css.deleteButton}
+          type="button"
           onClick={handleDeleteModalOpen}
         >
           <svg className={css.svgIconBin}>
             <use href={`${icon}#icon-bin`} />
           </svg>
-        </button>
+        </Button>
       </div>
     </div>
   );

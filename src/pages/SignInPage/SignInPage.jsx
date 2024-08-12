@@ -13,6 +13,7 @@ function SignInPage() {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 1439);
     };
+
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);

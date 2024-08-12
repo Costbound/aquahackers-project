@@ -20,7 +20,7 @@ const WaterList = () => {
 
   useEffect(() => {
     dispatch(fetchWater(selectedDate));
-  }, [dispatch]);
+  }, [dispatch, selectedDate]);
 
   const handleOpenModal = (id) => {
     dispatch(setSelectedWaterId(id));
