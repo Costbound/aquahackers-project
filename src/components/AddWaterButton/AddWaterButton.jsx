@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { ModalContext } from "../Modal/ModalProvider.jsx";
 import WaterModal from "../WaterModal/WaterModal.jsx";
 import {useSelector} from "react-redux";
-import {selectSelectedDate} from "../../redux/water/selectors-water.js";
+import { selectSelectedDate } from "../../redux/water/selectors-water.js";
+import Button from '../../components/Button/Button.jsx'
 
 const AddWaterButton = () => {
   const { openModal } = useContext(ModalContext);
@@ -16,12 +17,16 @@ const AddWaterButton = () => {
 
   return (
     <div className={css.addWaterContainer}>
-      <button className={css.addWaterButton} onClick={handleModalOpen}>
+      <Button
+        className={css.addWaterButton}
+        type="button"
+        onClick={handleModalOpen}
+      >
         <svg className={css.svgIconPlus}>
           <use href={`${icon}#icon-plus-1`} />
         </svg>
-      </button>
-      <span className={css.addWaterText}>Add water</span>
+        </Button>
+        <span className={css.addWaterText}>Add water</span>
     </div>
   );
 };

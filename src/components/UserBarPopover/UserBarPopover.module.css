@@ -15,7 +15,7 @@
 }
 
 .popoverButtonSetting {
-    background: none;
+    background-color: transparent !important;
     border: none;
     color: #323F47;
     cursor: pointer;
@@ -25,7 +25,7 @@
 }
 
 .popoverButtonLogout {
-    background: none;
+    background-color: transparent !important;
     border: none;
     color: rgba(50, 63, 71, 0.4);
     cursor: pointer;
@@ -54,7 +54,6 @@
         width: 157px;
         height: 82px;
         padding: 14px 57px 14px 20px;
-        gap: 12px;
         transform: translateY(8px);
     }
 
