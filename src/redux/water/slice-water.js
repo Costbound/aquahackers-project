@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import {fetchMonth, addWater, editWater, updateProgress} from "./ops-water";
 import { deleteWater, fetchWater } from "./ops-water";
 import getTodayDate from "../../helpers/getTodayDate.js";
-import {toast} from "react-hot-toast";
 
 const handlePending = (state) => {
   state.selectedDay.loading = true;
@@ -12,6 +11,19 @@ const handleRejected = (state, action) => {
   state.selectedDay.loading = false;
   state.selectedDay.error = action.payload;
 };
+
+const updateTodayProgress = (state, date, newDailyProgress) => {
+  if (date === state.todayDate) {
+    state.todayProgress = newDailyProgress;
+  }
+}
+
+const updateProgressInCalendar = (state, date, newDailyProgress) => {
+  const dayIndex = state.selectedMonthWater.findIndex(day => day.date === date);
+  if (dayIndex !== -1) {
+    state.selectedMonthWater[dayIndex].dailyProgress = newDailyProgress;
+  }
+}
 
 const waterSlice = createSlice({
   name: "water",
@@ -33,6 +45,9 @@ const waterSlice = createSlice({
     setSelectedDate(state, action) {
       state.selectedDay.date = action.payload;
     },
+    updateTodayDate(state) {
+      state.todayDate = getTodayDate()
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -43,9 +58,10 @@ const waterSlice = createSlice({
         const {date, updatedDailyProgress, water} = action.payload
 
         // Update today progress if selected day is today
-        if (date === state.todayDate) {
-          state.todayProgress = updatedDailyProgress;
-        }
+        updateTodayProgress(state, date, updatedDailyProgress)
+
+        // Update progress in calendar if this day is visible on calendar
+        updateProgressInCalendar(state, date, updatedDailyProgress)
 
         // Return to avoid push when add triggered from page with progressbar for today and selected date is not today
         if (date === state.todayDate && state.selectedDay.date !== state.todayDate) {
@@ -57,9 +73,11 @@ const waterSlice = createSlice({
         const {date, updatedDailyProgress, water} = action.payload
 
         // Update today progress if selected day is today
-        if (date === state.todayDate) {
-          state.todayProgress = updatedDailyProgress
-        }
+        updateTodayProgress(state, date, updatedDailyProgress)
+
+        // Update progress in calendar if this day is visible on calendar
+        // Update progress in calendar if this day is visible on calendar
+        updateProgressInCalendar(state, date, updatedDailyProgress)
 
         const index = state.selectedDay.items.findIndex(
           (item) => item._id === water._id
@@ -75,9 +93,8 @@ const waterSlice = createSlice({
         state.selectedDay.error = null;
 
         // Update today progress if selected day is today
-        if (date === state.todayDate) {
-          state.todayProgress = dailyProgress
-        }
+        updateTodayProgress(state, date, dailyProgress)
+
 
         state.selectedDay.items = waters
       })
@@ -93,9 +110,10 @@ const waterSlice = createSlice({
         state.selectedDay.error = null;
 
         // Update today progress if selected day is today
-        if (date === state.todayDate) {
-          state.todayProgress = updatedDailyProgress
-        }
+        updateTodayProgress(state, date, updatedDailyProgress)
+
+        // Update progress in calendar if this day is visible on calendar
+        updateProgressInCalendar(state, date, updatedDailyProgress)
 
         state.selectedDay.items = state.selectedDay.items.filter(
           (water) => water._id !== payloadWater._id
@@ -109,10 +127,9 @@ const waterSlice = createSlice({
 
 export const {
   changeDeleteWaterModalOpen,
-  changeSettingsModalOpen,
-  changeLogoutModalOpen,
   setSelectedWaterId,
   setSelectedDate,
+    updateTodayDate
 } = waterSlice.actions;
 
 const waterReducer = waterSlice.reducer;

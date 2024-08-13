@@ -72,6 +72,7 @@ export default function MonthInfo() {
       ).date;
       setActiveItem(tempDateId);
       // id дня це tempDateId - Функцію потрібно буде додати сюди
+      dispatch(setSelectedDate(tempDateId));
     } else {
       const tempDateId = monthDays.find(
         (item) => item.date.slice(-2) == monthDays.length
@@ -79,6 +80,7 @@ export default function MonthInfo() {
       setActiveItem(tempDateId);
       date.current = tempDateId.slice(-2);
       // id дня це tempDateId - Функцію потрібно буде додати сюди
+      dispatch(setSelectedDate(tempDateId));
     }
   };
 
@@ -90,7 +92,6 @@ export default function MonthInfo() {
     setActiveItem(data.date);
     date.current = data.date.slice(-2);
     dispatch(setSelectedDate(data.date)); // Обновляем дату в redux
-    dispatch(fetchWater(data.date));
   };
 
   const showChart = useSelector((state) => state.chart.showChart);

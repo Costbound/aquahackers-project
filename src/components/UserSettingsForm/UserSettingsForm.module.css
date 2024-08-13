@@ -156,8 +156,7 @@
   top: 100%;
   left: 0;
 }
-
-.error,
+input.error,
 .error:hover,
 .error:focus,
 .error:active {

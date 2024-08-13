@@ -10,7 +10,7 @@ export const WelcomeSection = () => {
 
   return (
     <SectionWithLogo className={css.welcomeSection}>
-      <p className={css.text}>Record daily water intake and track</p>
+      <h2 className={css.text}>Record daily water intake and track</h2>
 
       <h1 className={css.title}>Water consumption tracker</h1>
 
