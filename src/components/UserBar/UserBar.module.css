@@ -1,79 +1,80 @@
 .userBarContainer {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .userBar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 137px;
-    height: 50px;
-    margin-top: 20px;
-    border-radius: 30px;
-    gap: 8px;
-    padding: 6px 12px 6px 12px;
-    background-color: #323F47;
-    border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 137px;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 30px;
+  gap: 8px;
+  padding: 6px 12px 6px 12px;
+  background-color: #323f47;
+  border-style: none;
 }
 
 .avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    color:#F0EFF4;
-    background-color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #f0eff4;
+  background-color: #fff;
+  object-fit: cover;
 }
 
 .barUsername {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: -1%;
-    align-items: center;
-    color: #fff
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+  align-items: center;
+  color: #fff;
 }
 
 .svgIconChevron {
-    width: 16px;
-    height: 16px;
-    stroke: #fff;
-    fill: none;
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  fill: none;
 }
 
 .userChevron {
-    width: 16px;
-    height: 16px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
-    .userBar {
-        width: 157px;
-        height: 56px;
-        margin-top: 0;
-        gap: 10px;
-    }
+  .userBar {
+    width: 157px;
+    height: 56px;
+    margin-top: 0;
+    gap: 10px;
+  }
 
-    .userChevron {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .svgIconChevron {
-        width: 20px;
-        height: 20px;
-    }
+  .userChevron {
+    width: 20px;
+    height: 20px;
+  }
 
-    .avatar {
-        width: 44px;
-        height: 44px;
-    }
+  .svgIconChevron {
+    width: 20px;
+    height: 20px;
+  }
 
-    .barUsername {
-        font-size: 16px;
-        line-height: 24px;
-    }
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .barUsername {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }

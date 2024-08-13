@@ -7,7 +7,7 @@ import Button from "../Button/Button.jsx";
 import { useContext, useId, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateUserData } from "../../redux/userData/ops-userData.js";
-import { updateProgress} from "../../redux/water/ops-water.js";
+import { updateProgress } from "../../redux/water/ops-water.js";
 import defaultAvatar from "../../img/avatar.png";
 import checkPhotoExtension from "../../helpers/checkPhotoExtension.js";
 import Loader from "../Loader/Loader";
@@ -330,9 +330,7 @@ export const UserSettingsForm = () => {
 
                   <span className={css.amount}>
                     <span className={`${css.text} ${css.normaFormula}`}>
-                      {!user.gender || !user.weight
-                        ? "1.8 L"
-                        : requiredWater + " L"}
+                      {user.gender && user.weight ? `${requiredWater} L` : ""}
                     </span>
                   </span>
                 </div>
