@@ -9,26 +9,27 @@ import {
 } from "../../redux/water/selectors-water";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
-import { fetchWater } from "../../redux/water/ops-water";
 import Loader from "../Loader/Loader";
 
-import { setSelectedDate } from "../../redux/water/slice-water"; // Импортируем action
+import { setSelectedDate } from "../../redux/water/slice-water";
+import getTodayDate from "../../helpers/getTodayDate";
 
 export default function MonthInfo() {
+  const todayDate = getTodayDate();
+
   const [month, setMonth] = useState(useSelector(selectedMonth));
   const [year, setYear] = useState(useSelector(selectedYear));
-  const [activeItem, setActiveItem] = useState(null);
+  const [activeItem, setActiveItem] = useState(todayDate);
   const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
-
-  const date = useRef(null);
-
+  const date = useRef(todayDate.slice(-2));
   const monthDays = useSelector(selectedMonthDays);
 
   useEffect(() => {
-    const loadingToggle = async () => {
+    const loadingToggle = () => {
       setIsLoading(true);
-      await dispatch(fetchMonth({ year, month }));
+      dispatch(fetchMonth({ year, month }));
       setIsLoading(false);
     };
     loadingToggle();
@@ -58,37 +59,29 @@ export default function MonthInfo() {
     }
   });
 
-  // Якщо обрати день та змінити місяць має зберегтися обрана дата, при зміні місяця
-  // спрацьовує ця функція, тому щоб одразу витягувало інформацію про ту саму дату але
-  // в новому місяці, потрібно додати функцію і сюди. Її потрібно буде додати 2 рази
-  // Ці два рази я виділив та описав далі.
   const dateInMonthCheck = () => {
-    if (monthDays.some((item) => item.date.slice(-2) === date.current)) {
-      const tempDateId = monthDays.find(
-        (item) => item.date.slice(-2) === date.current
-      ).date;
-      setActiveItem(tempDateId);
-      // id дня це tempDateId - Функцію потрібно буде додати сюди
-      dispatch(setSelectedDate(tempDateId));
-    } else {
-      const tempDateId = monthDays.find(
-        (item) => item.date.slice(-2) == monthDays.length
-      ).date;
-      setActiveItem(tempDateId);
-      date.current = tempDateId.slice(-2);
-      // id дня це tempDateId - Функцію потрібно буде додати сюди
-      dispatch(setSelectedDate(tempDateId));
+    if (monthDays && monthDays.length > 0) {
+      if (monthDays.some((item) => item.date.slice(-2) === date.current)) {
+        const tempDateId = monthDays.find(
+          (item) => item.date.slice(-2) === date.current
+        ).date;
+        setActiveItem(tempDateId);
+        dispatch(setSelectedDate(tempDateId));
+      } else {
+        const tempDateId = monthDays.find(
+          (item) => item.date.slice(-2) == monthDays.length
+        ).date;
+        setActiveItem(tempDateId);
+        date.current = tempDateId.slice(-2);
+        dispatch(setSelectedDate(tempDateId));
+      }
     }
   };
 
-  // Функція кліку на день
-  // data - це повна інформація по дню для тесту можна використати
-  // console.log(data) - в самій функціїї
-  // id дня це data.date
-  const onItemClick = async (data) => {
+  const onItemClick = (data) => {
     setActiveItem(data.date);
     date.current = data.date.slice(-2);
-    dispatch(setSelectedDate(data.date)); // Обновляем дату в redux
+    dispatch(setSelectedDate(data.date));
   };
 
   return (
