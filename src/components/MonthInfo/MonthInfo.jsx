@@ -11,8 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMonth } from "../../redux/water/ops-water";
 import Loader from "../Loader/Loader";
 
-import { setSelectedDate } from "../../redux/water/slice-water";
+
+import { setSelectedDate } from "../../redux/water/slice-water"; // Импортируем action
+import { useNavigate } from "react-router";
+import { setShowChart } from "../../redux/chart/slice";
+import ChartComponent from "../Statistics/ChartComponent";
 import getTodayDate from "../../helpers/getTodayDate";
+
 
 export default function MonthInfo() {
   const todayDate = getTodayDate();
@@ -84,6 +89,19 @@ export default function MonthInfo() {
     dispatch(setSelectedDate(data.date));
   };
 
+  const showChart = useSelector((state) => state.chart.showChart);
+  const navigate = useNavigate();
+
+  const handleIconClick = () => {
+    const newShowChart = !showChart;
+    dispatch(setShowChart(newShowChart));
+    if (newShowChart) {
+      navigate("/tracker/statistics");
+    } else {
+      navigate("/tracker");
+    }
+  };
+
   return (
     <div className={css.container}>
       <CalendarPagination
@@ -91,11 +109,15 @@ export default function MonthInfo() {
         year={year}
         onPreviousMonth={previousMonth}
         onNextMonth={nextMonth}
+        handleIconClick={handleIconClick}
+        showChart={showChart}
       />
       {isLoading ? (
         <div className={css.loader}>
           <Loader />
         </div>
+      ) : showChart ? (
+        <ChartComponent />
       ) : (
         <Calendar
           monthDays={monthDays}

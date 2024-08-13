@@ -9,14 +9,19 @@ export default function CalendarPagination({
   year,
   onPreviousMonth,
   onNextMonth,
+  handleIconClick,
+  showChart,
 }) {
   const namedMonth = namingMonth(month);
   const isLoading = useSelector(selectorIsLoading);
 
   return (
     <div className={css.container}>
-      <h3 className={css.title}>Month</h3>
-
+      {!showChart ? (
+        <h3 className={css.title}>Month</h3>
+      ) : (
+        <h3 className={css.title}>Statistics</h3>
+      )}
       <div className={css.paginationContainer}>
         <div className={css.paginationElements}>
           <button
@@ -44,7 +49,11 @@ export default function CalendarPagination({
           </button>
         </div>
 
-        <button className={css.pieButton} type="button">
+        <button
+          className={css.pieButton}
+          type="button"
+          onClick={handleIconClick}
+        >
           <svg className={css.pieIcon}>
             <use href={`${icons}#icon-pie-for-statistics-active`} />
           </svg>
