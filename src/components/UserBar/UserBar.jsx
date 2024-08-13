@@ -13,7 +13,10 @@ const UserBar = () => {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
   const userName = useSelector(selectUserName);
-  const username = userName || 'User';
+  
+  const truncatedUsername = userName && userName.length > 6
+    ? `${userName.substring(0, 6)}...`
+    : userName || 'User';
 
   const togglePopover = () => {
     setPopoverOpen(prevState => !prevState);
@@ -45,7 +48,7 @@ const UserBar = () => {
   return (
     <div className={css.userBarContainer}>
       <button onClick={togglePopover} className={css.userBar} ref={buttonRef}>
-        <span className={css.barUsername}>{username}</span>
+        <span className={css.barUsername}>{truncatedUsername}</span>
         <img className={css.avatar} src={user || miniAvatar} alt="Avatar" />
         <span className={css.userChevron}>
           <svg className={css.svgIconChevron}>
