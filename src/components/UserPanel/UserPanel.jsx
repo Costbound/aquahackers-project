@@ -15,7 +15,7 @@ const UserPanel = () => {
     // Определение предела длины имени в зависимости от размера экрана
     let maxLength = 18;
     if (isMobile) maxLength = 10;
-    else if (isTablet) maxLength = 18;
+    else if (isTablet) maxLength = 16;
     else if (isDesktop) maxLength = 16;
 
     // Обрезаем имя, если оно превышает установленный лимит
