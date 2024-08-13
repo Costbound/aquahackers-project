@@ -330,7 +330,9 @@ export const UserSettingsForm = () => {
 
                   <span className={css.amount}>
                     <span className={`${css.text} ${css.normaFormula}`}>
-                      {user.gender && user.weight ? `${requiredWater} L` : ""}
+                      {!user.gender || !user.weight
+                          ? "1.8 L"
+                          : requiredWater + " L"}
                     </span>
                   </span>
                 </div>
