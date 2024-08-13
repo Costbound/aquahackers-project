@@ -33,6 +33,8 @@
   letter-spacing: -1%;
   align-items: center;
   color: #fff;
+  max-width: 60px;
+  text-overflow: ellipsis;
 }
 
 .svgIconChevron {
